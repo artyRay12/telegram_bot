@@ -10,7 +10,7 @@
   /*$keyboard = [["Начать викторину"]]; //Клавиша которая нихера не появляется */
   $menu = new $keyboard;
   $menu -> row('12', '123', '1234');
-  $menu -> property(name:'resize_keyboard', value: true);
+  //$menu -> property(name:'resize_keyboard', value: true);
   if($text) {
     if ($text == "/start" and $name) {
        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
