@@ -7,9 +7,10 @@
   $text = $result["message"]["text"];
   $chat_id = $result["message"]["chat"]["id"];  
   $name = $result["message"]["from"]["username"];
+  $keyboard = [["Сократить ссылку"],["Расшифровать ссылку"]]; //Клавиатура
   if($text) {
     if ($text == "/start" and $name) {
-       $reply = "Добро пожаловать, ".$name."!";
+       $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
     } elseif($text == "/start" and !$name) {
       $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, незнакомец!' ]);
     } elseif ($text == "/sayHello") {
