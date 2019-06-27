@@ -5,12 +5,12 @@ use Fadion\Fixerio\Exchange;
 use Fadion\Fixerio\Currency;
 
 $exchange = new Exchange();
-$exchange->key('f22838f03ab3c8f3ff5f7e119f870dfe');
+//$exchange->key('f22838f03ab3c8f3ff5f7e119f870dfe');
 $exchange->base(Currency::USD);
 $exchange->symbols(Currency::EUR, Currency::GBP);
 
 $rates = $exchange->get();
-$telegram = new Api("713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs");
+$telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
 $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"];
 $chat_id = $result["message"]["chat"]["id"];
