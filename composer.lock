@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75c9ba4ce6e702039e17a3cd61ed5c85",
+    "content-hash": "c3cdda991d6942e121c129aeba623bd5",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -72,6 +72,53 @@
                 "string"
             ],
             "time": "2018-01-09T20:05:19+00:00"
+        },
+        {
+            "name": "fadion/fixerio",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fadion/Fixerio.git",
+                "reference": "3d19b4f76200436ad152627fd879517f77e8903a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fadion/Fixerio/zipball/3d19b4f76200436ad152627fd879517f77e8903a",
+                "reference": "3d19b4f76200436ad152627fd879517f77e8903a",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fadion\\Fixerio\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fadion Dashi",
+                    "email": "jonidashi@gmail.com",
+                    "homepage": "http://www.streha.al"
+                }
+            ],
+            "description": "Wrapper for Fixer.io",
+            "keywords": [
+                "exchange",
+                "fixer",
+                "laravel"
+            ],
+            "time": "2017-03-28T14:43:09+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
