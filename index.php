@@ -8,7 +8,7 @@ $chat_id = $result["message"]["chat"]["id"];
 $name = $result["message"]["from"]["username"];
 if($text) {
   if ($text == "/start") {
-    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Добро пожаловать!" . $name]);
+    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
   } else{
     	 $reply = "Добро пожаловать, ".$name."!";
     }
