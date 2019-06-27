@@ -9,7 +9,7 @@
   $name = $result["message"]["from"]["username"];
   if($text) {
     if ($text == "/start" and $name) {
-      $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
+       $reply = "Добро пожаловать, ".$name."!";
     } elseif($text == "/start" and !$name) {
       $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, незнакомец!' ]);
     } elseif ($text == "/sayHello") {
