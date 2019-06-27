@@ -10,7 +10,7 @@ if($text) {
   if ($text == "/start") {
     $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Добро пожаловать!" ]);
   } else{
-    	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
+    	 $reply = "Добро пожаловать, ".$name."!";
     }
   }
 ?>
