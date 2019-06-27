@@ -13,7 +13,7 @@ if($text) {
         else
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Добро пожаловать незнакомец"]);
     else
-    }
+    {
     $reply = "Введите что-то другое"
     }
 }
