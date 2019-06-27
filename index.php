@@ -1,5 +1,5 @@
 <?php
-/*include('vendor/autoload.php');
+include('vendor/autoload.php');
 use Telegram\Bot\Api;
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
 $result = $telegram -> getWebhookUpdates();
@@ -12,7 +12,6 @@ if($text) {
     } else{
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
     }
-}*/
-echo "privet"
+}
 ?>
 
