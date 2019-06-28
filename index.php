@@ -22,7 +22,7 @@ print $rates['EUR'];
 print $rates[Currency::GBP];*/
 
 //----====KEYBOARD TEST====-----
-$keyboard = [
+/*$keyboard = [
     ['7', '8', '9'],
     ['4', '5', '6'],
     ['1', '2', '3'],
@@ -41,7 +41,7 @@ $response = $telegram->sendMessage([
 	'reply_markup' => $reply_markup
 ]);
 
-$messageId = $response->getMessageId();
+$messageId = $response->getMessageId();*/
 //-=-=-=-=-=-=-=-=--=-=-=-=
 
 
