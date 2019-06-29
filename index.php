@@ -29,7 +29,8 @@ print $rates[Currency::GBP];*/
 //-=-=-=-=-=-=-=-=--=-=-=-=
 if($text) {
     if ($text == "/start" and $name) {
-        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
+         $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
+         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
     } elseif($text == "/start" and !$name) {
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, незнакомец!' ]);
     } elseif ($text == "/sayHello") {
