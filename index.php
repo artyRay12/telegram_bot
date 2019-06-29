@@ -17,6 +17,7 @@ $chat_id = $result["message"]["chat"]["id"];
 $name = $result["message"]["from"]["username"];
 $keyboard = [["Начать викторину"]]; //Клавиша которая нихера не появляется
 
+
 /*$rates = (new Exchange())->key("f22838f03ab3c8f3ff5f7e119f870dfe")->symbols(Currency::USD, Currency::GBP)->get();
 print $rates['EUR'];
 print $rates[Currency::GBP];*/
@@ -29,6 +30,7 @@ print $rates[Currency::GBP];*/
 if($text) {
     if ($text == "/start" and $name) {
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, ' . $name . '!' ]);
+        $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
     } elseif($text == "/start" and !$name) {
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' =>'Добро пожаловать, незнакомец!' ]);
     } elseif ($text == "/sayHello") {
