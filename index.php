@@ -30,5 +30,4 @@ if ($text) {
 /*$rates = (new Exchange())->key("f22838f03ab3c8f3ff5f7e119f870dfe")->symbols(Currency::USD, Currency::GBP)->get();
 print $rates['EUR'];
 print $rates[Currency::GBP];*/
- 
 ?>
