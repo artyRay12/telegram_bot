@@ -15,7 +15,7 @@ $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-$keyboard = [["Start"], ["Quit"], ["Say Hello"]]; //Клавиатура
+$keyboard = [["Start"]]; //Клавиатура
 if ($text) {    
   if ($text == "Say Hello" or $text == "/start") {
     if ($name != "") {
