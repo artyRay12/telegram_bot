@@ -11,21 +11,21 @@ $exchange->symbols(Currency::EUR, Currency::GBP);
 $rates = $exchange->get();*/
 
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
-$result = $telegram -> getWebhookUpdates(); 
+$result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-$keyboard = [["Start Game"]]; //Клавиатура
+$keyboard = [["Start"]]; //Клавиатура
 
 if($text) {
     if ($text == "/start") {
         $reply = "Welcome";
-        $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 
-                                                        'resize_keyboard' => true, 
-                                                        'one_time_keyboard' => false ]);
-        $telegram->sendMessage([ 'chat_id' => $chat_id, 
-                                'text' => $reply, 
-                                'reply_markup' => $reply_markup ]);
+        $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => false ]);
+        $telegram->sendMessage([ 'chat_id' => $chat_id,
+            'text' => $reply,
+            'reply_markup' => $reply_markup ]);
     } elseif($text == "/sayHello") {
         if ($name) {
             $reply = 'Hello, ' . $name . '!';
