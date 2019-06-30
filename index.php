@@ -36,9 +36,6 @@ if ($text AND $start == FALSE) {
     }
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-    'resize_keyboard' => true,
-    'one_time_keyboard' => true]);
 
 function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
