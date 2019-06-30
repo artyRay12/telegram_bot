@@ -61,7 +61,6 @@ while ($start == TRUE) {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
 
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
-    $keyboard = [[$posAnswer0], [$posAnswer1]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
