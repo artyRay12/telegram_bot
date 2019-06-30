@@ -33,8 +33,6 @@ if ($text) {
     } elseif ($text == "Start") {
         $reply = "Game is started!!";
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-        $reply = "Чем отличается светло-розовый цвет, от нересто-лососевого";
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
     }
 }
 
