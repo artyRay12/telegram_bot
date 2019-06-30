@@ -26,7 +26,7 @@ if($text) {
         $telegram->sendMessage([ 'chat_id' => $chat_id, 
                                 'text' => $reply, 
                                 'reply_markup' => $reply_markup ]);
-    } elseif($text == "Привет бот") {
+    } elseif($text == "/sayHello") {
         if ($name) {
             $reply = 'Hello, ' . $name . '!';
         } else {
