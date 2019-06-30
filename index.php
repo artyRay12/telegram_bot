@@ -32,9 +32,10 @@ if ($text) {
         }
     } elseif ($text == "Start") {
         $reply = "Game is started!!";
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
     }
 }
+
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 /*if ($start) {
     $keyboard = [["Какая нахрен разница"]]; //Клавиатура
