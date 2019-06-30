@@ -15,6 +15,10 @@ $chat_id = $result["message"]["chat"]["id"]; //Уникальный иденти
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
+$question = "Если ты был супом, то каким супом ты бы был";
+$posAnswer0 = "Борщ с перчиком";
+$posAnswer1 = "Щи с чесночком";
+
 function pringMsg($msg) {
     return "Game is started!!!!!!";
 }
@@ -37,13 +41,17 @@ if ($text) {
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 if ($start == TRUE) {
-    $keyboard = [["Борщ с перчиком"], ["Щи с чесночком"]];
-    $reply = "Если ты был супом, то каким супом ты бы был";
+    $keyboard = [[$posAnswer0], [$posAnswer1]];
+    $reply = $question;
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+
+
+
+}
 /*if ($start) {
     $keyboard = [["Какая нахрен разница"]]; //Клавиатура
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
