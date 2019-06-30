@@ -22,7 +22,7 @@ if($text) {
         $reply = "Welcome";
         $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 
                                                         'resize_keyboard' => true, 
-                                                        'one_time_keyboard' => false ]);
+                                                        'one_time_keyboard' => true ]);
         $telegram->sendMessage([ 'chat_id' => $chat_id, 
                                 'text' => $reply, 
                                 'reply_markup' => $reply_markup ]);
