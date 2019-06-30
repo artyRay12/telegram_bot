@@ -4,7 +4,7 @@ use Telegram\Bot\Api;
 use Fadion\Fixerio\Exchange;
 use Fadion\Fixerio\Currency;
 
-$exchange = new Exchange();
+/*$exchange = new Exchange();
 $exchange->key('f22838f03ab3c8f3ff5f7e119f870dfe');
 $exchange->base(Currency::USD);
 $exchange->symbols(Currency::EUR, Currency::GBP);
