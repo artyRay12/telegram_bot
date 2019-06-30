@@ -31,10 +31,14 @@ if ($text AND $start == FALSE) {
         }
     }elseif ($text == "Start") {
         $reply = pringMsg($reply);
+        $keyboard = [[$posAnswer0], [$posAnswer1]];
         $start = TRUE;
     }
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
+    'resize_keyboard' => true,
+    'one_time_keyboard' => true]);
 function getQuestById($questionNumber, $question) {
     if ($questionNumber == 1) {
         return "На что похож твой код?";
@@ -48,7 +52,7 @@ function getPosAnswersById($questionNumber){
         return array("На дерьмо", "На гавно");
     }
     if ($questionNumber == 1) {
-        return array("Отличный мужик", "Жаль что распяли");
+        return array("Отличный мужик", "Странный тип");
     }
 }
 function answerAnalisys($questionNumber) {
