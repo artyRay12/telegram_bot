@@ -56,6 +56,7 @@ function answerAnalisys($questionNumber) {
         echo "<br/>You fucking damn right";
 }
 while ($start == TRUE) {
+    $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
 
