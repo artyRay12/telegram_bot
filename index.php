@@ -16,7 +16,10 @@ $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
 $keyboard = [["Start"]]; //Клавиатура
-
+$start = FALSE;
+function pringMsg($msg) {
+    return "Game is started!!";
+}
 
 if ($text) {
     if ($text == "/start") {
@@ -31,7 +34,7 @@ if ($text) {
             $reply = 'Hello, stranger!';
         }
     } elseif ($text == "Start") {
-        $reply = "Game is started!!";
+        $reply = pringMsg($reply);
     }
 }
 
