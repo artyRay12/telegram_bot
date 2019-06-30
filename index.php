@@ -17,10 +17,10 @@ $chat_id = $result["message"]["chat"]["id"]; //Уникальный иденти
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
 $keyboard = [["Start"]]; //Клавиатура
 
-function sayHello($message) {
+/*function sayHello($message) {
     $message = "You pressed button";
     return $message;
-{
+{*/
     
 if($text) {
     if ($text == "/start") {
@@ -37,7 +37,7 @@ if($text) {
         }
     } 
     elseif($text == "Start") {
-        sayHello($reply);
+        $reply = "You Dumb";
     }  
 }
 $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
