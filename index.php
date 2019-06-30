@@ -69,6 +69,7 @@ if ($text == $posAnswer0 OR $text == $posAnswer1 ) {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "nice", 'reply_markup' => $reply_markup]);  //печатаю вопрос
 } else {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "are you dumb?", 'reply_markup' => $reply_markup]);  //печатаю вопрос
+}
     
 
 
