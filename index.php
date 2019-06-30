@@ -24,9 +24,9 @@ if ($text) {
     } else {
       $reply = "Hello, stranger!";
     }
-    //$reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
-    //$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
-     $keyboard = array(
+    $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
+    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
+    $keyboard = array(
     array(array('callback_data'=>'/butt1','text'=>'Кнопка 1')),
     array(array('callback_data'=>'/buut2','text'=>'Кнопка 2')),
     );
