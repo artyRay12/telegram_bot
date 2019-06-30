@@ -60,7 +60,7 @@ function answerAnalisys($questionNumber) {
 }
 
 
-while ($start == TRUE) {
+while ($start == TRUE AND $questionNumber <= 5) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
