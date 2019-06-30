@@ -33,14 +33,14 @@ if ($text) {
         }
     } elseif ($text == "Start") {
         $reply = "Game is started!!!";
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+        $reply = "Чем отличается светло-розовый цвет, от нересто-лососевого";
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
         $start = TRUE;
-        $keyboard = [["Какая нахрен разница"]]; //Клавиатура
     }
 }
 
-if ($start) {
-    $reply = "Чем отличается светло-розовый цвет, от нересто-лососевого";
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+/*if ($start) {
     $keyboard = [["Какая нахрен разница"]]; //Клавиатура
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
@@ -51,7 +51,7 @@ if ($start) {
         }
     }
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-}
+}*/
 
 
 
