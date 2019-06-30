@@ -59,8 +59,20 @@ function answerAnalisys($questionNumber) {
         echo "<br/>You fucking damn right";
 }
 
+$keyboard = [[$posAnswer0], [$posAnswer1]];
+$question = getQuestById($questionNumber, $question); //Меняю вопрос
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
+    'resize_keyboard' => true,
+    'one_time_keyboard' => true]);
+if ($text == $posAnswer0 OR $text == $posAnswer1 ) {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "nice", 'reply_markup' => $reply_markup]);  //печатаю вопрос
+} else {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "are you dumb?", 'reply_markup' => $reply_markup]);  //печатаю вопрос
+    
 
-while ($start == TRUE AND $questionNumber <= 5) {
+
+/*while ($start == TRUE AND $questionNumber <= 5) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
@@ -69,10 +81,11 @@ while ($start == TRUE AND $questionNumber <= 5) {
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
+    while($text=="")
     if ($text)
         answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
     if ($questionNumber == 5)
         $start = FALSE;
-}
+}*/
 ?>
