@@ -14,9 +14,7 @@ $question = "Если ты был супом, то каким супом ты б
 $questionNumber = 0;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
-function pringMsg($msg) {
-    return "Game is started!!!!!!";
-}
+
 if ($text AND $start == FALSE) {
     if ($text == "/start") {
         $reply = "Welcome";
@@ -35,7 +33,7 @@ if ($text AND $start == FALSE) {
         $start = TRUE;
     }
 }
-//$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
