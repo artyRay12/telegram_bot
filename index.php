@@ -11,7 +11,7 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
 $question = "Если ты был супом, то каким супом ты бы был";
-$questionNumber = 0;
+$questionNumber = 1;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
 function pringMsg($msg) {
@@ -63,6 +63,8 @@ function answerAnalisys($questionNumber) {
     if ($questionNumber == 1 AND (($text == $posAnswer0) OR ($text = $posAnswer0)))
         echo "<br/>You fucking damn right";
 }
+
+
 while ($start == TRUE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
@@ -72,10 +74,10 @@ while ($start == TRUE) {
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
-
-    answerAnalisys($questionNumber); // анализ ответа
+    if ($text)
+      answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
-    if ($questionNumber == 3)
+    if ($questionNumber == 2)
         $start = FALSE;
 }
 ?>
