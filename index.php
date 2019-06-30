@@ -20,15 +20,16 @@ $keyboard = [["Start"]]; //Клавиатура
 if ($text) {    
   if ($text == "Say Hello" or $text == "/start") {
     if ($name != "") {
-      $reply = "Hello, ". $name . "!";
-    } else {
       $reply = "Hello, stranger!";
+    } else {
+      $reply = "Hello, ". $name . "!";
     }
     $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 
-                                                    'resize_keyboard' => true, 
+                                                    'resize_keyboard' => true,
+                                                    'text' => 'You pressed the button',
                                                     'one_time_keyboard' => false ]);
     $telegram->sendMessage([ 'chat_id' => $chat_id, 
-                            'text' => 'You press the button', 
+                            'text' => 'Hello, ". $name, 
                             'reply_markup' => $reply_markup ]);
   }
 }
