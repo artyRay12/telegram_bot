@@ -28,7 +28,7 @@ if ($text AND $start == FALSE) {
             $reply = 'Hello, stranger!';
         }
     }elseif ($text == "Start") {
-        $reply = pringMsg($reply);
+        $reply = "The game has begun";
         $keyboard = [[$posAnswer0], [$posAnswer1]];
         $start = TRUE;
     }
@@ -63,7 +63,7 @@ function answerAnalisys($questionNumber) {
 while ($start == TRUE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
-   // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
     echo $questionNumber;
 
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
