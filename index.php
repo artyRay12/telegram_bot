@@ -11,7 +11,7 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
 $question = "Если ты был супом, то каким супом ты бы был";
-$questionNumber = 1;
+$questionNumber = 0;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
 function pringMsg($msg) {
