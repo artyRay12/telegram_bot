@@ -35,9 +35,13 @@ if ($text) {
         }
     } elseif ($text == "Start") {
         $reply = pringMsg($reply);
+        $start = TRUE;
     }
 }
-
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+if ($start == TRUE) {
+    $reply = "start is true";
+}
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 /*if ($start) {
