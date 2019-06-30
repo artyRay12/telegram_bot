@@ -39,7 +39,11 @@ $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' 
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
     'resize_keyboard' => true,
     'one_time_keyboard' => true]);
+
 function getQuestById($questionNumber, $question) {
+    if ($questionNumber == 0) {
+        return "Если ты бы был супом, то каким супом ты бы был?";
+    }
     if ($questionNumber == 1) {
         return "На что похож твой код?";
     }
