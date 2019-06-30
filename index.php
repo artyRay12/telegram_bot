@@ -74,7 +74,7 @@ while ($start == TRUE) {
     if ($text)
       answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
-    if ($questionNumber == 2)
+    if ($questionNumber == 4)
         $start = FALSE;
 }
 ?>
