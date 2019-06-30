@@ -35,7 +35,7 @@ if ($text AND $start == FALSE) {
         $start = TRUE;
     }
 }
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+//$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
@@ -65,14 +65,15 @@ function answerAnalisys($questionNumber) {
 while ($start == TRUE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+   // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+    echo $questionNumber;
 
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
     if ($text)
-      answerAnalisys($questionNumber); // анализ ответа
+        answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
     if ($questionNumber == 4)
         $start = FALSE;
