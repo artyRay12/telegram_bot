@@ -64,7 +64,6 @@ while ($start == TRUE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
-    echo $questionNumber;
 
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
@@ -73,7 +72,7 @@ while ($start == TRUE) {
     if ($text)
         answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
-    if ($questionNumber == 4)
+    if ($questionNumber == 5)
         $start = FALSE;
 }
 ?>
