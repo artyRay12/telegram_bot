@@ -25,26 +25,30 @@ if ($text) {
     }
     //$reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
     //$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
+    startGame();
   }
 }
 
-$keyboard = array(
-    array(array('callback_data'=>'/butt1','text'=>'Кнопка 1')),
-    array(array('callback_data'=>'/buut2','text'=>'Кнопка 2')),
-);
+function startGame() {
+  
+  $keyboard = array(
+      array(array('callback_data'=>'/butt1','text'=>'Кнопка 1')),
+      array(array('callback_data'=>'/buut2','text'=>'Кнопка 2')),
+  );
 
-$reply_markup = $telegram->replyKeyboardMarkup([ 
-    'keyboard' => $keyboard, 
-    'resize_keyboard' => true, 
-    'one_time_keyboard' => false 
-]);
+  $reply_markup = $telegram->replyKeyboardMarkup([ 
+      'keyboard' => $keyboard, 
+      'resize_keyboard' => true, 
+      'one_time_keyboard' => false 
+  ]);
 
 
-$telegram->sendMessage(array(
-  'chat_id' => $chat_id,
-    'text' => 'Нажмите на одну из кнопок:',
-    'reply_markup' => $reply_markup,
-));
+  $telegram->sendMessage(array(
+    'chat_id' => $chat_id,
+      'text' => 'Нажмите на одну из кнопок:',
+      'reply_markup' => $reply_markup,
+  ));
+}
  
 /*$rates = (new Exchange())->key("f22838f03ab3c8f3ff5f7e119f870dfe")->symbols(Currency::USD, Currency::GBP)->get();
 print $rates['EUR'];
