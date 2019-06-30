@@ -24,13 +24,13 @@ if ($text) {
     } else {
       $reply = "Hello, ". $name . "!";
     }
-    $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 
+    /*$reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 
                                                     'resize_keyboard' => true,
                                                     'text' => 'You pressed the button',
                                                     'one_time_keyboard' => false ]);
     $telegram->sendMessage([ 'chat_id' => $chat_id, 
-                            'text' => 'Hello, ". $name, 
-                            'reply_markup' => $reply_markup ]);
+                            'text' => 'Hello', 
+                            'reply_markup' => $reply_markup ]);*/
   }
 }
  
