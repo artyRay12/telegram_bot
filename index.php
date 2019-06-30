@@ -41,7 +41,7 @@ $reply_markup = $telegram->replyKeyboardMarkup([
 
 
 $telegram->sendMessage(array(
-  'chat_id' => $chatId,
+  'chat_id' => $chat_id,
     'text' => 'Нажмите на одну из кнопок:',
     'reply_markup' => $reply_markup,
 ));
