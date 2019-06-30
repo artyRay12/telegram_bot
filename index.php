@@ -40,7 +40,7 @@ if ($text) {
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 if ($start == TRUE) {
-    $reply = "start is true";
+    $reply = "Если ты был супом, то каким супом ты бы был";
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
