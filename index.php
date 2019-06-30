@@ -49,9 +49,6 @@ if ($start == TRUE) {
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
-
-
-}
 /*if ($start) {
     $keyboard = [["Какая нахрен разница"]]; //Клавиатура
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
