@@ -18,7 +18,7 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
 function pringMsg($msg) {
-    return "Game is started!!";
+    return "Game is started!!!!!!";
 }
 
 if ($text) {
