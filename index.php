@@ -67,6 +67,11 @@ function answerAnalisys($questionNumber) {
 while ($start == TRUE) {
     $question = getQuestById($questionNumber, $question);
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);
+    
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true]);
+    
     answerAnalisys($questionNumber);
     $questionNumber = $questionNumber + 1;
     if ($questionNumber == 2)
