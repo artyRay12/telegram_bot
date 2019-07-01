@@ -2,6 +2,8 @@
 include('vendor/autoload.php');
 use Telegram\Bot\Api;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use Yandex\Translate\Translator;
+use Yandex\Translate\Exception;
 
 
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
@@ -15,8 +17,26 @@ $question = "Если ты был супом, то каким супом ты б
 $questionNumber = 1;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
+$ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
 
-// set API Endpoint and API key
+//-----======Yandex Translate=====-------
+if ($text) {
+    try {
+        $translator = new Translator($ykey);
+        $translation = $translator->translate('$text', 'en-ru');
+
+        echo $translation; // Привет мир
+
+        echo $translation->getSource(); // Hello world;
+
+        echo $translation->getSourceLanguage(); // en
+        echo $translation->getResultLanguage(); // ru
+    } catch (Exception $e) {
+        // handle exception
+    }  
+}
+//----======Перевод через Fixer io=====------
+/*/ set API Endpoint and API key
 $endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
@@ -34,7 +54,8 @@ $exchangeRates = json_decode($json, true);
 // Access the exchange rate values, e.g. GBP:
 $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
 echo $questionNumber;
-
+a
+//------======Викторина=====------
 if ($text AND $start == FALSE) {
     if ($text == "/start") {
         $reply = "Welcome";
