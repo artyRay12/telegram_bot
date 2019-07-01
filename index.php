@@ -1,11 +1,9 @@
 <?php
 include('vendor/autoload.php');
 use Telegram\Bot\Api;
-use Fadion\Fixerio\Exchange;
-use Fadion\Fixerio\Currency;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
-$tr = new GoogleTranslate('en'); // Translates into English
+
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
 $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
@@ -14,10 +12,28 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
 $question = "Если ты был супом, то каким супом ты бы был";
-$questionNumber = 0;
+$questionNumber = 1;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
-echo $tr->translate('Привет мир');
+
+// set API Endpoint and API key
+$endpoint = 'latest';
+$access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
+
+// Initialize CURL:
+$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Store the data:
+$json = curl_exec($ch);
+curl_close($ch);
+
+// Decode JSON response:
+$exchangeRates = json_decode($json, true);
+
+// Access the exchange rate values, e.g. GBP:
+$questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
+echo $questionNumber;
 
 if ($text AND $start == FALSE) {
     if ($text == "/start") {
@@ -32,9 +48,13 @@ if ($text AND $start == FALSE) {
             $reply = 'Hello, stranger!';
         }
     }elseif ($text == "Start") {
-        $reply = $tr->translate($text);
+        $reply = "We Starting!";
         //$keyboard = [[$posAnswer0], [$posAnswer1]];
         //$start = TRUE;
+    } else {
+        $questionNumber = $text;
+        $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
+        $reply = $questionNumber . "rub";
     }
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
