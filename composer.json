@@ -2,6 +2,7 @@
   "require": {
     "irazasyed/telegram-bot-sdk": "^2.0",
     "fadion/fixerio": "~1.0",
-    "stichoza/google-translate-php": "^4.0"
+    "stichoza/google-translate-php": "^4.0",
+    "yandex/translate-api": "1.5.x"
   }
 }
