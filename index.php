@@ -3,6 +3,9 @@ include('vendor/autoload.php');
 use Telegram\Bot\Api;
 use Fadion\Fixerio\Exchange;
 use Fadion\Fixerio\Currency;
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
+$tr = new GoogleTranslate('en'); // Translates into English
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
 $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
@@ -14,6 +17,7 @@ $question = "Если ты был супом, то каким супом ты б
 $questionNumber = 0;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
+echo $tr->translate('Привет мир');
 
 if ($text AND $start == FALSE) {
     if ($text == "/start") {
@@ -28,14 +32,14 @@ if ($text AND $start == FALSE) {
             $reply = 'Hello, stranger!';
         }
     }elseif ($text == "Start") {
-        $reply = "The game has begun";
-        $keyboard = [[$posAnswer0], [$posAnswer1]];
-        $start = TRUE;
+        $reply = $tr->translate($text);
+        //$keyboard = [[$posAnswer0], [$posAnswer1]];
+        //$start = TRUE;
     }
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
-function getQuestById($questionNumber, $question) {
+/*function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
         return "Если ты бы был супом, то каким супом ты бы был?";
     }
@@ -59,34 +63,21 @@ function answerAnalisys($questionNumber) {
         echo "<br/>You fucking damn right";
 }
 
-$keyboard = [[$posAnswer0], [$posAnswer1]];
-$question = getQuestById($questionNumber, $question); //Меняю вопрос
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-    'resize_keyboard' => true,
-    'one_time_keyboard' => true]);
-if ($text == $posAnswer0 OR $text == $posAnswer1 ) {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "nice", 'reply_markup' => $reply_markup]);  //печатаю вопрос
-} else {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "are you dumb?", 'reply_markup' => $reply_markup]);  //печатаю вопрос
-}
-    
 
-
-/*while ($start == TRUE AND $questionNumber <= 5) {
+while ($start == FALSE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+   // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
+    echo $question;
 
     list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
         'resize_keyboard' => true,
         'one_time_keyboard' => true]);
-    while($text=="")
     if ($text)
         answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
-    if ($questionNumber == 5)
-        $start = FALSE;
-}*/
+    if ($questionNumber == 4)
+        $start = TRUE;*/
+
 ?>
