@@ -69,8 +69,8 @@ if ($text AND $start == FALSE) {
         }
     }elseif ($text == "Start") {
         $reply = "We Starting!";
-        //$keyboard = [[$posAnswer0], [$posAnswer1]];
-        //$start = TRUE;
+        $keyboard = [[$posAnswer0], [$posAnswer1]];
+        $start = TRUE;
     } else {
         $questionNumber = $text;
         $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
@@ -80,7 +80,7 @@ if ($text AND $start == FALSE) {
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 //------======Викторина=====------
-/*function getQuestById($questionNumber, $question) {
+function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
         return "Если ты бы был супом, то каким супом ты бы был?";
     }
@@ -105,7 +105,7 @@ function answerAnalisys($questionNumber) {
 }
 
 
-while ($start == FALSE) {
+while ($start == TRUE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
    // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
@@ -119,6 +119,6 @@ while ($start == FALSE) {
         answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
     if ($questionNumber == 4)
-        $start = TRUE;*/
+        $start = TRUE;
 
 ?>
