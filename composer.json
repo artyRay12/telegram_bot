@@ -1,8 +1,7 @@
 {
-    "require": {
-      "irazasyed/telegram-bot-sdk": "^2.0",
-        "telegram-bot/api": "^2.3",
-        "longman/telegram-bot": "^0.58.0",
-      "fadion/fixerio": "~1.0"
-    }
+  "require": {
+    "irazasyed/telegram-bot-sdk": "^2.0",
+    "fadion/fixerio": "~1.0",
+    "stichoza/google-translate-php": "^4.0"
+  }
 }
