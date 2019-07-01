@@ -19,7 +19,7 @@ $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
 $ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
 
-//-----======Yandex Translate=====-------
+/*/-----======Yandex Translate=====-------
 if ($text) {
     try {
         $translator = new Translator($ykey);
@@ -34,9 +34,9 @@ if ($text) {
     } catch (Exception $e) {
         // handle exception
     }  
-}
+}*/
 //----======Перевод через Fixer io=====------
-/*/ set API Endpoint and API key
+// set API Endpoint and API key
 $endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
@@ -54,8 +54,7 @@ $exchangeRates = json_decode($json, true);
 // Access the exchange rate values, e.g. GBP:
 $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
 echo $questionNumber;
-a
-//------======Викторина=====------
+
 if ($text AND $start == FALSE) {
     if ($text == "/start") {
         $reply = "Welcome";
@@ -80,6 +79,7 @@ if ($text AND $start == FALSE) {
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
+//------======Викторина=====------
 /*function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
         return "Если ты бы был супом, то каким супом ты бы был?";
