@@ -38,7 +38,7 @@ $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' 
 $data = Array (
     'questText' => 'Bobby'
 );
-$db->where ('questID', 0);
+$db->where ('questID', 1);
 if ($db->update ('questions', $data))
     echo $db->count . ' records were updated';
 else
