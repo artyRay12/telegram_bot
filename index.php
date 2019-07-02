@@ -20,29 +20,89 @@ $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
 $heroku_userName = 'bb3a6b14f5f759';
 $heroku_pass = '8b5a0204';
+$questText = "";
+$questNumber = 0;
+$questDinId = 0;
+
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $db->autoReconnect = true;
 
 
-$cols = Array ("questText");
-$questDb = $db->get ("questions", null, $cols);
-if ($db->count > 0)
-    foreach ($questDb as $user) {
-      //  print_r ($user);
-    }
-
-$question = $questDb[$questionNumber]["questText"];
-$reply = $question;
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-
 $data = Array (
-    'questText' => 'Какое из этих блюд является копченным ягненком?'
+    'dinamycQuestID' => '0'
 );
-$db->where ('questID', 1);
-if ($db->update ('questions', $data))
-    echo $db->count . ' records were updated';
-else
-    echo 'update failed: ' . $db->getLastError();
+$db->update ('questions', $data);
+
+//----===Берем questID
+$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
+$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+$questDinId = $questDb[0]["dynamicQuestID"];
+echo $questDinId;
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
+
+//----===Берем questText
+$questTextRequest = Array ("questText");
+$questDb = $db->get ("questions", null, $questTextRequest);
+$questText = $questDb[$questDinId]["questText"];
+echo $questText;
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+
+//----===Меняем questID
+$data = Array (
+    'dynamicQuestID' => $db->inc(1),
+);
+$db->where ('dynamicQuestID', $questDinId);
+$db->update ('questions', $data);
+
+//----===Берем questID
+$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
+$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+$questDinId = $questDb[0]["dynamicQuestID"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
+
+//----===Берем questText
+$questTextRequest = Array ("questText");
+$questDb = $db->get ("questions", null, $questTextRequest);
+$questText = $questDb[$questDinId]["questText"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+
+//----===Меняем questID
+$data = Array (
+    'dynamicQuestID' => $db->inc(1),
+);
+$db->where ('dynamicQuestID', $questDinId);
+$db->update ('questions', $data);
+
+//----===Берем questID
+$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
+$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+$questDinId = $questDb[0]["dynamicQuestID"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
+
+//----===Берем questText
+$questTextRequest = Array ("questText");
+$questDb = $db->get ("questions", null, $questTextRequest);
+$questText = $questDb[$questDinId]["questText"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+
+//----===Меняем questID
+$data = Array (
+    'dynamicQuestID' => $db->inc(1),
+);
+$db->where ('dynamicQuestID', $questDinId);
+$db->update ('questions', $data);
+
+//----===Берем questID
+$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
+$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+$questDinId = $questDb[0]["dynamicQuestID"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
+
+//----===Берем questText
+$questTextRequest = Array ("questText");
+$questDb = $db->get ("questions", null, $questTextRequest);
+$questText = $questDb[$questDinId]["questText"];
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
 /*/-----======Yandex Translate=====-------
 if ($text) {
