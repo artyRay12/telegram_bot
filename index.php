@@ -24,7 +24,7 @@ $questText = "";
 $questNumber = 0;
 $questDinId = 0;
 $questIdRequest = "";
-$keyboard = [['Answer1, Answer2'], ['Answer3, Answer4']];
+$keyboard = [['Answer1', 'Answer2'], ['Answer3', 'Answer4']];
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 if ($text) {
