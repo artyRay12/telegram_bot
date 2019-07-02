@@ -28,11 +28,11 @@ $questIdRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 //if ($text) {
-  if ($text == "/start") {
+ // if ($text == "/start") {
     $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-  }// else {
+  //}// else {
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
