@@ -112,7 +112,7 @@ if ($text AND $start == FALSE) {
         $reply = $questionNumber . "rub";
     }
 }
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);*/
 
 
 ?>
