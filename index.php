@@ -34,12 +34,12 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 
 
 //---===Получаем кнопки===---
-$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
 $buttondb = $db->get("questions", null, $buttonRequest);
 $answer1 = $buttondb[$questDinId]["questAnswer0"];
 $answer2 = $buttondb[$questDinId]["questAnswer1"];
 $answer3 = $buttondb[$questDinId]["questAnswer2"];
 $answer4 = $buttondb[$questDinId]["questAnswer3"];
+$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
 
 
 if ($text) {
@@ -47,10 +47,7 @@ if ($text) {
     $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-  }
-}  
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-
+  } else {
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
@@ -69,24 +66,10 @@ $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
-  //} 
-//}
-/*-----======Yandex Translate=====-------
-if ($text) {
-    try {
-        $translator = new Translator($ykey);
-        $translation = $translator->translate('$text', 'en-ru');
+  }
+}  
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-        echo $translation; // Привет мир
-
-        echo $translation->getSource(); // Hello world;
-
-        echo $translation->getSourceLanguage(); // en
-        echo $translation->getResultLanguage(); // ru
-    } catch (Exception $e) {
-        // handle exception
-    }
-}*/
 //----======Перевод через Fixer io=====------
 // set API Endpoint and API key
 /*$endpoint = 'latest';
@@ -131,46 +114,5 @@ if ($text AND $start == FALSE) {
 }
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
-//------======Викторина=====------
-/*function getQuestById($questionNumber, $question) {
-    if ($questionNumber == 0) {
-        return "Если ты бы был супом, то каким супом ты бы был?";
-    }
-    if ($questionNumber == 1) {
-        return "На что похож твой код?";
-    }
-    if ($questionNumber == 2) {
-        return "Как вы относитесь к Иисусу?";
-    }
-}
-function getPosAnswersById($questionNumber){
-    if ($questionNumber == 1) {
-        return array("На дерьмо", "На гавно");
-    }
-    if ($questionNumber == 1) {
-        return array("Отличный мужик", "Странный тип");
-    }
-}
-function answerAnalisys($questionNumber) {
-    if ($questionNumber == 1 AND (($text == $posAnswer0) OR ($text = $posAnswer0)))
-        echo "<br/>You fucking damn right";
-}
-
-
-while ($start == FALSE) {
-    $keyboard = [[$posAnswer0], [$posAnswer1]];
-    $question = getQuestById($questionNumber, $question); //Меняю вопрос
-   // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
-    echo $question;
-
-    list($posAnswer0, $posAnswer1) = getPosAnswersById($questionNumber);// меняю кнопки
-    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-        'resize_keyboard' => true,
-        'one_time_keyboard' => true]);
-    if ($text)
-        answerAnalisys($questionNumber); // анализ ответа
-    $questionNumber = $questionNumber + 1;
-    if ($questionNumber == 4)
-        $start = TRUE;*/
 
 ?>
