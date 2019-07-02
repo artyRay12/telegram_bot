@@ -54,56 +54,6 @@ $data = Array (
 $db->where ('dynamicQuestID', $questDinId);
 $db->update ('questions', $data);
 
-//----===Берем questID
-$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
-$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
-$questDinId = $questDb[0]["dynamicQuestID"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
-
-//----===Берем questText
-$questTextRequest = Array ("questText");
-$questDb = $db->get ("questions", null, $questTextRequest);
-$questText = $questDb[$questDinId]["questText"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-
-//----===Меняем questID
-$data = Array (
-    'dynamicQuestID' => $db->inc(1),
-);
-$db->where ('dynamicQuestID', $questDinId);
-$db->update ('questions', $data);
-
-//----===Берем questID
-$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
-$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
-$questDinId = $questDb[0]["dynamicQuestID"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
-
-//----===Берем questText
-$questTextRequest = Array ("questText");
-$questDb = $db->get ("questions", null, $questTextRequest);
-$questText = $questDb[$questDinId]["questText"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-
-//----===Меняем questID
-$data = Array (
-    'dynamicQuestID' => $db->inc(1),
-);
-$db->where ('dynamicQuestID', $questDinId);
-$db->update ('questions', $data);
-
-//----===Берем questID
-$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
-$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
-$questDinId = $questDb[0]["dynamicQuestID"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
-
-//----===Берем questText
-$questTextRequest = Array ("questText");
-$questDb = $db->get ("questions", null, $questTextRequest);
-$questText = $questDb[$questDinId]["questText"];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-
 /*/-----======Yandex Translate=====-------
 if ($text) {
     try {
