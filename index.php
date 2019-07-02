@@ -47,20 +47,23 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     //---===Получаем кнопки===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
     $buttondb = $db->get("questions", null, $buttonRequest);
-    $answer1 = $buttondb[$questDinId]["questAnswer0"];
-    $answer2 = $buttondb[$questDinId]["questAnswer1"];
-    $answer3 = $buttondb[$questDinId]["questAnswer2"];
-    $answer4 = $buttondb[$questDinId]["questAnswer3"];
+    //$answer1 = $buttondb[$questDinId]["questAnswer0"];
+    //$answer2 = $buttondb[$questDinId]["questAnswer1"];
+    //$answer3 = $buttondb[$questDinId]["questAnswer2"];
+    //$answer4 = $buttondb[$questDinId]["questAnswer3"];
 
-    $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+    $keyboard = [[$buttondb[$questDinId]["questAnswer1"], 
+                  $buttondb[$questDinId]["questAnswer1"]], 
+                 [$buttondb[$questDinId]["questAnswer2, 
+                 $buttondb[$questDinId]["questAnswer3"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
-    $questText = $questDb[$questDinId]["questText"];
-    echo $questText;
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    //$questText = $questDb[$questDinId]["questText"];
+    //echo $questText;
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDb[$questDinId]["questText"], 'reply_markup' => $reply_markup]);
 
     //----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
