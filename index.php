@@ -30,11 +30,10 @@ $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-
-
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'work here', 'reply_markup' => $reply_markup]);
 //if ($text) {
   if ($text == "/start") {
-    $data = Array ('dynamicQuestID' => '0');
+    $data = Array ('dynamicQuestID' => 0);
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   } else {
