@@ -32,10 +32,10 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 
 //if ($text) {
   if ($text == "/start") {
-    $data = Array ('dynamicQuestID' => 0);
+    $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-    $keyboard = [['Начать игру']];
+    $keyboard = [["Начать игру"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
   } else {
     
