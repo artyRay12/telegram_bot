@@ -23,15 +23,16 @@ $heroku_pass = '8b5a0204';
 $questText = "";
 $questNumber = 0;
 $questDinId = 0;
+$questIdRequest = "";
 
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $db->autoReconnect = true;
 
 
-$data = Array (
+/*$data = Array (
     'dinamycQuestID' => '0'
 );
-$db->update ('questions', $data);
+$db->update ('questions', $data);*/
 
 //----===Берем questID
 $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
@@ -40,7 +41,7 @@ $questDinId = $questDb[0]["dynamicQuestID"];
 echo $questDinId;
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
 
-//----===Берем questText
+/*/----===Берем questText
 $questTextRequest = Array ("questText");
 $questDb = $db->get ("questions", null, $questTextRequest);
 $questText = $questDb[$questDinId]["questText"];
@@ -54,7 +55,7 @@ $data = Array (
 $db->where ('dynamicQuestID', $questDinId);
 $db->update ('questions', $data);
 
-/*/-----======Yandex Translate=====-------
+/*-----======Yandex Translate=====-------
 if ($text) {
     try {
         $translator = new Translator($ykey);
