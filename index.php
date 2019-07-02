@@ -42,7 +42,7 @@ $answer4 = $buttondb[$questDinId]["questAnswer3"];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $text, 'reply_markup' => $reply_markup]);
 //if ($text) {
   if ($text == "/start") {
  //   $data = Array ('dynamicQuestID' => '0');
