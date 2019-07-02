@@ -12,8 +12,8 @@ $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
 $question = "";
 $questionNumber = 0;
-$posAnswer0 = "Борщ с перчиком";
-$posAnswer1 = "Щи с чесночком";
+$posAnswer0 = "";
+$posAnswer1 = "";
 $ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
 $text = '';
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
@@ -31,6 +31,7 @@ $db->autoReconnect = true;
 if ($text == "/start") {
   $data = Array ('dynamicQuestID' => '0');
   $db->update ('questions', $data);
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
 }
 
 //----===Берем questID
