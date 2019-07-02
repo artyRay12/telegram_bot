@@ -1,9 +1,6 @@
 <?php
 include('vendor/autoload.php');
 use Telegram\Bot\Api;
-use Stichoza\GoogleTranslate\GoogleTranslate;
-use Yandex\Translate\Translator;
-use Yandex\Translate\Exception;
 
 
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
