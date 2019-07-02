@@ -41,6 +41,7 @@ $answer3 = $buttondb[$questDinId]["questAnswer2"];
 $answer4 = $buttondb[$questDinId]["questAnswer3"];
 
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
 
 //if ($text) {
@@ -69,7 +70,7 @@ $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $db->update ('questions', $data);
 //  }
 //}  
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+
 
 //----======Перевод через Fixer io=====------
 // set API Endpoint and API key
