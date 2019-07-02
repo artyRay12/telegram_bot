@@ -24,13 +24,23 @@ $questText = "";
 $questNumber = 0;
 $questDinId = 0;
 $questIdRequest = "";
-$answer1 = "1";
-$answer2 = "2";
-$answer3 = "3";
-$answer4 = "4";
+$answer1 = "";
+$answer2 = "";
+$answer3 = "";
+$answer4 = "";
 $buttonRequest = "";
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
+
+
+//---===Получаем кнопки===---
+$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
+$buttondb = $db->get("questions", null, $buttonRequest);
+$answer1 = $buttondb[$questDinId]["questAnswer0"];
+$answer2 = $buttondb[$questDinId]["questAnswer1"];
+$answer3 = $buttondb[$questDinId]["questAnswer2"];
+$answer4 = $buttondb[$questDinId]["questAnswer3"];
+
 
 if ($text) {
   if ($text == "/start") {
@@ -40,6 +50,7 @@ if ($text) {
   }
 }  
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
