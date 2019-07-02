@@ -28,7 +28,7 @@ $questIdRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $db->autoReconnect = true;
 
-if ($text = "/start") {
+if ($text == "/start") {
   $data = Array ('dynamicQuestID' => '0');
   $db->update ('questions', $data);
 }
