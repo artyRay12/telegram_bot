@@ -42,12 +42,12 @@ $answer4 = $buttondb[$questDinId]["questAnswer3"];
 $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
 
 
-if ($text) {
-  if ($text == "/start") {
+//if ($text) {
+//  if ($text == "/start") {
     $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-  } else {
+//  } else {
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
@@ -66,8 +66,8 @@ if ($text) {
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
-  }
-}  
+//  }
+//}  
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
 //----======Перевод через Fixer io=====------
