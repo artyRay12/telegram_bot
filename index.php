@@ -30,29 +30,33 @@ $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-//----===Берем questID
-$questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
-$questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
-$questDinId = $questDb[0]["dynamicQuestID"];
-//---===Получаем кнопки===---
-$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
-$buttondb = $db->get("questions", null, $buttonRequest);
-$answer1 = $buttondb[$questDinId]["questAnswer0"];
-$answer2 = $buttondb[$questDinId]["questAnswer1"];
-$answer3 = $buttondb[$questDinId]["questAnswer2"];
-$answer4 = $buttondb[$questDinId]["questAnswer3"];
 
-$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
 //if ($text) {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-  } //else {
+  } else {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDinId, 'reply_markup' => $reply_markup]);
+    
+    //----===Берем questID
+    $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
+    $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+    $questDinId = $questDb[0]["dynamicQuestID"];
+    
+    //---===Получаем кнопки===---
+    $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
+    $buttondb = $db->get("questions", null, $buttonRequest);
+    $answer1 = $buttondb[$questDinId]["questAnswer0"];
+    $answer2 = $buttondb[$questDinId]["questAnswer1"];
+    $answer3 = $buttondb[$questDinId]["questAnswer2"];
+    $answer4 = $buttondb[$questDinId]["questAnswer3"];
 
+    $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+    
+    
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
@@ -64,8 +68,8 @@ $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
-//  }
-//}  
+  }
+}  
 
 
 //----======Перевод через Fixer io=====------
