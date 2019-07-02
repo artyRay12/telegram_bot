@@ -24,7 +24,7 @@ $questText = "";
 $questNumber = 0;
 $questDinId = 0;
 $questIdRequest = "";
-
+$keyboard = [['Hello'], ['Motherfucker']];
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 if ($text) {
@@ -34,6 +34,7 @@ if ($text) {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 }  
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
