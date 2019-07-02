@@ -29,7 +29,7 @@ $answer2 = "2";
 $answer3 = "3";
 $answer4 = "4";
 $buttonRequest = "";
-$keyboard = [[$Answer1, $Answer2], [$Answer3, $Answer4]];
+$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 if ($text) {
