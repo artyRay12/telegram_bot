@@ -54,7 +54,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 
     $keyboard = [[$buttondb[$questDinId]["questAnswer0"], 
                   $buttondb[$questDinId]["questAnswer1"]], 
-                 [$buttondb[$questDinId]["questAnswer2], 
+                 [$buttondb[$questDinId]["questAnswer2"], 
                  $buttondb[$questDinId]["questAnswer3"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     
