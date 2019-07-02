@@ -30,7 +30,6 @@ $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'work here', 'reply_markup' => $reply_markup]);
 //if ($text) {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
@@ -65,8 +64,8 @@ $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'work here', 'reply_mar
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
-  }
-}  
+ }
+ 
 
 
 //----======Перевод через Fixer io=====------
