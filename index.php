@@ -34,8 +34,6 @@ if ($text) {
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
-}
-
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
@@ -54,7 +52,7 @@ if ($text) {
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
- // } 
+} 
 //}
 
 /*-----======Yandex Translate=====-------
