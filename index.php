@@ -34,7 +34,8 @@ if ($db->count > 0)
 $question = $questDb[$questionNumber]["questText"];
 $reply = $question;
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-
+$sql = "UPDATE questions SET questText='Hello World' WHERE questID = '0'";
+$db->query($sql);
 
 /*/-----======Yandex Translate=====-------
 if ($text) {
