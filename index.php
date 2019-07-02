@@ -28,11 +28,10 @@ $questIdRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $db->autoReconnect = true;
 
-
-/*$data = Array (
-    'dinamycQuestID' => '0'
-);
-$db->update ('questions', $data);*/
+if ($text = "/start") {
+  $data = Array ('dinamycQuestID' => '0');
+  $db->update ('questions', $data);
+}
 
 //----===Берем questID
 $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
