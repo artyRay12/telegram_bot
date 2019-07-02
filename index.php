@@ -23,7 +23,8 @@ $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
 $heroku_userName = 'bb3a6b14f5f759';
 $heroku_pass = '8b5a0204';
-$db = new MysqliDb('$heroku_host', '$heroku_userName', '$heroku_pass', '$heroku_schema');
+$db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
+$db->autoReconnect = true;
 
 
 $cols = Array ("questText");
