@@ -29,17 +29,18 @@ $answer2 = "";
 $answer3 = "";
 $answer4 = "";
 $buttonRequest = "";
-$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 
 //---===Получаем кнопки===---
+$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
 $buttondb = $db->get("questions", null, $buttonRequest);
 $answer1 = $buttondb[$questDinId]["questAnswer0"];
 $answer2 = $buttondb[$questDinId]["questAnswer1"];
 $answer3 = $buttondb[$questDinId]["questAnswer2"];
 $answer4 = $buttondb[$questDinId]["questAnswer3"];
-$buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
+
+$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 
 
 //if ($text) {
