@@ -42,13 +42,13 @@ $answer3 = $buttondb[$questDinId]["questAnswer2"];
 $answer4 = $buttondb[$questDinId]["questAnswer3"];
 
 
-//if ($text) {
-//  if ($text == "/start") {
+if ($text) {
+  if ($text == "/start") {
     $data = Array ('dynamicQuestID' => '0');
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
-//  }
-//}  
+  }
+}  
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
     //----===Берем questID
