@@ -36,7 +36,7 @@ $reply = $question;
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 $data = Array (
-    'questText' => 'Bobby'
+    'questText' => 'Какое из этих блюд является копченным ягненком?'
 );
 $db->where ('questID', 1);
 if ($db->update ('questions', $data))
