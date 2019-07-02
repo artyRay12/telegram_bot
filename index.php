@@ -13,11 +13,30 @@ $chat_id = $result["message"]["chat"]["id"]; //Уникальный иденти
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
 $keyboard = [["Start"]]; //Клавиатура
 $start = FALSE;
-$question = "Если ты был супом, то каким супом ты бы был";
+$question = "";
 $questionNumber = 1;
 $posAnswer0 = "Борщ с перчиком";
 $posAnswer1 = "Щи с чесночком";
 $ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
+$text = '';
+$heroku_schema = 'heroku_fcc9304d7d4cb18';
+$heroku_host = 'eu-cdbr-west-02.cleardb.net';
+$heroku_userName = 'bb3a6b14f5f759';
+$heroku_pass = '8b5a0204';
+$db = new MysqliDb('$heroku_host', '$heroku_userName', '$heroku_pass', '$heroku_schema');
+
+
+$cols = Array ("questText");
+$questDb = $db->get ("questions", null, $cols);
+if ($db->count > 0)
+    foreach ($questDb as $user) {
+      //  print_r ($user);
+    }
+
+$question = $questDb[$questionNumber]["questText"];
+$reply = $question;
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+
 
 /*/-----======Yandex Translate=====-------
 if ($text) {
@@ -33,11 +52,11 @@ if ($text) {
         echo $translation->getResultLanguage(); // ru
     } catch (Exception $e) {
         // handle exception
-    }  
+    }
 }*/
 //----======Перевод через Fixer io=====------
 // set API Endpoint and API key
-$endpoint = 'latest';
+/*$endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
 // Initialize CURL:
@@ -69,8 +88,8 @@ if ($text AND $start == FALSE) {
         }
     }elseif ($text == "Start") {
         $reply = "We Starting!";
-        $keyboard = [[$posAnswer0], [$posAnswer1]];
-        $start = TRUE;
+        //$keyboard = [[$posAnswer0], [$posAnswer1]];
+        //$start = TRUE;
     } else {
         $questionNumber = $text;
         $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
@@ -80,7 +99,7 @@ if ($text AND $start == FALSE) {
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 
 //------======Викторина=====------
-function getQuestById($questionNumber, $question) {
+/*function getQuestById($questionNumber, $question) {
     if ($questionNumber == 0) {
         return "Если ты бы был супом, то каким супом ты бы был?";
     }
@@ -105,7 +124,7 @@ function answerAnalisys($questionNumber) {
 }
 
 
-while ($start == TRUE) {
+while ($start == FALSE) {
     $keyboard = [[$posAnswer0], [$posAnswer1]];
     $question = getQuestById($questionNumber, $question); //Меняю вопрос
    // $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $question, 'reply_markup' => $reply_markup]);  //печатаю вопрос
@@ -119,6 +138,6 @@ while ($start == TRUE) {
         answerAnalisys($questionNumber); // анализ ответа
     $questionNumber = $questionNumber + 1;
     if ($questionNumber == 4)
-        $start = TRUE;
+        $start = TRUE;*/
 
 ?>
