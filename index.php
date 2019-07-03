@@ -60,7 +60,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 function checkUserID($db, $userID, $name, $id) {
   $db -> where("userName", $name);
   $userData = $db->getOne("users");
-  if (empty($userData)) {
+  if ($userData) {
   } else {
     $data = Array ("userID" => $userID,
                "userName" => $name,
