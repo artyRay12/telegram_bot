@@ -53,11 +53,11 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     //$answer4 = $buttondb[$questDinId]["questAnswer3"];
 
     try {
-      $keyboard = [[  $buttondb[$questDinId]["questAnswer0"], 
+      /*$keyboard = [[$buttondb[$questDinId]["questAnswer0"], 
                   $buttondb[$questDinId]["questAnswer1"]], 
                   [$buttondb[$questDinId]["questAnswer2"], 
                    $buttondb[$questDinId]["questAnswer3"]]];
-    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);*/
     } catch(Exeptions $e) {
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $e->getMessage(), 'reply_markup' => $reply_markup]);
     }
