@@ -57,7 +57,7 @@ try {
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
-    //$questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
+    $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
     
