@@ -39,20 +39,18 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       $db->update ('users', $data);
   }
                    
-  if ($questDinId == 1 AND $text == $answer1) {
+  if ($questDinId == 2 AND $text == $answer1) {
       ScoreUp($db);
-  } elseif($questDinId == 2 AND $text == $answer4) {
-      ScoreUp($db);
-  } elseif($questDinId == 3 AND $text == $answer1) {
+  } elseif($questDinId == 3 AND $text == $answer4) {
       ScoreUp($db);
   } elseif($questDinId == 4 AND $text == $answer1) {
       ScoreUp($db);
-  } elseif($questDinId == 5 AND $text == $answer2) {
+  } elseif($questDinId == 5 AND $text == $answer1) {
+      ScoreUp($db);
+  } elseif($questDinId == 6 AND $text == $answer2) {
       ScoreUp($db);
   } elseif($questDinId == 6 AND $text == $answer4) {
       ScoreUp($db);
-  } else {
-    ScoreUp($db);
   }
   return;
 }
@@ -61,6 +59,9 @@ try {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
     $db->update ('questions', $data);
+    //---===Refresh score
+    $data = Array('Score' => 0);
+    $db->update('Score' => 0);
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
