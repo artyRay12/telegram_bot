@@ -61,7 +61,7 @@ try {
     $db->update ('questions', $data);
     //---===Refresh score
     $data = Array('Score' => 0);
-    $db->update('Score' => 0);
+    $db->update('Score', $data);
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
