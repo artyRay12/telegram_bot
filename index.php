@@ -67,7 +67,7 @@ try {
     $scoreRequest = Array("userScore");
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $score, 'reply_markup' => $reply_markup]);
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $score, 'reply_markup' => $reply_markup]);
     
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
