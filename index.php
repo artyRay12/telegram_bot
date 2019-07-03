@@ -31,7 +31,7 @@ $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-//if ($text) {
+try {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
     $db->update ('questions', $data);
@@ -51,28 +51,25 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
     $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
     $answer4 = isset($buttondb[$questDinId]["questAnswer3"]) ? $buttondb[$questDinId]["questAnswer3"] : "";
-   
-    try {
-      $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-    } catch(Exeptions $e) {
-    }
-   
+    $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
-      
-    try {
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-    } catch(Exeptions $e) {
-    }
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+
     
-    /*/----===Меняем questID
+    //----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
-    $db->update ('questions', $data);*/
+    $db->update ('questions', $data);
   }
+}
+catch (Exeptions $e)  {
+}
+  
 
 //----======Перевод через Fixer io=====------
 // set API Endpoint and API key
