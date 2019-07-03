@@ -38,7 +38,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     $db->update ('questions', $data);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
-    
+  if($questDinId < 6) {  
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
@@ -65,10 +65,10 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
-    //$questText = $questDb[$questDinId]["questText"];
+    $questText = $questDb[$questDinId]["questText"];
     //echo $questText;
     try {
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Test String", 'reply_markup' => $reply_markup]);
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDb[$questDinId]["questText"], 'reply_markup' => $reply_markup]);
     } catch(Exeptions $e) {
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $e->getMessage(), 'reply_markup' => $reply_markup]);
     }
@@ -79,6 +79,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
+  }
 
  
 
