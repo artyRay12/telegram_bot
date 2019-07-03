@@ -52,7 +52,6 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   } elseif($questDinId == 6 AND $text == $answer4) {
       ScoreUp($db);
   }
-  ScoreUp($db);
   return;
 }
     
