@@ -31,6 +31,25 @@ $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
+function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4) {
+  if ($questDinId == 1 AND $text == $answer1) {
+      $score = $score + 20;
+  } elseif($questDinId == 2 AND $text == $answer4) {
+      $score = $score + 20;
+  } elseif($questDinId == 3 AND $text == $answer1) {
+      $score = $score + 20;
+  } elseif($questDinId == 4 AND $text == $answer1) {
+      $score = $score + 20;
+  } elseif($questDinId == 5 AND $text == $answer2) {
+      $score = $score + 20;
+  } elseif($questDinId == 6 AND $text == $answer4) {
+      $score = $score + 20;
+  }
+  return;
+}
+    
+  
+
 try {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
@@ -58,7 +77,10 @@ try {
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
+    
+    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4)
+      
 
     
     //----===Меняем questID
