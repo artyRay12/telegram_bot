@@ -60,14 +60,14 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 function checkUserID($db, $userID, $name, $id) {
   $db -> where("userName", $name);
   $userData = $db->getOne("users");
-  if ($userData) {
-  } else {
+  //if ($userData) {
+//  } else {
     $data = Array ("userID" => $userID,
                "userName" => $name,
                "userScore" => 0,
                 "currentQuest" => 0);
     $id = $db->insert ('users', $data);
-  }
+  //}
   return;
 }  
 
