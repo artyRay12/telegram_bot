@@ -79,7 +79,7 @@ try {
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
     
-    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4)
+    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4);
       
 
     
