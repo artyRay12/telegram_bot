@@ -8,7 +8,7 @@ $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-$userID = $result['message']['from']['id'];
+$userID = $result['message']['from']['id']; 
 $start = FALSE;
 $question = "";
 $questionNumber = 0;
@@ -41,7 +41,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       $db->update ('users', $data);
   }
                    
-  if (/*$questDinId == 1 AND */$text == $answer1) {
+  if ($questDinId == 1 AND $text == $answer1) {
       ScoreUp($db);
   } elseif($questDinId == 2 AND $text == $answer4) {
       ScoreUp($db);
@@ -110,7 +110,7 @@ try {
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
     
     //Анализ ответа изходя из номера вопроса
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
@@ -121,6 +121,7 @@ try {
       $db->where ('dynamicQuestID', $questDinId);
       $db->update ('questions', $data);
     }
+     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "квестID" . $questDinId . "Ответ" . $answer1, 'reply_markup' => $reply_markup]);
   }
 }
 catch (Exeptions $e)  {
