@@ -34,8 +34,10 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
   if ($text == "/start") {
     $keyboard = [["Начать игру"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-    $data = Array ('dynamicQuestID' => 0);
-    $db->update ('questions', $data);
+    for ($i = 0; $i < 6; $i++)  {
+      $data = Array ('dynamicQuestID' => 0);
+      $db->update ('questions', $data);
+    }
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
   if($questDinId < 6) {  
@@ -73,16 +75,11 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $e->getMessage(), 'reply_markup' => $reply_markup]);
     }
       
-    
-
     //----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
     $db->update ('questions', $data);
   }
-
- 
-
 
 //----======Перевод через Fixer io=====------
 // set API Endpoint and API key
