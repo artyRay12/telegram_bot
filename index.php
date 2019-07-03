@@ -60,7 +60,7 @@ try {
     $data = Array ('dynamicQuestID' => 0);
     $db->update ('questions', $data);
     //---===Refresh score
-    $data = Array('Score' => 0);
+    $data = Array('userScore' => 0);
     $db->update('users', $data);
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
