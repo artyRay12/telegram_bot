@@ -66,18 +66,18 @@ try {
   }
 
   if($questDinId <= 5) {  
-    //----===Получаем score
+    //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $score, 'reply_markup' => $reply_markup]);
     
-    //----===Берем questID
+    //----===Получаем номер вопроса
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
     $questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
-    //---===Получаем кнопки===---
+    //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
     $buttondb = $db->get("questions", null, $buttonRequest);
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
@@ -87,17 +87,18 @@ try {
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-    //----===Берем questText
+    //----===Печатаем впорос
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
     
+    //Анализ ответа изходя из номера вопроса
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
       
 
     
-    //----===Меняем questID
+    //----===Увеличиваю счетчик вопроса
     if($questDinId < 5) {
       $data = Array ('dynamicQuestID' => $db->inc(1),);
       $db->where ('dynamicQuestID', $questDinId);
