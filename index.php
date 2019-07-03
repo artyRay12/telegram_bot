@@ -38,7 +38,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
-  if($questDinId < 6) {  
+  if($questDinId <= 5) {  
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
@@ -62,7 +62,7 @@ try {
 
     
     //----===Меняем questID
-    if($questDinId <= 5) {
+    if($questDinId < 5) {
       $data = Array ('dynamicQuestID' => $db->inc(1),);
       $db->where ('dynamicQuestID', $questDinId);
       $db->update ('questions', $data);
