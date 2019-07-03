@@ -54,7 +54,7 @@ try {
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-    //----===Берем questText
+    /*/----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
@@ -64,7 +64,7 @@ try {
     //----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
-    $db->update ('questions', $data);
+    $db->update ('questions', $data);*/
   }
 }
 catch (Exeptions $e)  {
