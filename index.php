@@ -110,7 +110,7 @@ try {
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " $questDinId, 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
     
     //Анализ ответа изходя из номера вопроса
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
