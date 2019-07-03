@@ -62,9 +62,11 @@ try {
 
     
     //----===Меняем questID
-    $data = Array ('dynamicQuestID' => $db->inc(1),);
-    $db->where ('dynamicQuestID', $questDinId);
-    $db->update ('questions', $data);
+    if($questDinId <= 5) {
+      $data = Array ('dynamicQuestID' => $db->inc(1),);
+      $db->where ('dynamicQuestID', $questDinId);
+      $db->update ('questions', $data);
+    }
   }
 }
 catch (Exeptions $e)  {
