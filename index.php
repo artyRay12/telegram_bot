@@ -14,6 +14,7 @@ $question = "";
 $questionNumber = 0;
 $posAnswer0 = "";
 $posAnswer1 = "";
+$score = "";
 $ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
@@ -48,8 +49,6 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   return;
 }
     
-  
-
 try {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
