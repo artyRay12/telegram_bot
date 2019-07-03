@@ -57,19 +57,17 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     } catch(Exeptions $e) {
     }
-    
-    
+   
     //----===Берем questText
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
-    //$questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
-    
-    /*
+    $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
+      
     try {
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
     } catch(Exeptions $e) {
     }
-      
+    /*
     //----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
