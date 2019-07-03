@@ -53,6 +53,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       ScoreUp($db);
   } else {
     ScoreUp($db);
+  }
   return;
 }
     
