@@ -30,7 +30,7 @@ $answer3 = "";
 $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
-
+/*
 //if ($text) {
   if ($text == "/start") {
     $data = Array ('dynamicQuestID' => 0);
@@ -41,7 +41,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     //----===Берем questID
     $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
     $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
-    //$questDinId = $questIdDb[0]["dynamicQuestID"];
+    //$questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
     //---===Получаем кнопки===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
