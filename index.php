@@ -68,7 +68,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     //$questText = $questDb[$questDinId]["questText"];
     //echo $questText;
     try {
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questDb[$questDinId]["questText"], 'reply_markup' => $reply_markup]);
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Test String", 'reply_markup' => $reply_markup]);
     } catch(Exeptions $e) {
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $e->getMessage(), 'reply_markup' => $reply_markup]);
     }
