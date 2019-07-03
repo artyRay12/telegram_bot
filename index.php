@@ -68,10 +68,10 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
     } catch(Exeptions $e) {
     }
     
-    //----===Меняем questID
+    /*/----===Меняем questID
     $data = Array ('dynamicQuestID' => $db->inc(1),);
     $db->where ('dynamicQuestID', $questDinId);
-    $db->update ('questions', $data);
+    $db->update ('questions', $data);*/
   }
 
 //----======Перевод через Fixer io=====------
