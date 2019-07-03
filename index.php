@@ -1,14 +1,14 @@
 <?php
 include('vendor/autoload.php');
 use Telegram\Bot\Api;
-
+//require('bd_functions.php');
 
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
 $result = $telegram -> getWebhookUpdates();
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
-$keyboard = [["Start"]]; //Клавиатура
+$userID = $update['message']['from']['id'];
 $start = FALSE;
 $question = "";
 $questionNumber = 0;
@@ -30,8 +30,10 @@ $answer2 = "";
 $answer3 = "";
 $answer4 = "";
 $buttonRequest = "";
+$id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
+//===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db) {
   function ScoreUp($db) {                
       $data = Array ('userScore' => $db->inc(20),);
@@ -54,6 +56,21 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   }
   return;
 }
+//=======================================
+function checkUserID($db, $userID, $name, $id) {
+  $db -> where("userName", $name);
+  $userData = $db->getOne("users");
+  if ($userData) {
+  } else {
+    $data = Array ("userID" => $userID,
+               "userName" => $name,
+               "userScore" => 0,
+                "currentQuest" => 0);
+    $id = $db->insert ('users', $data);
+  }
+  return;
+}  
+
     
 try {
   if ($text == "/start") {
@@ -62,6 +79,7 @@ try {
     //---===Refresh score
     $data = Array('userScore' => 0);
     $db->update('users', $data);
+    checkUserID($db, $userID, $name, $id);
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
