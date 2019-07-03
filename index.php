@@ -35,7 +35,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db) {
   function ScoreUp($db) {                
       $data = Array ('userScore' => $db->inc(20),);
-      $db->where ('usedID', 1);
+      $db->where ('userID', 1);
       $db->update ('users', $data);
   }
                    
