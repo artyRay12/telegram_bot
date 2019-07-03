@@ -52,6 +52,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   } elseif($questDinId == 6 AND $text == $answer4) {
       ScoreUp($db);
   }
+  ScoreUp($db);
   return;
 }
     
@@ -66,6 +67,7 @@ try {
   }
 
   if($questDinId <= 5) {  
+    
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
     $scoreDb = $db->get("users", null, $scoreRequest);
@@ -87,7 +89,7 @@ try {
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-    //----===Печатаем впорос
+    //----===Получаем и печатаем впорос
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
@@ -96,8 +98,6 @@ try {
     //Анализ ответа изходя из номера вопроса
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
       
-
-    
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 5) {
       $data = Array ('dynamicQuestID' => $db->inc(1),);
