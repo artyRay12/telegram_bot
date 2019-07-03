@@ -26,25 +26,31 @@ $questDinId = "";
 $questIdRequest = "";
 $questIdDb = "";
 $answer1 = "";
-$answer2 = "";
+$answer2 = "";db
 $answer3 = "";
 $answer4 = "";
 $buttonRequest = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4) {
+function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db) {
+  function ScoreUp($db) {                
+      $data = Array ('userScore' => $db->inc(20),);
+      $db->where ('usedID', 1);
+      $db->update ('users', $data);
+  }
+                   
   if ($questDinId == 1 AND $text == $answer1) {
-      $score = $score + 20;
+      ScoreUp($db);
   } elseif($questDinId == 2 AND $text == $answer4) {
-      $score = $score + 20;
+      ScoreUp($db);
   } elseif($questDinId == 3 AND $text == $answer1) {
-      $score = $score + 20;
+      ScoreUp($db);
   } elseif($questDinId == 4 AND $text == $answer1) {
-      $score = $score + 20;
+      ScoreUp($db);
   } elseif($questDinId == 5 AND $text == $answer2) {
-      $score = $score + 20;
+      ScoreUp($db);
   } elseif($questDinId == 6 AND $text == $answer4) {
-      $score = $score + 20;
+      ScoreUp($db);
   }
   return;
 }
