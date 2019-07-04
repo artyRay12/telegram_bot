@@ -100,7 +100,7 @@ try {
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
     $db->where('userID', $userID);
-    $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста 
+    $questIdDb = $db->get ("users", null, $questIdRequest);//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
     //Анализ ответа изходя из номера вопроса
