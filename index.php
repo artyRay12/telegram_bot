@@ -34,27 +34,27 @@ $id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 //===========Анализ ответов===============
-function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db) {
-  function ScoreUp($db) {                
+function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
+  function ScoreUp($db, $userID) {                
       $data = Array ('userScore' => $db->inc(20),);
       $db->where ('userID', $userID);
       $db->update ('users', $data);
   }
                    
   if ($questDinId == 1 AND $text == "Хангикьот") {  //$text == $answer1
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 2 AND $text == "На га*но") { //$text == $answer1
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 3 AND $text == "Она без полотенца") { //$text == $answer1
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 4 AND $text == "Шарманка") { //$text == $answer2
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 5 AND $text == "Датская ватрушка с сыром") { //$text == $answer1
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 6 AND $text == "Как я встретил вашу маму") { //$text == $answer1
-      ScoreUp($db);
+      ScoreUp($db, $userID);
   } elseif($questDinId == 7 AND $text == "Эдвард") { //$text == $answer1
-      ScoreUp($db);  
+      ScoreUp($db, $userID);
   }
   return;
 }
@@ -104,7 +104,7 @@ try {
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
     //Анализ ответа изходя из номера вопроса
-    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
+    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
     
     //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
