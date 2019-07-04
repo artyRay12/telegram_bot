@@ -161,12 +161,12 @@ try {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
-    } else {
+    }/* else {
       //Кончились вопросы
       $data = Array ('EndIsNear' => 1);
       $db->where('userID', $userID);
       $db->update ('users', $data);   
-    }   
+    }   */
   }
  
 
