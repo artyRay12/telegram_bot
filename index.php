@@ -102,9 +102,9 @@ try {
     $db->where('userID', $userID);
     $db->update('users', $data);
     //--==Refresh EndIsNear
-    $data = Array ('EndIsNear' => 0);
+    /*$data = Array ('EndIsNear' => 0);
     $db->where('userID', $userID);
-    $db->update ('users', $data);
+    $db->update ('users', $data);*/
   }
   
   if($questDinId <= 7) {  
@@ -114,11 +114,11 @@ try {
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
     
-    //Получаем данные о конце викторины
+    /*/Получаем данные о конце викторины
     $endRequest = Array("endIsNear");
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $endRequest);
-    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";*/
     
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
@@ -144,17 +144,17 @@ try {
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      
     //Последнее сообщение
-    if ($endIsNear == 1) {
+   /* if ($endIsNear == 1) {
       $keyboard = [["/start"]];
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);   
-    } else {
+    } else {*/
       //----===Получаем и печатаем впорос
       $questTextRequest = Array ("questText");
       $questDb = $db->get ("questions", null, $questTextRequest);
       $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-    }
+    //}
   
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
