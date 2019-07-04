@@ -101,7 +101,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
-  if($questDinId <= 7) {  
+  if($questDinId <= 8) {  
     
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
@@ -139,7 +139,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
         
     //----===Увеличиваю счетчик вопроса
-    if($questDinId < 7) {
+    if($questDinId < 8) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
