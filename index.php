@@ -101,6 +101,10 @@ try {
     $data = Array('userScore' => 0);
     $db->where('userID', $userID);
     $db->update('users', $data);
+    //--==Refresh EndIsNear
+    $data = Array ('EndIsNear' => 0);
+    $db->where('userID', $userID);
+    $db->update ('users', $data);
   }
   
   if($questDinId <= 7) {  
@@ -118,7 +122,6 @@ try {
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
     //Анализ ответа изходя из номера вопроса
-    
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
     
     //---===Получаем кнопки исходя из номера вопроса===---
@@ -138,6 +141,12 @@ try {
     $questTextRequest = Array ("questText");
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
+    
+    //==Получаем данные о конце викторины
+    $endRequest = Array("endIsNear");
+    $db->where('userID', $userID);
+    $scoreDb = $db->get("users", null, $endRequest);
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
   
     //----===Увеличиваю счетчик вопроса
