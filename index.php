@@ -137,17 +137,19 @@ try {
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
-   } else {
-      $keyboard = [["/start"]];
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
-   }
-    //----===Увеличиваю счетчик вопроса
-    if($questDinId < 7) {
+    
+    if($questDinId < 8) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
+    } else {
+      $keyboard = [["/start"]];
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
     }
+  }
+    //----===Увеличиваю счетчик вопроса
+    
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 }
 catch (Exeptions $e)  {
