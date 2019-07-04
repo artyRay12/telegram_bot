@@ -103,7 +103,7 @@ try {
     $db->update('users', $data);
   }
   
- /* if($questDinId <= 7) {  
+  if($questDinId <= 7) {  
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
     $db->where('userID', $userID);
@@ -119,7 +119,7 @@ try {
     
     //Анализ ответа изходя из номера вопроса
     
-    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
+    /*anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
     
     //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
@@ -145,11 +145,11 @@ try {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
-    }
+    }*/
   }
  
 
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);*/
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 } catch (Exeptions $e) {
 }
 
