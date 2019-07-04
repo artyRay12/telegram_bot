@@ -154,11 +154,21 @@ try {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
+    } else {
+      //Кончились вопросы
+      $data = Array ('EndIsNear' => 1);
+      $db->where('userID', $userID);
+      $db->update ('users', $data);
     }
   }
  
-
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  if ($endIsNear == 1) {
+   $keyboard = [["/start"]];
+   $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+   $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
+  } else {
+   $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  }
 } catch (Exeptions $e) {
 }
 
