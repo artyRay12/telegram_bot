@@ -37,7 +37,7 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db) {
   function ScoreUp($db) {                
       $data = Array ('userScore' => $db->inc(20),);
-      $db->where ('userID', 123);
+      $db->where ('userID', $userID);
       $db->update ('users', $data);
   }
                    
@@ -62,26 +62,30 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 function checkUserID($db, $userID, $name, $id) {
   $db -> where("userID", $userID);
   $userData = $db->getOne("users");
-  //if ($userData) {
-  //} else {
+  if ($userData) {
+  } else {
   $data = Array ("userID" => $userID,
                "userName" => $name,
                "userScore" => 0,
                 "currentQuest" => 0);
     $id = $db->insert ('users', $data);
-//  }
+  }
   return;
 }  
 
     
 try {
   if ($text == "/start") {
-    $data = Array ('dynamicQuestID' => 0);
+    checkUserID($db, $userID, $name, $id);
+    //---==Refresh currQuest
+    $data = Array ('currentQuest' => 0);
+    $db->where('userID', $userID);
     $db->update ('questions', $data);
     //---===Refresh score
     $data = Array('userScore' => 0);
+    $db->where('userID', $userID);
     $db->update('users', $data);
-    checkUserID($db, $userID, $name, $id);
+    
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
@@ -89,13 +93,14 @@ try {
     
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
+    $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $score, 'reply_markup' => $reply_markup]);
     
     //----===Получаем номер вопроса
-    $questIdRequest = Array("dynamicQuestID"); //Массив для с полем для запроса
-    $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
+    $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
+    $db->where('userID', $userID);
+    $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
     //Анализ ответа изходя из номера вопроса
@@ -119,9 +124,9 @@ try {
         
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 6) {
-      $data = Array ('dynamicQuestID' => $db->inc(1),);
-      $db->where ('dynamicQuestID', $questDinId);
-      $db->update ('questions', $data);
+      $data = Array ('currentQuest' => $db->inc(1),);
+      $db->where('userID', $userID);
+      $db->update ('users', $data);
     } else {
       $keyboard = [["/start"]];
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
