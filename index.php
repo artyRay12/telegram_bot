@@ -80,7 +80,7 @@ try {
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
-    $db->update ('questions', $data);
+    $db->update ('users', $data);
     //---===Refresh score
     $data = Array('userScore' => 0);
     $db->where('userID', $userID);
