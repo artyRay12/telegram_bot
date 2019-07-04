@@ -152,16 +152,16 @@ try {
 
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
      //Последнее сообщение
-     if ($endIsNear == 1) {
+     /*if ($endIsNear == 1) {
        $keyboard = [["/start"]];
        $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);   
-     } else {
+     } else {*/
       //----===Получаем и печатаем впорос
       $questTextRequest = Array ("questText");
       $questDb = $db->get ("questions", null, $questTextRequest);
       $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
-     }
+   //  }
    
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
