@@ -41,19 +41,19 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       $db->update ('users', $data);
   }
                    
-  if ($questDinId == 0 AND $text == $answer1) {  //$text == "Хангикьот"
+  if ($questDinId == 1 AND $text == "Хангикьот") {  //$text == $answer1
       ScoreUp($db);
-  } elseif($questDinId == 1 AND $text == $answer1) { //$text == "На га*но"
+  } elseif($questDinId == 2 AND $text == "На га*но") { //$text == $answer1
       ScoreUp($db);
-  } elseif($questDinId == 2 AND $text == $answer1) { //$text == "Она без полотенца"
+  } elseif($questDinId == 3 AND $text == "Она без полотенца") { //$text == $answer1
       ScoreUp($db);
-  } elseif($questDinId == 3 AND $text == $answer2) {//$text == "Шарманка"
+  } elseif($questDinId == 4 AND $text == "Шарманка") { //$text == $answer2
       ScoreUp($db);
-  } elseif($questDinId == 4 AND $text == $answer1) { //$text == "Датская ватрушка с сыром"
+  } elseif($questDinId == 5 AND $text == "Датская ватрушка с сыром") { //$text == $answer1
       ScoreUp($db);
-  } elseif($questDinId == 5 AND $text == $answer1) {//$text == "Как я встретил вашу маму"
+  } elseif($questDinId == 6 AND $text == "Как я встретил вашу маму") { //$text == $answer1
       ScoreUp($db);
-  } elseif($questDinId == 6 AND $text == $answer1) { //$text == "Эдвард"
+  } elseif($questDinId == 7 AND $text == "Эдвард") { //$text == $answer1
       ScoreUp($db);  
   }
   return;
@@ -126,6 +126,9 @@ try {
       $db->update ('questions', $data);
     }
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
+  } esle {
+    $keyboard = [["/start"]];
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
   }
 }
 catch (Exeptions $e)  {
