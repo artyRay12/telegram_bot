@@ -149,7 +149,7 @@ try {
   }
  
 
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 } catch (Exeptions $e) {
 }
 
