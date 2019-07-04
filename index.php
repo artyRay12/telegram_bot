@@ -101,13 +101,9 @@ try {
     $data = Array('userScore' => 0);
     $db->where('userID', $userID);
     $db->update('users', $data);
-    //--==Refresh EndIsNear
-    /*$data = Array ('EndIsNear' => 0);
-    $db->where('userID', $userID);
-    $db->update ('users', $data);*/
   }
   
-  if($questDinId <= 7) {  
+ /* if($questDinId <= 7) {  
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
     $db->where('userID', $userID);
@@ -153,7 +149,7 @@ try {
   }
  
 
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);*/
 } catch (Exeptions $e) {
 }
 
