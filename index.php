@@ -143,7 +143,7 @@ try {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
-    } else {
+    } elseif($text = $answer1 or $text = $answer2 or $text = $answer3 or $text = $answer4)  {
       $keyboard = [["/start"]];
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
