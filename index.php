@@ -91,7 +91,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
-  if($questDinId <= 8) {  
+  if($questDinId <= 7) {  
     
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
@@ -113,7 +113,7 @@ try {
     $buttondb = $db->get("questions", null, $buttonRequest);
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
-    if ($questDinId == 8) {
+    if ($questDinId == 7) {
        $answer3 = $valute;
     } else {
       $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
@@ -129,7 +129,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
         
     //----===Увеличиваю счетчик вопроса
-    if($questDinId < 8) {
+    if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
