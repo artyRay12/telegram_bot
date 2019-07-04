@@ -109,7 +109,7 @@ try {
   
   if($questDinId <= 7) {  
     //----===Получаем очки пользователя
-    /&$scoreRequest = Array("userScore");
+    $scoreRequest = Array("userScore");
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
