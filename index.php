@@ -41,17 +41,17 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       $db->update ('users', $data);
   }
                    
-  if ($questDinId == 0 AND $text == $answer1) {
+  if ($questDinId == 1 AND $text == $answer1) {
       ScoreUp($db);
-  } elseif($questDinId == 0 AND $text == $answer4) {
+  } elseif($questDinId == 2 AND $text == $answer4) {
       ScoreUp($db);
-  } elseif($questDinId == 1 AND $text == $answer1) {
+  } elseif($questDinId == 3 AND $text == $answer1) {
       ScoreUp($db);
-  } elseif($questDinId == 2 AND $text == $answer1) {
+  } elseif($questDinId == 4 AND $text == $answer1) {
       ScoreUp($db);
-  } elseif($questDinId == 3 AND $text == $answer2) {
+  } elseif($questDinId == 5 AND $text == $answer2) {
       ScoreUp($db);
-  } elseif($questDinId == 4 AND $text == $answer4) {
+  } elseif($questDinId == 6 AND $text == $answer4) {
       ScoreUp($db);
   }
   return;
@@ -121,7 +121,7 @@ try {
       $db->where ('dynamicQuestID', $questDinId);
       $db->update ('questions', $data);
     }
-     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "квестID" . $questDinId . "Ответ" . $answer1, 'reply_markup' => $reply_markup]);
+     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
   }
 }
 catch (Exeptions $e)  {
