@@ -43,15 +43,15 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
                    
   if ($questDinId == 1 AND $text == answer1) {  //$text == "Хангикьот"
       ScoreUp($db);
-  } elseif($questDinId == 2 AND $text == answer3) { //$text == "На га*но"
+  } elseif($questDinId == 2 AND $text == answer1) { //$text == "На га*но"
       ScoreUp($db);
   } elseif($questDinId == 3 AND $text == answer1) { //$text == "Она без полотенца"
       ScoreUp($db);
-  } elseif($questDinId == 4 AND $text == answer1) {//$text == "Шарманка"
+  } elseif($questDinId == 4 AND $text == answer2) {//$text == "Шарманка"
       ScoreUp($db);
-  } elseif($questDinId == 5 AND $text == answer2) { //$text == "Датская ватрушка с сыром"
+  } elseif($questDinId == 5 AND $text == answer1) { //$text == "Датская ватрушка с сыром"
       ScoreUp($db);
-  } elseif($questDinId == 6 AND $text == answer4) {//$text == "Как я встретил вашу маму"
+  } elseif($questDinId == 6 AND $text == answer1) {//$text == "Как я встретил вашу маму"
       ScoreUp($db);
   } elseif($questDinId == 7 AND $text == answer1) { //$text == "Эдвард"
       ScoreUp($db);  
