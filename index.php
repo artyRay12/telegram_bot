@@ -140,12 +140,12 @@ try {
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
 
   
-   /* //----===Увеличиваю счетчик вопроса
+    //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
-    }*/
+    }
   }
  
 
