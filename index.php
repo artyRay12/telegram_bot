@@ -41,19 +41,19 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
       $db->update ('users', $data);
   }
                    
-  if ($questDinId == 1 AND $text == "Хангикьот") {
+  if ($questDinId == 1 AND $text == answer1) {  //$text == "Хангикьот"
       ScoreUp($db);
-  } elseif($questDinId == 2 AND $text == "На га*но") {
+  } elseif($questDinId == 2 AND $text == answer3) { //$text == "На га*но"
       ScoreUp($db);
-  } elseif($questDinId == 3 AND $text == "Она без полотенца") {
+  } elseif($questDinId == 3 AND $text == answer1) { //$text == "Она без полотенца"
       ScoreUp($db);
-  } elseif($questDinId == 4 AND $text == "Шарманка") {
+  } elseif($questDinId == 4 AND $text == answer1) {//$text == "Шарманка"
       ScoreUp($db);
-  } elseif($questDinId == 5 AND $text == "Датская ватрушка с сыром") {
+  } elseif($questDinId == 5 AND $text == answer2) { //$text == "Датская ватрушка с сыром"
       ScoreUp($db);
-  } elseif($questDinId == 6 AND $text == "Как я встретил вашу маму") {
+  } elseif($questDinId == 6 AND $text == answer4) {//$text == "Как я встретил вашу маму"
       ScoreUp($db);
-  } elseif($questDinId == 7 AND $text == "Эдвард") {
+  } elseif($questDinId == 7 AND $text == answer1) { //$text == "Эдвард"
       ScoreUp($db);  
   }
   return;
@@ -98,6 +98,8 @@ try {
     $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
     $questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
+    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
+    
     //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
     $buttondb = $db->get("questions", null, $buttonRequest);
@@ -115,7 +117,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
     
     //Анализ ответа изходя из номера вопроса
-    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
+    
       
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 6) {
