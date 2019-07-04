@@ -119,7 +119,7 @@ try {
     
     //Анализ ответа изходя из номера вопроса
     
-    /*anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
+    anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
     
     //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
@@ -140,7 +140,7 @@ try {
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
 
   
-    //----===Увеличиваю счетчик вопроса
+   /* //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
@@ -149,7 +149,7 @@ try {
   }
  
 
-  //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 } catch (Exeptions $e) {
 }
 
