@@ -98,6 +98,7 @@ try {
     $questIdDb = $db->get ("questions", null, $questIdRequest);//получаем номер квеста
     $questDinId = isset($questIdDb[0]["dynamicQuestID"]) ? $questIdDb[0]["dynamicQuestID"] : "";
     
+    //Анализ ответа изходя из номера вопроса
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db);
     
     //---===Получаем кнопки исходя из номера вопроса===---
@@ -115,20 +116,18 @@ try {
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
-    
-    //Анализ ответа изходя из номера вопроса
-    
-      
+        
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 6) {
       $data = Array ('dynamicQuestID' => $db->inc(1),);
       $db->where ('dynamicQuestID', $questDinId);
       $db->update ('questions', $data);
+    } else {
+      $keyboard = [["/start"]];
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     }
+      
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
-  } else {
-    $keyboard = [["/start"]];
-    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
   }
 }
 catch (Exeptions $e)  {
