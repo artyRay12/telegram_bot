@@ -104,6 +104,11 @@ try {
     $data = Array('userScore' => 0);
     $db->where('userID', $userID);
     $db->update('users', $data);
+    //--==Refresh EndIsNear
+    $data = Array ('EndIsNear' => 0);
+    $db->where('userID', $userID);
+    $db->update ('users', $data);
+    
     
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
