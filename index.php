@@ -12,10 +12,7 @@ $userID = $result['message']['from']['id'];
 $start = FALSE;
 $question = "";
 $questionNumber = 0;
-$posAnswer0 = "";
-$posAnswer1 = "";
 $score = "";
-$ykey = 'trnsl.1.1.20190701T123556Z.a709b3fe483b8b73.382884258e396ec33cbc5dfd6b98f7f28f65d49a';
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
 $heroku_userName = 'bb3a6b14f5f759';
@@ -29,8 +26,14 @@ $answer1 = "";
 $answer2 = "";
 $answer3 = "";
 $answer4 = "";
+$valute = 5;
 $buttonRequest = "";
 $id = "";
+
+$endpoint = 'latest';
+$access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
+
+
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 //===========Анализ ответов===============
@@ -88,7 +91,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
-  if($questDinId <= 6) {  
+  if($questDinId <= 8) {  
     
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
@@ -110,7 +113,11 @@ try {
     $buttondb = $db->get("questions", null, $buttonRequest);
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
-    $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
+    if ($questDinId == 8) {
+       $answer3 = $valute;
+    } else {
+      $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
+    }
     $answer4 = isset($buttondb[$questDinId]["questAnswer3"]) ? $buttondb[$questDinId]["questAnswer3"] : "";
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
@@ -122,7 +129,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
         
     //----===Увеличиваю счетчик вопроса
-    if($questDinId < 7) {
+    if($questDinId < 8) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
@@ -139,49 +146,14 @@ catch (Exeptions $e)  {
 }
   
 
-//----======Перевод через Fixer io=====------
-// set API Endpoint and API key
-/*$endpoint = 'latest';
-$access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
-
-// Initialize CURL:
-$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Store the data:
-$json = curl_exec($ch);
-curl_close($ch);
-
-// Decode JSON response:
-$exchangeRates = json_decode($json, true);
-
-// Access the exchange rate values, e.g. GBP:
-$questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
-echo $questionNumber;
-
-if ($text AND $start == FALSE) {
-    if ($text == "/start") {
-        $reply = "Welcome";
-        $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-            'resize_keyboard' => true,
-            'one_time_keyboard' => true]);
-    } elseif ($text == "/sayHello") {
-        if ($name) {
-            $reply = 'Hello, ' . $name . '!';
-        } else {
-            $reply = 'Hello, stranger!';
-        }
-    }elseif ($text == "Start") {
-        $reply = "We Starting!";
-        //$keyboard = [[$posAnswer0], [$posAnswer1]];
-        //$start = TRUE;
-    } else {
-        $questionNumber = $text;
-        $questionNumber = $questionNumber * $exchangeRates['rates']['RUB'];
-        $reply = $questionNumber . "rub";
-    }
-}
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);*/
-
+  $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  // Store the data:
+  $json = curl_exec($ch);
+  curl_close($ch);
+  // Decode JSON response:
+  $exchangeRates = json_decode($json, true);
+  // Access the exchange rate values, e.g. GBP:
+  $valute = $questionNumber * $exchangeRates['rates']['TND'];
 
 ?>
