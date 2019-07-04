@@ -138,7 +138,8 @@ try {
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
     
-    if($questDinId < 8) {
+    //----===Увеличиваю счетчик вопроса
+    if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
@@ -148,7 +149,7 @@ try {
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
     }
   }
-    //----===Увеличиваю счетчик вопроса
+    
     
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 }
