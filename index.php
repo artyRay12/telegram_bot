@@ -54,6 +54,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   } elseif($questDinId == 6 AND $text == $answer4) {
       ScoreUp($db);
   }
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1, 'reply_markup' => $reply_markup]);
   return;
 }
 //=======================================
