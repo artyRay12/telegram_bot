@@ -74,7 +74,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
   }
   return;
 }
-//=======================================
+//=====================Проверка userID==================
 function checkUserID($db, $userID, $name, $id) {
   $db -> where("userID", $userID);
   $userData = $db->getOne("users");
@@ -109,16 +109,11 @@ try {
   
   if($questDinId <= 7) {  
     //----===Получаем очки пользователя
-    $scoreRequest = Array("userScore");
+    /&$scoreRequest = Array("userScore");
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-    
-    /*/Получаем данные о конце викторины
-    $endRequest = Array("endIsNear");
-    $db->where('userID', $userID);
-    $scoreDb = $db->get("users", null, $endRequest);
-    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";*/
+   
     
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
@@ -127,51 +122,39 @@ try {
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
     //Анализ ответа изходя из номера вопроса
+    
     anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID);
     
     //---===Получаем кнопки исходя из номера вопроса===---
     $buttonRequest = Array('questAnswer0', 'questAnswer1', 'questAnswer2', 'questAnswer3');
     $buttondb = $db->get("questions", null, $buttonRequest);
+    
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
-   /* if ($questDinId == 7) {
-       $answer3 = $valute;
-    } else {*/
-      $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
-    //}
+    $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
     $answer4 = isset($buttondb[$questDinId]["questAnswer3"]) ? $buttondb[$questDinId]["questAnswer3"] : "";
+    
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      
-    //Последнее сообщение
-   /* if ($endIsNear == 1) {
-      $keyboard = [["/start"]];
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);   
-    } else {*/
-      //----===Получаем впорос
-      $questTextRequest = Array ("questText");
-      $questDb = $db->get ("questions", null, $questTextRequest);
-      $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
-    //}
+ 
+    //----===Получаем впорос
+    $questTextRequest = Array ("questText");
+    $questDb = $db->get ("questions", null, $questTextRequest);
+    $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
+
   
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
-    }/* else {
-      //Кончились вопросы
-      $data = Array ('EndIsNear' => 1);
-      $db->where('userID', $userID);
-      $db->update ('users', $data);   
-    }   */
+    }
   }
  
 
-     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-}
-catch (Exeptions $e)  {
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+} catch (Exeptions $e) {
 }
 
 ?>
