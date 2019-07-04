@@ -26,7 +26,7 @@ $answer1 = "";
 $answer2 = "";
 $answer3 = "";
 $answer4 = "";
-$valute = 5;
+$valute = 5.2;
 $buttonRequest = "";
 $id = "";
 
@@ -35,6 +35,16 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
 
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
+
+$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  // Store the data:
+  $json = curl_exec($ch);
+  curl_close($ch);
+  // Decode JSON response:
+  $exchangeRates = json_decode($json, true);
+  // Access the exchange rate values, e.g. GBP:
+  $valute = $questionNumber * $exchangeRates['rates']['TND'];
 
 //===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
@@ -129,7 +139,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
         
     //----===Увеличиваю счетчик вопроса
-    if($questDinId < 7) {
+    if($questDinId < 8) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
@@ -144,16 +154,5 @@ try {
 }
 catch (Exeptions $e)  {
 }
-  
-
-  $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  // Store the data:
-  $json = curl_exec($ch);
-  curl_close($ch);
-  // Decode JSON response:
-  $exchangeRates = json_decode($json, true);
-  // Access the exchange rate values, e.g. GBP:
-  $valute = $questionNumber * $exchangeRates['rates']['TND'];
 
 ?>
