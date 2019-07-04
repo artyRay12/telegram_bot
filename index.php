@@ -88,10 +88,7 @@ function checkUserID($db, $userID, $name, $id) {
   }
   return;
 } 
-
-$scoreRequest = Array("userScore");
-$db->where('userID', $userID);
-$scoreDb = $db->get("users", null, $scoreRequest);
+//=-==---=-==-=-=-=-=-----=-==-=-=-=-=-=-=-=-=-=-
 
 try {
   if ($text == "/start") {
