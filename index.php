@@ -126,7 +126,7 @@ try {
       $db->update ('questions', $data);
     }
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
-  } esle {
+  } else {
     $keyboard = [["/start"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
   }
