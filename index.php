@@ -141,20 +141,19 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
     
     //----===Увеличиваю счетчик вопроса
-    if ($endIsNear == TRUE) {
-      $keyboard = [["/start"]];
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
-    }
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
       $db->update ('users', $data);
     } else {
       $endIsNear = TRUE;
-    }
-    
+    }   
   }
+  if ($endIsNear == TRUE) {
+      $keyboard = [["/start"]];
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
+    }
     
     
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
