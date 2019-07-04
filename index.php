@@ -30,12 +30,13 @@ $answer4 = "";
 $valute = 5.2;
 $buttonRequest = "";
 $id = "";
+$db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
 /*$endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
 
-$db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
+
 
 $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
