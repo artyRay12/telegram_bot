@@ -13,7 +13,7 @@ $start = FALSE;
 $question = "";
 $questionNumber = 0;
 $score = "";
-$endIsNear = FALSE;
+$endIsNear = 0;
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
 $heroku_userName = 'bb3a6b14f5f759';
@@ -21,6 +21,7 @@ $heroku_pass = '8b5a0204';
 $questText = "";
 $questNumber = 0;
 $questDinId = "";
+$endRequest = "";
 $questIdRequest = "";
 $questIdDb = "";
 $answer1 = "";
@@ -86,7 +87,11 @@ function checkUserID($db, $userID, $name, $id) {
     $id = $db->insert ('users', $data);
   }
   return;
-}  
+} 
+
+$scoreRequest = Array("userScore");
+$db->where('userID', $userID);
+$scoreDb = $db->get("users", null, $scoreRequest);
 
 try {
   if ($text == "/start") {
@@ -102,7 +107,13 @@ try {
     
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
-
+  
+    //Проверяю не кончились ли вопросы
+    $endRequest = Array("endIsNear");
+    $db->where('userID', $userID);
+    $scoreDb = $db->get("users", null, $endRequest);
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
+  
   if($questDinId <= 7) {  
     
     //----===Получаем очки пользователя
@@ -139,6 +150,12 @@ try {
     $questDb = $db->get ("questions", null, $questTextRequest);
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . "  " . $questDinId, 'reply_markup' => $reply_markup]);
+     //Последнее сообщение
+     if ($endIsNear == 1) {
+      $keyboard = [["/start"]];
+      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
+    }
     
     //----===Увеличиваю счетчик вопроса
     if($questDinId < 7) {
@@ -146,14 +163,13 @@ try {
       $db->where('userID', $userID);
       $db->update ('users', $data);
     } else {
-      $endIsNear = TRUE;
+      //Кончились вопросы
+      $data = Array ('EndIsNear' => $db->inc(1),);
+      $db->where('userID', $userID);
+      $db->update ('users', $data);   
     }   
   }
-  if ($endIsNear == TRUE) {
-      $keyboard = [["/start"]];
-      $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов" . $valute, 'reply_markup' => $reply_markup]);   
-    }
+ 
     
     
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
