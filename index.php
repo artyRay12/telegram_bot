@@ -132,7 +132,7 @@ try {
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     }
       
-     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score, 'reply_markup' => $reply_markup]);
+     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $score . $questDinId, 'reply_markup' => $reply_markup]);
   }
 }
 catch (Exeptions $e)  {
