@@ -149,11 +149,10 @@ try {
       $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);   
     } else {*/
-      //----===Получаем и печатаем впорос
+      //----===Получаем впорос
       $questTextRequest = Array ("questText");
       $questDb = $db->get ("questions", null, $questTextRequest);
       $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
     //}
   
     //----===Увеличиваю счетчик вопроса
