@@ -172,7 +172,7 @@ try {
       $db->update ('users', $data);
     } else {
       //Кончились вопросы
-      $data = Array ('EndIsNear' => $db->inc(1),);
+      $data = Array ('EndIsNear' => 1);
       $db->where('userID', $userID);
       $db->update ('users', $data);   
     }   
