@@ -31,7 +31,7 @@ $valute = 5.2;
 $buttonRequest = "";
 $id = "";
 
-$endpoint = 'latest';
+/*$endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
 
@@ -45,7 +45,7 @@ $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key
   // Decode JSON response:
   $exchangeRates = json_decode($json, true);
   // Access the exchange rate values, e.g. GBP:
-  $valute = $questionNumber * $exchangeRates['rates']['TND'];
+  $valute = $questionNumber * $exchangeRates['rates']['TND'];*/
 
 //===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
@@ -124,11 +124,11 @@ try {
     $buttondb = $db->get("questions", null, $buttonRequest);
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
-    if ($questDinId == 7) {
+   /* if ($questDinId == 7) {
        $answer3 = $valute;
-    } else {
+    } else {*/
       $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
-    }
+    //}
     $answer4 = isset($buttondb[$questDinId]["questAnswer3"]) ? $buttondb[$questDinId]["questAnswer3"] : "";
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
