@@ -101,7 +101,7 @@ try {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Test was reloaded', 'reply_markup' => $reply_markup]);
   }
 
-  if($questDinId <= 8) {  
+  if($questDinId <= 7) {  
     
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
