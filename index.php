@@ -23,6 +23,7 @@ $questNumber = 0;
 $questDinId = "";
 $endRequest = "";
 $questIdRequest = "";
+$userNameIDRequest = "";
 $questIdDb = "";
 $answer1 = "";
 $answer2 = "";
@@ -53,7 +54,7 @@ $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
   function ScoreUp($db, $userID) {                
       $data = Array ('userScore' => $db->inc(20),);
-      $db->where ('userID', 123);
+      $db->where ('userID', $userID);
       $db->update ('users', $data);
   }
                    
@@ -80,11 +81,19 @@ function checkUserID($db, $userID, $name, $id) {
   $userData = $db->getOne("users");
   if ($userData) {
   } else {
-  $data = Array ("userID" => $userID,
-               "userName" => $name,
-               "userScore" => 0,
-                "currentQuest" => 0);
-    $id = $db->insert ('users', $data);
+    $userNameIDRequest = Array("userID");
+    $db->where('userID', $userID);
+    $scoreDb = $db->getOne("users", null, $userNameIDRequest);
+    if ($scoreDb["userID"]) {
+    } else {
+      $data = Array ("userID" => $userID,
+          "userName" => $name,
+          "userScore" => '0',
+          "currentQuest" => '0',
+          "maxScore" => '0',
+          "endIsNear" => '0');
+      $id = $db->insert ('users', $data);
+    }
   }
   return;
 } 
@@ -95,15 +104,15 @@ try {
     //checkUserID($db, $userID, $name, $id);
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
-    $db->where('userID', 123);
+    $db->where('userID', $userID);
     $db->update ('users', $data);
     //---===Refresh score
     $data = Array('userScore' => 0);
-    $db->where('userID', 123);
+    $db->where('userID', $userID);
     $db->update('users', $data);
     //--==Refresh EndIsNear
     $data = Array ('EndIsNear' => 0);
-    $db->where('userID', 123);
+    $db->where('userID', $userID);
     $db->update ('users', $data);
   }
   
@@ -116,7 +125,7 @@ try {
   
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
-    $db->where('userID', 123);
+    $db->where('userID', $userID);
     $questIdDb = $db->get ("users", null, $questIdRequest);//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
@@ -143,7 +152,7 @@ try {
     
     //==Получаем данные о конце викторины
     $endRequest = Array("endIsNear");
-    $db->where('userID', 123);
+    $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $endRequest);
     $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
@@ -151,12 +160,12 @@ try {
     //----===Увеличиваю счетчик вопроса!
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
-      $db->where('userID', 123);
+      $db->where('userID', $userID);
       $db->update ('users', $data);
     } else {
       //Кончились вопросы
       $data = Array ('EndIsNear' => 1);
-      $db->where('userID', 123);
+      $db->where('userID', $userID);
       $db->update ('users', $data);
     }
   }
