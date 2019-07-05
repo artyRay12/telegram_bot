@@ -51,9 +51,9 @@ $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key
 
 //===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
-  function ScoreUp($db, $userID) {                
+  function ScoreUp($db, 123) {                
       $data = Array ('userScore' => $db->inc(20),);
-      $db->where ('userID', $userID);
+      $db->where ('userID', 123);
       $db->update ('users', $data);
   }
                    
