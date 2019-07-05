@@ -77,23 +77,18 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 }
 //=====================Проверка userID==================
 function checkUserID($db, $userID, $name, $id) {
-  $db -> where("userID", $userID);
-  $userData = $db->getOne("users");
-  if ($userData["userID"]) {
+  $userNameIDRequest = Array("userID");
+  $db->where('userID', $userID);
+  $scoreDb = $db->getOne("users", null, $userNameIDRequest);
+  if ($scoreDb["userID"]) {
   } else {
-    $userNameIDRequest = Array("userID");
-    $db->where('userID', $userID);
-    $scoreDb = $db->getOne("users", null, $userNameIDRequest);
-    if ($scoreDb["userID"]) {
-    } else {
-      $data = Array ("userID" => $userID,
-          "userName" => $name,
-          "userScore" => '0',
-          "currentQuest" => '0',
-          "maxScore" => '0',
-          "endIsNear" => '0');
-      $id = $db->insert ('users', $data);
-    }
+    $data = Array ("userID" => $userID,
+        "userName" => $name,
+        "userScore" => '0',
+        "currentQuest" => '0',
+        "maxScore" => '0',
+        "endIsNear" => '0');
+    $id = $db->insert ('users', $data);
   }
   return;
 } 
