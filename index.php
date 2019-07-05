@@ -92,31 +92,31 @@ function checkUserID($db, $userID, $name, $id) {
 
 try {
   if ($text == "/start") {
-    checkUserID($db, $userID, $name, $id);
+    //checkUserID($db, $userID, $name, $id);
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
     $db->update ('users', $data);
     //---===Refresh score
     $data = Array('userScore' => 0);
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $db->update('users', $data);
     //--==Refresh EndIsNear
     $data = Array ('EndIsNear' => 0);
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $db->update ('users', $data);
   }
   
   if($questDinId <= 7) {  
     //----===Получаем очки пользователя
     $scoreRequest = Array("userScore");
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
   
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $questIdDb = $db->get ("users", null, $questIdRequest);//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
@@ -143,7 +143,7 @@ try {
     
     //==Получаем данные о конце викторины
     $endRequest = Array("endIsNear");
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $scoreDb = $db->get("users", null, $endRequest);
     $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
@@ -151,12 +151,12 @@ try {
     //----===Увеличиваю счетчик вопроса!
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
-      $db->where('userID', $userID);
+      $db->where('userID', 123);
       $db->update ('users', $data);
     } else {
       //Кончились вопросы
       $data = Array ('EndIsNear' => 1);
-      $db->where('userID', $userID);
+      $db->where('userID', 123);
       $db->update ('users', $data);
     }
   }
