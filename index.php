@@ -113,8 +113,7 @@ try {
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, $scoreRequest);
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-   
-    
+  
     //----===Получаем номер вопроса
     $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
     $db->where('userID', $userID);
@@ -149,7 +148,7 @@ try {
     $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
   
-    //----===Увеличиваю счетчик вопроса
+    //----===Увеличиваю счетчик вопроса!
     if($questDinId < 7) {
       $data = Array ('currentQuest' => $db->inc(1),);
       $db->where('userID', $userID);
