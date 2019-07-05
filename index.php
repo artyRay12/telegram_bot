@@ -95,7 +95,7 @@ try {
     //checkUserID($db, $userID, $name, $id);
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
-    $db->where('userID', $userID);
+    $db->where('userID', 123);
     $db->update ('users', $data);
     //---===Refresh score
     $data = Array('userScore' => 0);
