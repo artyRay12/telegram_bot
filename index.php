@@ -79,7 +79,7 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 function checkUserID($db, $userID, $name, $id) {
   $db -> where("userID", $userID);
   $userData = $db->getOne("users");
-  if ($userData["userID") {
+  if ($userData["userID"]) {
   } else {
     $userNameIDRequest = Array("userID");
     $db->where('userID', $userID);
