@@ -29,8 +29,21 @@ $questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=$q
 $questSite = "$questionsRequest";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
+function checkUserID($db, $userID, $name) {
+  $db->where('userID', $userID);
+  $scoreDb = $db->getOne("users", null, "userID");
+  if ($scoreDb["userID"]) {
+  } else {
+    $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, EndIsNear) values($userID, '$name', 0, 0, 0, 0)";
+    $db->query($query);
+  }
+  return;
+} 
+//=-==---=
+
 
 if ($text == "/start") {
+    checkUserID($db, $userID, $name)
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
@@ -116,12 +129,17 @@ if ($text == "/start") {
   }
 
   if ($endIsNear == 1) {
-     $keyboard = [["/start"]];
-     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
-    } else {
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-    }
+    $keyboard = [["/start"]];
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+    //----===Получаем очки пользователя
+    $db->where('userID', $userID);
+    $scoreDb = $db->get("users", null, "userScore");
+    $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
+
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
+  } else {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  }
 
 
 
