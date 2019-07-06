@@ -96,7 +96,7 @@ function checkUserID($db, $userID, $name, $id) {
 //=-==---=-==-=-=-=-=-----=-==-=-=-=-=-=-=-=-=-=-
 
 try {
-  $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, EndIsNear) values($userID, $name, 0, 0, 0, 0)";
+  $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, EndIsNear) values($userID, '$name', 0, 0, 0, 0)";
   $db->query($query);
   
   if ($text == "/start") {
