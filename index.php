@@ -69,7 +69,7 @@ if ($text == "/start") {
         $randID = rand(0, 3);
         if (in_array($randID, $answersID)){
         } else {
-          array_push($answersID, $id);
+          array_push($answersID, $randID);
           $answerCounter = $answerCounter + 1;
         }
           if ($answerCounter == 4)
@@ -78,10 +78,10 @@ if ($text == "/start") {
       
       
     $questText = $update["data"]["question"];
-    $answer1 = $update["data"]["answers"][$randomNumber[0]];
-    $answer2 = $update["data"]["answers"][$randomNumber[1]];
-    $answer3 = $update["data"]["answers"][$randomNumber[2]];
-    $answer4 = $update["data"]["answers"][$randomNumber[4]];
+    $answer1 = $update["data"]["answers"][$answersID[0]];
+    $answer2 = $update["data"]["answers"][$answersID[1]];
+    $answer3 = $update["data"]["answers"][$answersID[2]];
+    $answer4 = $update["data"]["answers"][$answersID[4]];
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       
