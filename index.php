@@ -43,7 +43,7 @@ $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
 
 if ($text == $rightAnswer) {
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "эммм ХЗ ДАЖЕ", 'reply_markup' => $reply_markup]);
 }
 
 $questText = $update["data"]["question"];
