@@ -19,6 +19,7 @@ $questText = "";
 $questNumber = 0;
 $questDinId = "";
 $isAnswersReady = FALSE;
+$answersCounter = 0;
 $questIdDb = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $endpoint = 'latest';
@@ -66,7 +67,7 @@ if ($text == "/start") {
       $answersID = [];
       while ($isAnswersReady == FALSE):
         $randID = rand(0, 3);
-        if (in_array($id, $answersID)){
+        if (in_array($randID, $answersID)){
         } else {
           array_push($answersID, $id);
           $answerCounter = $answerCounter + 1;
