@@ -30,7 +30,6 @@ $moneyForQuest = 5;
 $answer2 = "";
 $answer3 = "";
 $answer4 = "";*/
-$rightAnswer = $answer1;
 $rightAnswerBefore = "";
 $rightWatch = "";
 $valute = 5.2;
@@ -46,7 +45,7 @@ $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 //Получаем посл ответ
 $db->where('userID', $userID);
 $questIdDb = $db->get ("users", null, "lastAnswer");//получаем номер квеста 
-$rightAnswer = isset($questIdDb[0]["lastAnswer"]) ? $questIdDb[0]["lastAnswer"] : "";
+$lastAnswer = isset($questIdDb[0]["lastAnswer"]) ? $questIdDb[0]["lastAnswer"] : "";
 
 //Compare $text and $rightAnswer
 if ($text == $rightAnswer) {
@@ -55,7 +54,7 @@ if ($text == $rightAnswer) {
   $db->update ('users', $data);
 }
 
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text, 'reply_markup' => $reply_markup]);
+
 
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
@@ -65,7 +64,7 @@ $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text, 'reply_markup' => $reply_markup]);
 
 //Записываем последний ответ
 $data = Array ('lastAnswer' => $text);
