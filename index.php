@@ -32,7 +32,6 @@ $answer3 = "";
 $answer4 = "";*/
 $rightAnswerBefore = "";
 $rightWatch = "";
-$valute = 5.2;
 $buttonRequest = "";
 $id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
@@ -42,11 +41,6 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
-//Получаем посл ответ
-$db->where('userID', $userID);
-$questIdDb = $db->get ("users", null, "lastAnswer");//получаем номер квеста 
-$lastAnswer = isset($questIdDb[0]["lastAnswer"]) ? $questIdDb[0]["lastAnswer"] : "";
-
 //Compare $text and $rightAnswer
 if ($text == $rightAnswer) {
   $data = Array ('userScore' => $db->inc(20),);
@@ -55,21 +49,55 @@ if ($text == $rightAnswer) {
 }
 
 
+if ($text == "/start") {
+  checkUserID($db, $userID, $name, $id);
+    //---==Refresh currQuest
+    $data = Array ('currentQuest' => 0);
+    $db->where('userID', $userID);
+    $db->update ('users', $data);
+    //---===Refresh score
+    $data = Array('userScore' => 0);
+    $db->where('userID', $userID);
+    $db->update('users', $data);
+    //--==Refresh EndIsNear
+    $data = Array ('EndIsNear' => 0);
+    $db->where('userID', $userID);
+    $db->update ('users', $data);
+  }
+  if($questDinId <= 7) {  
+    $questText = $update["data"]["question"];
+    $answer1 = $update["data"]["answers"][0];
+    $rightAnswer = $answer1;
+    $answer2 = $update["data"]["answers"][1];
+    $answer3 = $update["data"]["answers"][2];
+    $answer4 = $update["data"]["answers"][3];
+    $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-$questText = $update["data"]["question"];
-$answer1 = $update["data"]["answers"][0];
-$rightAnswer = $answer1;
-$answer2 = $update["data"]["answers"][1];
-$answer3 = $update["data"]["answers"][2];
-$answer4 = $update["data"]["answers"][3];
-$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text, 'reply_markup' => $reply_markup]);
 
-//Записываем последний ответ
-$data = Array ('lastAnswer' => $text);
-$db->where ('userID', $userID);
-$db->update ('users', $data);
+    //----===Увеличиваю счетчик вопроса!
+    if($questDinId < 7) {
+      $data = Array ('currentQuest' => $db->inc(1),);
+      $db->where('userID', $userID);
+      $db->update ('users', $data);
+    } else {
+      //Кончились вопросы
+      $data = Array ('EndIsNear' => 1);
+      $db->where('userID', $userID);
+      $db->update ('users', $data);
+    }
+  }
+
+  if ($endIsNear == 1) {
+     $keyboard = [["/start"]];
+     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+       $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
+    } else {
+      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    }
+
+
+
 
   
 /*
