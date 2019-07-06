@@ -47,8 +47,6 @@ function addPersonalRecord($db, $scoreDb, $maxScore, $score, $userID) {
   
 }*/
 
-
-
 function checkUserID($db, $userID, $name) {
   $db->where('userID', $userID);
   $scoreDb = $db->getOne("users", null, "userID");
@@ -158,9 +156,9 @@ if ($text == "/start") {
     
     addPersonalRecord($db, $scoreDb, $maxScore, $score, $userID);
     
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
   }
 
 
