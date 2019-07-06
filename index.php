@@ -25,6 +25,7 @@ $endRequest = "";
 $questIdRequest = "";
 $userNameIDRequest = "";
 $questIdDb = "";
+$moneyForQuest = 5;
 $answer1 = "";
 $answer2 = "";
 $answer3 = "";
@@ -48,7 +49,7 @@ $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key
   // Decode JSON response:
   $exchangeRates = json_decode($json, true);
   // Access the exchange rate values, e.g. GBP:
-  $valute = $questionNumber * $exchangeRates['rates']['TND'];
+  $valute = $moneyForQuest * $exchangeRates['rates']['TND'];
 
 //===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
@@ -125,7 +126,11 @@ try {
     
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
-    $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
+    if ($questDinId == 8) {
+      $answe3 = $valute
+    } else {
+      $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
+    }
     $answer4 = isset($buttondb[$questDinId]["questAnswer3"]) ? $buttondb[$questDinId]["questAnswer3"] : "";
     
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
