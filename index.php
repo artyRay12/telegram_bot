@@ -24,7 +24,7 @@ $questIdDb = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $questLevels = rand(1, 4);
 
-$questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
+$questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=$questLevels&count=1";
 
 $questSite = "$questionsRequest";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
