@@ -34,11 +34,26 @@ $valute = 5.2;
 $buttonRequest = "";
 $id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
-
 $endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
-$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
+$questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
+$update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
+
+$questText = $update["data"]["question"];
+$answer1 = $update["data"]["answers"][0];
+$answer2 = $update["data"]["answers"][1];
+$answer3 = $update["data"]["answers"][2];
+$answer4 = $update["data"]["answers"][3];
+
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $exchangeRates['rates']['TND'], 'reply_markup' => $reply_markup]);
+
+
+
+
+
+/*$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   // Store the data:
   $json = curl_exec($ch);
@@ -166,5 +181,5 @@ try {
   }
 } catch (Exeptions $e) {
 }
-
+*/
 ?>
