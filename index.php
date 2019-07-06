@@ -46,7 +46,7 @@ $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 //Получаем посл ответ
 $db->where('userID', $userID);
 $questIdDb = $db->get ("users", null, "lastAnswer");//получаем номер квеста 
-$rightAnswer = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+$rightAnswer = isset($questIdDb[0]["lastAnswer"]) ? $questIdDb[0]["lastAnswer"] : "";
 
 //Compare $text and $rightAnswer
 if ($text == $rightAnswer) {
@@ -67,7 +67,7 @@ $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . "  /  " . $rightAnswerBefore, 'reply_markup' => $reply_markup]);
 
 //Записываем последний ответ
-$data = Array ('userScore' => $db-> $text);
+$data = Array ('lastAnswer' => $db-> $text);
 $db->where ('userID', $userID);
 $db->update ('users', $data);
 
