@@ -148,7 +148,7 @@ if ($text == "/start") {
     $scoreDb = $db->get("users", null, "userScore");
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
     
-    addScore($db, $scoreDb, $maxScore, $score);
+    addScore($db, $scoreDb, $maxScore, $score, $userID);
     
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
