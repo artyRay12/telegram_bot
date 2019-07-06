@@ -42,9 +42,9 @@ $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
 
-if ($text == $rightAnswer) {
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "эммм ХЗ ДАЖЕ", 'reply_markup' => $reply_markup]);
-}
+//if ($text == $rightAnswer) {
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $rightAnswer, 'reply_markup' => $reply_markup]);
+//}
 
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
