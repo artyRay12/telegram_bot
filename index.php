@@ -128,15 +128,13 @@ try {
   
   if($questDinId <= 7) {  
     //----===Получаем очки пользователя
-    $scoreRequest = Array("userScore");
     $db->where('userID', $userID);
-    $scoreDb = $db->get("users", null, $scoreRequest);
+    $scoreDb = $db->get("users", null, "userScore");
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
   
     //----===Получаем номер вопроса
-    $questIdRequest = Array("currentQuest"); //Массив для с полем для запроса
     $db->where('userID', $userID);
-    $questIdDb = $db->get ("users", null, $questIdRequest);//получаем номер квеста 
+    $questIdDb = $db->get ("users", null, "currentQuest");//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     
     //Анализ ответа изходя из номера вопроса
@@ -155,15 +153,13 @@ try {
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      
  
-    //----===Получаем впорос
-    $questTextRequest = Array ("questText");
-    $questDb = $db->get ("questions", null, $questTextRequest);
+    //----===Получаем впорос;
+    $questDb = $db->get ("questions", null, "questText");
     $questText = $questText = isset($questDb[$questDinId]["questText"]) ? $questDb[$questDinId]["questText"] : "";  
     
     //==Получаем данные о конце викторины
-    $endRequest = Array("endIsNear");
     $db->where('userID', $userID);
-    $scoreDb = $db->get("users", null, $endRequest);
+    $scoreDb = $db->get("users", null, "endIsNear");
     $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
   
