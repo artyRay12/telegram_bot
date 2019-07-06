@@ -96,7 +96,7 @@ function checkUserID($db, $userID, $name, $id) {
 
 try {
   if ($text == "/start") {
-    //checkUserID($db, $userID, $name, $id);
+    checkUserID($db, $userID, $name, $id);
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
