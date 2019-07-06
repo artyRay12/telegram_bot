@@ -77,9 +77,8 @@ function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $
 }
 //=====================Проверка userID==================
 function checkUserID($db, $userID, $name, $id) {
-  $userNameIDRequest = Array("userID");
   $db->where('userID', $userID);
-  $scoreDb = $db->getOne("users", null, $userNameIDRequest);
+  $scoreDb = $db->getOne("users", null, "userID");
   if ($scoreDb["userID"]) {
     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль уже создан", 'reply_markup' => $reply_markup]);
   } else {
@@ -99,13 +98,12 @@ function checkUserID($db, $userID, $name, $id) {
 try {
   if ($text == "/start") {
   checkUserID($db, $userID, $name, $id);
-  /*$userNameIDRequest = Array("userID");
   $db->where('userID', $userID);
-  $scoreDb = $db->getOne("users", null, $userNameIDRequest);
+  $scoreDb = $db->getOne("users", null, "userID");
   if ($scoreDb["userID"]) {
-    
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль уже создан", 'reply_markup' => $reply_markup]);
   } else {
-    
+    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль не создан", 'reply_markup' => $reply_markup]);
     $data = Array ("userID" => $userID,
         "userName" => $name,
         "userScore" => '0',
@@ -113,7 +111,7 @@ try {
         "maxScore" => '0',
         "endIsNear" => '0');
     $id = $db->insert ('users', $data);
-  }*/
+  }
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
