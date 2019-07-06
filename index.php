@@ -31,6 +31,8 @@ $answer2 = "";
 $answer3 = "";
 $answer4 = "";
 $rightAnswer = "";
+$rightAnswerBefore = "";
+$rightWatch = "";
 $valute = 5.2;
 $buttonRequest = "";
 $id = "";
@@ -41,6 +43,10 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
+if ($text == $rightAnswer) {
+  $rightWatch = "TRUE";
+}
+$rightAnswerBefore = $answer1;
 
 
 $questText = $update["data"]["question"];
@@ -51,7 +57,7 @@ $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . " / " . $rightAnswer, 'reply_markup' => $reply_markup]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . "  /  " . $rigthWatch . "  / " .  $rightAnswerBefore, 'reply_markup' => $reply_markup]);
 
 
 
