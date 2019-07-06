@@ -55,7 +55,7 @@ if ($text == $rightAnswer) {
   $db->update ('users', $data);
 }
 
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text 'reply_markup' => $reply_markup]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text, 'reply_markup' => $reply_markup]);
 
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
