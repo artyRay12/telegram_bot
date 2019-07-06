@@ -41,11 +41,11 @@ function addPersonalRecord($db, $scoreDb, $maxScore, $score, $userID) {
   }
 }
 
-function addGlobalRecord($db, $scoreDb, $maxScore, $score, $userID) {
+/*function addGlobalRecord($db, $scoreDb, $maxScore, $score, $userID) {
   
   
   
-}
+}*/
 
 
 
