@@ -38,9 +38,6 @@ $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema
 $endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
-
-
-
 $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   // Store the data:
@@ -127,7 +124,7 @@ try {
     $answer1 = isset($buttondb[$questDinId]["questAnswer0"]) ? $buttondb[$questDinId]["questAnswer0"] : "";
     $answer2 = isset($buttondb[$questDinId]["questAnswer1"]) ? $buttondb[$questDinId]["questAnswer1"] : "";
     if ($questDinId == 8) {
-      $answe3 = $valute;
+      $answer3 = $valute;
     } else {
       $answer3 = isset($buttondb[$questDinId]["questAnswer2"]) ? $buttondb[$questDinId]["questAnswer2"] : "";
     }
