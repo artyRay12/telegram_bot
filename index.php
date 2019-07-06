@@ -55,6 +55,7 @@ if ($text == $rightAnswer) {
   $db->update ('users', $data);
 }
 
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $answer1 . "/" . $rightAnswer . "/" . $text 'reply_markup' => $reply_markup]);
 
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
@@ -64,7 +65,7 @@ $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . "  /  " . $rightAnswerBefore, 'reply_markup' => $reply_markup]);
+
 
 //Записываем последний ответ
 $data = Array ('lastAnswer' => $text);
