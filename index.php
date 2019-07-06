@@ -48,7 +48,7 @@ $answer2 = $update["data"]["answers"][1];
 $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+//$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
