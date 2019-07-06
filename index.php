@@ -9,9 +9,6 @@ $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["username"]; //Юзернейм пользователя
 $userID = $result['message']['from']['id']; 
-$start = FALSE;
-$question = "";
-$questionNumber = 0;
 $score = "";
 $endIsNear = 0;
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
@@ -21,19 +18,8 @@ $heroku_pass = '8b5a0204';
 $questText = "";
 $questNumber = 0;
 $questDinId = "";
-$endRequest = "";
-$questIdRequest = "";
-$userNameIDRequest = "";
+$isAnswersReady = FALSE;
 $questIdDb = "";
-$moneyForQuest = 5;
-/*$answer1 = "";
-$answer2 = "";
-$answer3 = "";
-$answer4 = "";*/
-$rightAnswerBefore = "";
-$rightWatch = "";
-$buttonRequest = "";
-$id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 $endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
@@ -71,18 +57,35 @@ if ($text == "/start") {
     }
     
     // Получаю кнопки и вопрос
+       //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
+    $data = Array ('rightAnswer' => $update["data"]["answers"][0]);
+    $db->where ('userID', $userID);
+    $db->update ('users', $data);
+      
+      //Смешиваю варианты ответа
+      $answersID = [];
+      while ($isAnswersReady == FALSE):
+        $randID = rand(0, 3);
+        if (in_array($id, $answersID)){
+        } else {
+          array_push($answersID, $id);
+          $answerCounter = $answerCounter + 1;
+        }
+          if ($answerCounter == 4)
+            $isAnswersReady = TRUE;
+      endwhile;
+      
+      
     $questText = $update["data"]["question"];
-    $answer1 = $update["data"]["answers"][0];
-    $answer2 = $update["data"]["answers"][1];
-    $answer3 = $update["data"]["answers"][2];
-    $answer4 = $update["data"]["answers"][3];
+    $answer1 = $update["data"]["answers"][$randomNumber[0]];
+    $answer2 = $update["data"]["answers"][$randomNumber[1]];
+    $answer3 = $update["data"]["answers"][$randomNumber[2]];
+    $answer4 = $update["data"]["answers"][$randomNumber[4]];
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       
-    //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
-    $data = Array ('rightAnswer' => $answer1);
-    $db->where ('userID', $userID);
-    $db->update ('users', $data);
+   
+    
     
     
     //Получаем номер текущего вопроса
