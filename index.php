@@ -41,12 +41,7 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
-//Compare $text and $rightAnswer
-if ($text == $rightAnswer) {
-  $data = Array ('userScore' => $db->inc(20),);
-  $db->where ('userID', $userID);
-  $db->update ('users', $data);
-}
+
 
 
 if ($text == "/start") {
@@ -63,8 +58,17 @@ if ($text == "/start") {
     $data = Array ('EndIsNear' => 0);
     $db->where('userID', $userID);
     $db->update ('users', $data);
+    $rightAnswer = "";
   }
   if($questDinId <= 7) {  
+    
+    //Compare $text and $rightAnswer
+    if ($text == $rightAnswer) {
+      $data = Array ('userScore' => $db->inc(20),);
+      $db->where ('userID', $userID);
+      $db->update ('users', $data);
+    }
+    
     $questText = $update["data"]["question"];
     $answer1 = $update["data"]["answers"][0];
     $rightAnswer = $answer1;
@@ -73,7 +77,11 @@ if ($text == "/start") {
     $answer4 = $update["data"]["answers"][3];
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-
+    
+    //Получаем номер текущего вопроса
+    $db->where('userID', $userID);
+    $questIdDb = $db->get ("users", null, "currentQuest");//получаем номер квеста 
+    $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
 
     //----===Увеличиваю счетчик вопроса!
     if($questDinId < 7) {
