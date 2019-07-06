@@ -30,7 +30,7 @@ $questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=$q
 $questSite = "$questionsRequest";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
-function addScore($db, $scoreDb, $maxScore, $score, $userID) {
+function addPersonalRecord($db, $scoreDb, $maxScore, $score, $userID) {
   $db->where('userID', $userID);
   $scoreDb = $db->get("users", null, "maxScore");
   $maxScore = isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
@@ -40,6 +40,14 @@ function addScore($db, $scoreDb, $maxScore, $score, $userID) {
     $db->update ('users', $data);
   }
 }
+
+function addGlobalRecord($db, $scoreDb, $maxScore, $score, $userID) {
+  
+  
+  
+}
+
+
 
 function checkUserID($db, $userID, $name) {
   $db->where('userID', $userID);
@@ -148,7 +156,7 @@ if ($text == "/start") {
     $scoreDb = $db->get("users", null, "userScore");
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
     
-    addScore($db, $scoreDb, $maxScore, $score, $userID);
+    addPersonalRecord($db, $scoreDb, $maxScore, $score, $userID);
     
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
