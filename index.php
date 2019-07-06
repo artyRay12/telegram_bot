@@ -48,15 +48,11 @@ $answer2 = $update["data"]["answers"][1];
 $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
 $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
-//$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
-
-
-
-
-/*$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
+/*
+$ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   // Store the data:
   $json = curl_exec($ch);
@@ -180,7 +176,7 @@ try {
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $exchangeRates['rates']['TND'], 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
   }
 } catch (Exeptions $e) {
 }
