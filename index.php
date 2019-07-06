@@ -160,7 +160,7 @@ try {
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $valute, 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $exchangeRates['rates']['TND'], 'reply_markup' => $reply_markup]);
   }
 } catch (Exeptions $e) {
 }
