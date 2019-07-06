@@ -60,7 +60,7 @@ if ($text == "/start") {
     //Получаем верный ответ из БД
     $db->where('userID', $userID);
     $questIdDb = $db->get ("users", null, "rightAnswer");//получаем номер квеста 
-    $rightAnswer = isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["currentQuest"] : "";
+    $rightAnswer = isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["rightAnswer"] : "";
      
     
     //Сравниваем верный ответ с ответов пользователя
