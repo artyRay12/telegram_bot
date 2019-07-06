@@ -11,6 +11,7 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 $userID = $result['message']['from']['id']; 
 $score = "";
 $endIsNear = 0;
+$maxScore = 0;
 $heroku_schema = 'heroku_fcc9304d7d4cb18';
 $heroku_host = 'eu-cdbr-west-02.cleardb.net';
 $heroku_userName = 'bb3a6b14f5f759';
@@ -22,12 +23,23 @@ $isAnswersReady = FALSE;
 $answersCounter = 0;
 $questIdDb = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
-$questLevels = rand(1, 4);
+$questLevels = rand(2, 4);
 
 $questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=$questLevels&count=1";
 
 $questSite = "$questionsRequest";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
+
+function addScore($db, $scoreDb, $maxScore, $score, $userID) {
+  $db->where('userID', $userID);
+  $scoreDb = $db->get("users", null, "maxScore");
+  $maxScore = isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
+  if ($score > $maxScore) {
+    $data = Array ('maxScore' => $score);
+    $db->where ('userID', $userID);
+    $db->update ('users', $data);
+  }
+}
 
 function checkUserID($db, $userID, $name) {
   $db->where('userID', $userID);
@@ -72,7 +84,7 @@ if ($text == "/start") {
     }
     
     // Получаю кнопки и вопрос
-       //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
+     //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
     $data = Array ('rightAnswer' => $update["data"]["answers"][0]);
     $db->where ('userID', $userID);
     $db->update ('users', $data);
@@ -135,13 +147,13 @@ if ($text == "/start") {
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, "userScore");
     $score = isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-
+    
+    addScore($db, $scoreDb, $maxScore, $score);
+    
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
   }
-
-
 
 
   
