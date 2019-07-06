@@ -43,10 +43,17 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
+//Получаем посл ответ
+$db->where('userID', $userID);
+$questIdDb = $db->get ("users", null, "lastAnswer");//получаем номер квеста 
+$rightAnswer = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+
+//Compare $text and $rightAnswer
 if ($text == $rightAnswer) {
-  $rightWatch = "TRUE";
+  $data = Array ('userScore' => $db->inc(20),);
+  $db->where ('userID', $userID);
+  $db->update ('users', $data);
 }
-$rightAnswerBefore = $answer1;
 
 
 $questText = $update["data"]["question"];
@@ -59,7 +66,10 @@ $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . "  /  " . $rightAnswerBefore, 'reply_markup' => $reply_markup]);
 
-
+//Записываем последний ответ
+$data = Array ('userScore' => $db-> $text);
+$db->where ('userID', $userID);
+$db->update ('users', $data);
 
   
 /*
