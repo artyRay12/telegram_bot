@@ -91,20 +91,6 @@ function checkUserID($db, $userID, $name, $id) {
 try {
   if ($text == "/start") {
   checkUserID($db, $userID, $name, $id);
-  /*$db->where('userID', $userID);
-   $scoreDb = $db->getOne("users", null, "userID");
-   if ($scoreDb["userID"]) {
-     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль уже создан", 'reply_markup' => $reply_markup]);
-    } else {
-      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль не создан", 'reply_markup' => $reply_markup]);
-      $data = Array ("userID" => $userID,
-          "userName" => $name,
-          "userScore" => '0',
-          "currentQuest" => '0',
-          "maxScore" => '0',
-          "endIsNear" => '0');
-      $id = $db->insert ('users', $data);
-    }*/
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
@@ -172,9 +158,9 @@ try {
   if ($endIsNear == 1) {
    $keyboard = [["/start"]];
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-     //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
+     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
-    //$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
   }
 } catch (Exeptions $e) {
 }
