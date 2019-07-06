@@ -45,7 +45,6 @@ $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
 
 if ($text == "/start") {
-  checkUserID($db, $userID, $name, $id);
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
