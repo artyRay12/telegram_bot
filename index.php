@@ -40,6 +40,8 @@ $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1";
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
+
+$keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
 $answer2 = $update["data"]["answers"][1];
