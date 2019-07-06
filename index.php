@@ -51,6 +51,11 @@ $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
 $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
+
+if ($text == $answer1) {
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+}
+  
 /*
 $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
