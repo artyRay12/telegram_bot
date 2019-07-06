@@ -67,7 +67,7 @@ $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . "  /  " . $rightAnswerBefore, 'reply_markup' => $reply_markup]);
 
 //Записываем последний ответ
-$data = Array ('lastAnswer' => $db-> $text);
+$data = Array ('lastAnswer' => $text);
 $db->where ('userID', $userID);
 $db->update ('users', $data);
 
