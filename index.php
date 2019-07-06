@@ -79,7 +79,7 @@ if ($text == "/start") {
     $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       
-    //Cохраняем верный ответ в БД
+    //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
     $data = Array ('rightAnswer' => $text);
     $db->where ('userID', $userID);
     $db->update ('users', $data);
@@ -89,6 +89,11 @@ if ($text == "/start") {
     $db->where('userID', $userID);
     $questIdDb = $db->get ("users", null, "currentQuest");//получаем номер квеста 
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+      
+    //==Получаем данные о конце викторины
+    $db->where('userID', $userID);
+    $scoreDb = $db->get("users", null, "endIsNear");
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
 
     //----===Увеличиваю счетчик вопроса!
     if($questDinId < 7) {
@@ -101,6 +106,8 @@ if ($text == "/start") {
       $db->where('userID', $userID);
       $db->update ('users', $data);
     }
+      
+      
   }
 
   if ($endIsNear == 1) {
