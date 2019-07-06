@@ -80,7 +80,7 @@ if ($text == "/start") {
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
       
     //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
-    $data = Array ('rightAnswer' => $text);
+    $data = Array ('rightAnswer' => $answer1);
     $db->where ('userID', $userID);
     $db->update ('users', $data);
     
