@@ -34,7 +34,7 @@ $buttonRequest = "";
 $id = "";
 $db = new MysqliDb ($heroku_host, $heroku_userName, $heroku_pass, $heroku_schema);
 
-/*$endpoint = 'latest';
+$endpoint = 'latest';
 $access_key = 'f22838f03ab3c8f3ff5f7e119f870dfe';
 
 
@@ -48,7 +48,7 @@ $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key
   // Decode JSON response:
   $exchangeRates = json_decode($json, true);
   // Access the exchange rate values, e.g. GBP:
-  $valute = $questionNumber * $exchangeRates['rates']['TND'];*/
+  $valute = $questionNumber * $exchangeRates['rates']['TND'];
 
 //===========Анализ ответов===============
 function anwerAnalys($text, $questDinId, $score, $answer1, $answer2, $answer3, $answer4, $db, $userID) {
@@ -160,7 +160,7 @@ try {
    $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
      $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . $score . " баллов", 'reply_markup' => $reply_markup]);
   } else {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText . $valute, 'reply_markup' => $reply_markup]);
   }
 } catch (Exeptions $e) {
 }
