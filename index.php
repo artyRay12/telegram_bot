@@ -113,6 +113,7 @@ try {
         "maxScore" => '0',
         "endIsNear" => '0');
     $id = $db->insert ('users', $data);
+  }
     //---==Refresh currQuest
     $data = Array ('currentQuest' => 0);
     $db->where('userID', $userID);
