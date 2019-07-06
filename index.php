@@ -30,6 +30,7 @@ $answer1 = "";
 $answer2 = "";
 $answer3 = "";
 $answer4 = "";
+$rightAnswer = "";
 $valute = 5.2;
 $buttonRequest = "";
 $id = "";
@@ -41,9 +42,13 @@ $questSite = "https://engine.lifeis.porn/api/millionaire.php?ok=true&q=3&count=1
 $update = json_decode(file_get_contents($questSite), JSON_OBJECT_AS_ARRAY);
 
 
+if ($text == $rightAnswer) {
+  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
+}
 
 $questText = $update["data"]["question"];
 $answer1 = $update["data"]["answers"][0];
+$rightAnswer = $answer1;
 $answer2 = $update["data"]["answers"][1];
 $answer3 = $update["data"]["answers"][2];
 $answer4 = $update["data"]["answers"][3];
@@ -52,9 +57,7 @@ $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
 
-if ($text == $answer1) {
-  $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
-}
+
   
 /*
 $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key.'');
