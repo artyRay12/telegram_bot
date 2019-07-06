@@ -81,7 +81,9 @@ function checkUserID($db, $userID, $name, $id) {
   $db->where('userID', $userID);
   $scoreDb = $db->getOne("users", null, $userNameIDRequest);
   if ($scoreDb["userID"]) {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль уже создан", 'reply_markup' => $reply_markup]);
   } else {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Ваш профиль не создан", 'reply_markup' => $reply_markup]);
     $data = Array ("userID" => $userID,
         "userName" => $name,
         "userScore" => '0',
