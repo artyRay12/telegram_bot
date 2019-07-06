@@ -72,7 +72,7 @@ if ($text == "/start") {
           array_push($answersID, $randID);
           $answersCounter = $answersCounter + 1;
         }
-          if ($answerCounter == 4)
+          if ($answersCounter == 4)
             $isAnswersReady = TRUE;
       endwhile;
       
