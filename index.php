@@ -53,24 +53,13 @@ if ($text == START_COMMAND) {
 }
 
 if($questDinId <= 7) {
-    //Получаем верный ответ из БД
-    $db->where('userID', $userID);
-    $questIdDb = $db->get ("users", null, "rightAnswer");//получаем номер квеста
-    $rightAnswer = isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["rightAnswer"] : "";
-
-
     //Сравниваем верный ответ с ответов пользователя
-    if ($text == $rightAnswer) {
-        $data = Array ('userScore' => $db->inc(20),);
-        $db->where ('userID', $userID);
-        $db->update ('users', $data);
+    if (isRightAnswer($db, $userID, $update, $text)) {
+        addPoint($db, $userID);
     }
 
-    // Получаю кнопки и вопрос
-    //Cохраняем верный ответ в БД чтобы потом сравнить с ответом от пользователя
-    $data = Array ('rightAnswer' => $update["data"]["answers"][0]);
-    $db->where ('userID', $userID);
-    $db->update ('users', $data);
+
+    pushRightAnswerInDB($db, $userID, $userID);
 
     //Смешиваю варианты ответа
     $answersID = [];

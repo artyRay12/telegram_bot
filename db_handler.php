@@ -38,4 +38,32 @@
         $db->update ('users', $data);
         return;
     }
+
+    function pushRightAnswerInDB($db, $userID, $update): void {
+        $data = Array ('rightAnswer' => $update["data"]["answers"][0]);
+        $db->where ('userID', $userID);
+        $db->update ('users', $data);
+        return;
+    }
+
+    function getRightAnwerFromDB($db, $userID, $update): string {
+        $db->where('userID', $userID);
+        $questIdDb = $db->get ("users", null, "rightAnswer");//получаем номер квеста
+        return isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["rightAnswer"] : "";
+    }
+
+    function isRightAnswer($db, $userID, $update, $text): bool {
+        $rightAnswer = getRightAnwerFromDB($db, $userID, $update);
+        if ($text == $rightAnswer) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function addPoint($db, $userID): void {
+        $data = Array ('userScore' => $db->inc(20),);
+        $db->where ('userID', $userID);
+        $db->update ('users', $data);
+     }
 ?>
