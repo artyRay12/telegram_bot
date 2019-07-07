@@ -24,12 +24,12 @@ function isRightAnswer($db, $userID, $update, $text): bool {
     }
 }
 
-function isLastQuestion($db, $userID): bool {
+function isTestCompleted($db, $userID): bool {
     $currentQuestID = getCurrentQuestId($db, $userID);
     if ( $currentQuestID < 10) {
-        return false;
-    } else {
         return true;
+    } else {
+        return false;
     }
 }
 

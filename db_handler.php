@@ -58,7 +58,6 @@
         return isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
     }
 
-
     function increaseQuestCounter($db, $userID): void {
         $data = Array('currentQuest' => $db->inc(1),);
         $db->where('userID', $userID);
@@ -66,13 +65,13 @@
         return;
     }
 
-    function getUserScore($db, $userID): int {
+    function getUserScore($db, $userID): string {
         $db->where('userID', $userID);
         $scoreDb = $db->get("users", null, "userScore");
         return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
     }
 
-    function getUserMaxScore($db, $userID): int {
+    function getUserMaxScore($db, $userID): string {
         $db->where('userID', $userID);
         $scoreDb = $db->get("users", null, "maxScore");
         return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
