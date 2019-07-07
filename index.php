@@ -50,20 +50,12 @@ function checkUserID($db, $userID, $name) {
     return;
 }
 //=-==---=
-if ($text == "/start") {
-    checkUserID($db, $userID, $name);
-    //---==Refresh currQuest
-    $data = Array ('currentQuest' => 0);
-    $db->where('userID', $userID);
-    $db->update ('users', $data);
-    //---===Refresh score
-    $data = Array('userScore' => 0);
-    $db->where('userID', $userID);
-    $db->update('users', $data);
-    //--==Refresh EndIsNear
-    $data = Array ('EndIsNear' => 0);
-    $db->where('userID', $userID);
-    $db->update ('users', $data);
+if ($text == START_COMMAND) {
+    if (isNewplayer($db, $userID, $userName)) {
+        createNewAccount($db, $userID, $userName)
+    } else {
+        resetTheGame($db, $userID);
+    }
 }
 if($questDinId <= 7) {
     //Получаем верный ответ из БД
