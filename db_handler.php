@@ -97,7 +97,8 @@
          }
      }
 
-     function testFinish($db, $userID): bool{
+     function isFinish($db, $userID): bool
+     {
          $endIsNear = "";
          //==Получаем данные о конце викторины
          $db->where('userID', $userID);
@@ -109,5 +110,15 @@
              return true;
          }
      }
+
+     function increaseQuestCounter($db, $update, $userID): void  {
+         $data = Array('currentQuest' => $db->inc(1),);
+         $db->where('userID', $userID);
+         $db->update('users', $data);
+     }
+
+     //function
+
+
 
 ?>
