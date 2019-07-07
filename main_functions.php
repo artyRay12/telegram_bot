@@ -27,9 +27,9 @@ function isRightAnswer($db, $userID, $update, $text): bool {
 function isTestCompleted($db, $userID): bool {
     $currentQuestID = getCurrentQuestId($db, $userID);
     if ( $currentQuestID < 10) {
-        return true;
-    } else {
         return false;
+    } else {
+        return true;
     }
 }
 
