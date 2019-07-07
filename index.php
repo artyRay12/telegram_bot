@@ -52,7 +52,7 @@ if ($text == START_COMMAND) {
     }
 }
 
-if($questDinId <= 10) {
+if(isLastQuestion($db, $userID) == FALSE) {
     //Сравниваем верный ответ с ответов пользователя
     if (isRightAnswer($db, $userID, $update, $text)) {
         addPoint($db, $userID);
