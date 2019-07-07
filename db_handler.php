@@ -8,7 +8,7 @@
     }
 
     function isNewPlayer($db, $userID, $userName): bool {
-        if $db->where('userID', $userID);
+        $db->where('userID', $userID);
         $scoreDb = $db->getOne("users", null, "userID");
         if ($scoreDb["userID"]) {
           return FALSE;
