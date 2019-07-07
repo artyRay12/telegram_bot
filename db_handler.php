@@ -41,8 +41,8 @@
 
     function getRightAnwerFromDB($db, $userID, $update): string {
         $db->where('userID', $userID);
-        $questIdDb = $db->get("users", null, "rightAnswer");//получаем номер квеста
-        return isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["rightAnswer"] : "";
+        $rightAnswer = $db->get("users", null, "rightAnswer");//получаем номер квеста
+        return isset($rightAnswer[0]["rightAnswer"]) ? $rightAnswer[0]["rightAnswer"] : "";
     }
 
     function addPoint($db, $userID): void {
@@ -54,8 +54,8 @@
 
     function getCurrentQuestId($db, $userID): string {
         $db->where('userID', $userID);
-        $questIdDb = $db->get("users", null, "currentQuest");//получаем номер квеста
-        return isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+        $questId = $db->get("users", null, "currentQuest");//получаем номер квеста
+        return isset($questId[0]["currentQuest"]) ? $questId[0]["currentQuest"] : "";
     }
 
     function increaseQuestCounter($db, $userID): void {
