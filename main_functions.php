@@ -26,49 +26,20 @@ function isRightAnswer($db, $userID, $update, $text): bool
     }
 }
 
-function addPoint($db, $userID): void
-{
-    $data = Array('userScore' => $db->inc(20),);
-    $db->where('userID', $userID);
-    $db->update('users', $data);
-    return;
-}
-
 function isLastQuestion($db, $userID): bool
 {
-    //Получаем номер текущего вопроса
-    $db->where('userID', $userID);
-    $questIdDb = $db->get("users", null, "currentQuest");//получаем номер квеста
-    $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
-
-    if ($questDinId < 10) {
+    $currentQuestID = getCurrentQuestId($db, $userID);
+    if ( $currentQuestID < 10) {
         return false;
     } else {
         return true;
     }
 }
 
-function increaseQuestCounter($db, $update, $userID): void
-{
-    $data = Array('currentQuest' => $db->inc(1),);
-    $db->where('userID', $userID);
-    $db->update('users', $data);
-    return;
-}
-
-function getUserScore($db, $userID): int
-{
-    $db->where('userID', $userID);
-    $scoreDb = $db->get("users", null, "userScore");
-    return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-}
-
 function isNewRecord($db, $userID): bool
 {
     $score = getUserScore($db, $userID);
-    $db->where('userID', $userID);
-    $scoreDb = $db->get("users", null, "maxScore");
-    $maxScore = isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
+    $maxScore = getUserMaxScore($db, $userID);
     if ($score > $maxScore) {
         return true;
     } else {
@@ -76,13 +47,7 @@ function isNewRecord($db, $userID): bool
     }
 }
 
-function addPersonalRecord($db, $userID): void
-{
-    $data = Array('maxScore' => getUserScore($db, $userID));
-    $db->where('userID', $userID);
-    $db->update('users', $data);
-    return;
-}
+
 
 
 ?>

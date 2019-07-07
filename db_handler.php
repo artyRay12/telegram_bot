@@ -49,6 +49,50 @@
         return isset($questIdDb[0]["rightAnswer"]) ? $questIdDb[0]["rightAnswer"] : "";
     }
 
+    function addPoint($db, $userID): void
+    {
+        $data = Array('userScore' => $db->inc(20),);
+        $db->where('userID', $userID);
+        $db->update('users', $data);
+        return;
+    }
+
+    function getCurrentQuestId($db, $userID): string{
+        $db->where('userID', $userID);
+        $questIdDb = $db->get("users", null, "currentQuest");//получаем номер квеста
+        return isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+    }
+
+
+    function increaseQuestCounter($db, $userID): void
+    {
+        $data = Array('currentQuest' => $db->inc(1),);
+        $db->where('userID', $userID);
+        $db->update('users', $data);
+        return;
+    }
+
+    function getUserScore($db, $userID): int
+    {
+        $db->where('userID', $userID);
+        $scoreDb = $db->get("users", null, "userScore");
+        return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
+    }
+
+    function getUserMaxScore($db, $userID): int {
+        $db->where('userID', $userID);
+        $scoreDb = $db->get("users", null, "maxScore");
+        return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
+    }
+
+    function addPersonalRecord($db, $userID): void
+    {
+        $data = Array('maxScore' => getUserScore($db, $userID));
+        $db->where('userID', $userID);
+        $db->update('users', $data);
+        return;
+    }
+
 
 
 ?>

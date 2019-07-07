@@ -35,7 +35,7 @@ if(isLastQuestion($db, $userID) == FALSE) {
     $keyboard = getPosibleAnswers($update, $userID, $db);
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
-    increaseQuestCounter($db, $update, $userID);
+    increaseQuestCounter($db, $userID);
 
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $update["data"]["question"], 'reply_markup' => $reply_markup]);
 
