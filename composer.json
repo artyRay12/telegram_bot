@@ -1,8 +1,15 @@
 {
   "require": {
     "irazasyed/telegram-bot-sdk": "^2.0",
+<<<<<<< HEAD
     "telegram-bot/api": "^2.3",
     "longman/telegram-bot": "^0.58.0",
     "fadion/fixerio": "~1.0"
   }
 }
+=======
+    "fadion/fixerio": "~1.0",
+    "thingengineer/mysqli-database-class": "dev-master"
+  }
+}
+>>>>>>> 2a7ace2c0ff5fdfa6c9dbbf916de63d1a15d090e
