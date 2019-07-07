@@ -1,7 +1,9 @@
 /vendor/
+/.idea/
+composer.json
+composer.lock
 composer
-
 composer.bat
-
 composer.phar
-
+dontTouchIt.php
+previousVersion.php
