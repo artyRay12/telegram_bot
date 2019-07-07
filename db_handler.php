@@ -80,10 +80,25 @@
              if ($answersCounter == 4)
                  $isAnswersReady = TRUE;
          endwhile;
-
-
-
          return [[$update["data"]["answers"][$answersID[0]], $update["data"]["answers"][$answersID[1]]], [$update["data"]["answers"][$answersID[2]], $update["data"]["answers"][$answersID[3]]]];
-
      }
+
+     function isLastQuestion($db, $userID): bool
+     {
+         //Получаем номер текущего вопроса
+         $db->where('userID', $userID);
+         $questIdDb = $db->get("users", null, "currentQuest");//получаем номер квеста
+         $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
+
+         //==Получаем данные о конце викторины
+         $db->where('userID', $userID);
+         $scoreDb = $db->get("users", null, "endIsNear");
+         $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
+         if ($questDinId < 10) {
+             return false;
+         } else {
+             return true;
+         }
+     }
+
 ?>
