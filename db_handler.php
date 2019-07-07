@@ -64,6 +64,7 @@
         $data = Array ('userScore' => $db->inc(20),);
         $db->where ('userID', $userID);
         $db->update ('users', $data);
+        return;
      }
 
      function getPosibleAnswers($update): array {
