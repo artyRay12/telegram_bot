@@ -52,28 +52,13 @@ if ($text == START_COMMAND) {
     }
 }
 
-if($questDinId <= 7) {
+if($questDinId <= 10) {
     //Сравниваем верный ответ с ответов пользователя
     if (isRightAnswer($db, $userID, $update, $text)) {
         addPoint($db, $userID);
     }
 
     pushRightAnswerInDB($db, $userID, $userID);
-
-    //Смешиваю варианты ответа
-    $answersID = [];
-    while ($isAnswersReady == FALSE):
-        $randID = rand(0, 3);
-        if (in_array($randID, $answersID)){
-        } else {
-            array_push($answersID, $randID);
-            $answersCounter = $answersCounter + 1;
-        }
-        if ($answersCounter == 4)
-            $isAnswersReady = TRUE;
-    endwhile;
-
-
     $questText = $update["data"]["question"];
     $keyboard = getPosibleAnswers($update);
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
@@ -90,7 +75,7 @@ if($questDinId <= 7) {
     $scoreDb = $db->get("users", null, "endIsNear");
     $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
     //----===Увеличиваю счетчик вопроса!
-    if($questDinId < 7) {
+    if($questDinId < 10) {
         $data = Array ('currentQuest' => $db->inc(1),);
         $db->where('userID', $userID);
         $db->update ('users', $data);
