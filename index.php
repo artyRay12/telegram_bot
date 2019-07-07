@@ -52,7 +52,7 @@ function checkUserID($db, $userID, $name) {
 //=-==---=
 if ($text == START_COMMAND) {
     if (isNewplayer($db, $userID, $userName)) {
-        createNewAccount($db, $userID, $userName)
+        createNewAccount($db, $userID, $userName);
     } else {
         resetTheGame($db, $userID);
     }
