@@ -66,14 +66,14 @@ if($questDinId <= 10) {
 
 
     //Получаем номер текущего вопроса
-    $db->where('userID', $userID);
+    /*$db->where('userID', $userID);
     $questIdDb = $db->get ("users", null, "currentQuest");//получаем номер квеста
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
 
     //==Получаем данные о конце викторины
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, "endIsNear");
-    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";*/
 
     //----===Увеличиваю счетчик вопроса!
     if(isLastQuestion($db, $userID) == FALSE) {
