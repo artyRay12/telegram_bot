@@ -19,7 +19,7 @@ $db = dbInit();
 
 //=-==---=
 if ($text == START_COMMAND) {
-    if (isNewplayer($db, $userID, $userName)) {
+    if (isNewplayer($db, $userID)) {
         createNewAccount($db, $userID, $userName);
     } else {
         resetTheGame($db, $userID);
@@ -37,7 +37,7 @@ if(isLastQuestion($db, $userID) == FALSE) {
 
     increaseQuestCounter($db, $userID);
 
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $update["data"]["question"], 'reply_markup' => $reply_markup]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => getQuestText($update), 'reply_markup' => $reply_markup]);
 
 } else {
         $keyboard = [[START_COMMAND]];

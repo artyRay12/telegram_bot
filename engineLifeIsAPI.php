@@ -4,8 +4,7 @@
   $questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?q=$questLevels";
   $update = json_decode(file_get_contents($questionsRequest), JSON_OBJECT_AS_ARRAY);
 
-    function getPosibleAnswers($update, $userID, $db): array
-    {
+    function getPosibleAnswers($update, $userID, $db): array {
         $answersID = [];
         $isAnswersReady = FALSE;
         $answersCounter = 0;
@@ -21,6 +20,10 @@
                 $isAnswersReady = TRUE;
         endwhile;
         return [[$update["data"]["answers"][$answersID[0]], $update["data"]["answers"][$answersID[1]]], [$update["data"]["answers"][$answersID[2]], $update["data"]["answers"][$answersID[3]]]];
+    }
+
+    function getQuestText($update): string {
+        return $update["data"]["question"];
     }
 
 

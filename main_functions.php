@@ -6,18 +6,16 @@ require_once("config.php");
 require_once("engineLifeIsAPI.php");
 
 
-function isNewPlayer($db, $userID, $userName): bool
-{
-    $userTest = getUserID($db, $userID);
-    if ($userTest) {
+function isNewPlayer($db, $userID): bool {
+    $userIDfromDB = getUserID($db, $userID);
+    if ($userName) {
         return FALSE;
     } else {
         return TRUE;
     }
 }
 
-function isRightAnswer($db, $userID, $update, $text): bool
-{
+function isRightAnswer($db, $userID, $update, $text): bool {
     $rightAnswer = getRightAnwerFromDB($db, $userID, $update);
     if ($text == $rightAnswer) {
         return TRUE;
@@ -26,8 +24,7 @@ function isRightAnswer($db, $userID, $update, $text): bool
     }
 }
 
-function isLastQuestion($db, $userID): bool
-{
+function isLastQuestion($db, $userID): bool {
     $currentQuestID = getCurrentQuestId($db, $userID);
     if ( $currentQuestID < 10) {
         return false;
@@ -36,8 +33,7 @@ function isLastQuestion($db, $userID): bool
     }
 }
 
-function isNewRecord($db, $userID): bool
-{
+function isNewRecord($db, $userID): bool {
     $score = getUserScore($db, $userID);
     $maxScore = getUserMaxScore($db, $userID);
     if ($score > $maxScore) {
