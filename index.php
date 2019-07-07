@@ -34,11 +34,11 @@ if ($text == START_COMMAND) {
 
 if(isLastQuestion($db, $userID) == FALSE) {
     //Сравниваем верный ответ с ответов пользователя
-    //if (isRightAnswer($db, $userID, $update, $text)) {
+    if (isRightAnswer($db, $userID, $update, $text)) {
         addPoint($db, $userID);
-    //}
+    }
 
-    pushRightAnswerInDB($db, $userID, $userID);
+    pushRightAnswerInDB($db, $userID, $update);
 
     $questText = $update["data"]["question"];
 
