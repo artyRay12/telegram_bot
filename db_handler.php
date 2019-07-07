@@ -16,7 +16,7 @@
     }
 
     function createNewAccount($db, $userID, $userName): void {
-      $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, EndIsNear) values($userID, '$userName', 0, 0, 0, 0)";
+      $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, rightAnswer) values($userID, '$userName', 0, 'empty', 0, 'epmty')";
       $db->query($query);
       return;
     }
