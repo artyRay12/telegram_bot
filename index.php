@@ -65,7 +65,7 @@ if($questDinId <= 10) {
 
 
 
-    /*/Получаем номер текущего вопроса
+    //Получаем номер текущего вопроса
     $db->where('userID', $userID);
     $questIdDb = $db->get ("users", null, "currentQuest");//получаем номер квеста
     $questDinId = isset($questIdDb[0]["currentQuest"]) ? $questIdDb[0]["currentQuest"] : "";
@@ -73,7 +73,8 @@ if($questDinId <= 10) {
     //==Получаем данные о конце викторины
     $db->where('userID', $userID);
     $scoreDb = $db->get("users", null, "endIsNear");
-    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";*/
+    $endIsNear = isset($scoreDb[0]["endIsNear"]) ? $scoreDb[0]["endIsNear"] : "";
+
     //----===Увеличиваю счетчик вопроса!
     if(isLastQuestion($db, $userID) == FALSE) {
         $data = Array ('currentQuest' => $db->inc(1),);
@@ -88,7 +89,7 @@ if($questDinId <= 10) {
 
 
 }
-if ($endIsNear == 1) {
+if (testFinish($db, $userID)) {
     $keyboard = [["/start"]];
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
     //----===Получаем очки пользователя
