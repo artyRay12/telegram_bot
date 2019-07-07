@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "e1c2eb15c273d6f04b99a099aa74954c",
-=======
     "content-hash": "75f5b37a5ff314ccbda65290f1b47d53",
->>>>>>> 2a7ace2c0ff5fdfa6c9dbbf916de63d1a15d090e
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -418,22 +414,21 @@
         },
         {
             "name": "irazasyed/telegram-bot-sdk",
-            "version": "dev-master",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
-                "reference": "2109011c2ad2a43dd9d874fd98b3e68bc826769c"
+                "reference": "2824278370b231dfc9172104db8acc23fc5ade94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/2109011c2ad2a43dd9d874fd98b3e68bc826769c",
-                "reference": "2109011c2ad2a43dd9d874fd98b3e68bc826769c",
+                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/2824278370b231dfc9172104db8acc23fc5ade94",
+                "reference": "2824278370b231dfc9172104db8acc23fc5ade94",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "~6.0",
                 "illuminate/support": "~5.0",
-                "league/event": "^2.1",
                 "php": ">=5.5.0"
             },
             "require-dev": {
@@ -447,15 +442,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Telegram\\Bot\\Laravel\\TelegramServiceProvider"
-                    ],
-                    "aliases": {
-                        "Telegram": "Telegram\\Bot\\Laravel\\Facades\\Telegram"
-                    }
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -485,57 +472,7 @@
                 "telegram php",
                 "telegram sdk"
             ],
-            "time": "2019-02-26T22:45:13+00:00"
-        },
-        {
-            "name": "league/event",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/event.git",
-                "reference": "d2cc124cf9a3fab2bb4ff963307f60361ce4d119"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/event/zipball/d2cc124cf9a3fab2bb4ff963307f60361ce4d119",
-                "reference": "d2cc124cf9a3fab2bb4ff963307f60361ce4d119",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "henrikbjorn/phpspec-code-coverage": "~1.0.1",
-                "phpspec/phpspec": "^2.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\Event\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frank de Jonge",
-                    "email": "info@frenky.net"
-                }
-            ],
-            "description": "Event package",
-            "keywords": [
-                "emitter",
-                "event",
-                "listener"
-            ],
-            "time": "2018-11-26T11:52:41+00:00"
+            "time": "2017-01-05T09:01:54+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -1026,11 +963,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-<<<<<<< HEAD
-        "irazasyed/telegram-bot-sdk": 20
-=======
         "thingengineer/mysqli-database-class": 20
->>>>>>> 2a7ace2c0ff5fdfa6c9dbbf916de63d1a15d090e
     },
     "prefer-stable": false,
     "prefer-lowest": false,
