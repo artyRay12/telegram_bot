@@ -115,9 +115,33 @@
          $data = Array('currentQuest' => $db->inc(1),);
          $db->where('userID', $userID);
          $db->update('users', $data);
+         return;
      }
 
-     //function
+     function getUserScore($db, $userID): int {
+        $db->where('userID', $userID);
+        $scoreDb = $db->get("users", null, "userScore");
+        return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
+     }
+
+     function isNewRecord($db, $userID): bool {
+         $score = getUserScore($db, $userID);
+         $db->where('userID', $userID);
+         $scoreDb = $db->get("users", null, "maxScore");
+         $maxScore = isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
+         if ($score > $maxScore) {
+             return true;
+         } else {
+             return false;
+         }
+     }
+
+    function addPersonalRecord($db, $userID): void {
+        $data = Array('maxScore' => getUserScore($db, $userID));
+        $db->where('userID', $userID);
+        $db->update('users', $data);
+      return;
+    }
 
 
 
