@@ -66,14 +66,14 @@ if($questDinId <= 10) {
 
 
     //----===Увеличиваю счетчик вопроса!
-    if(isLastQuestion($db, $userID) == FALSE) {
+   // if(isLastQuestion($db, $userID) == FALSE) {
         increaseQuestCounter($db, $update, $userID);
-    } else {
+   // } else {
         //Кончились вопросы
         $data = Array ('EndIsNear' => 1);
         $db->where('userID', $userID);
         $db->update ('users', $data);
-    }
+  //  }
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $questText, 'reply_markup' => $reply_markup]);
 
 } else {
