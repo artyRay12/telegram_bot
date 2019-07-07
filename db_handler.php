@@ -23,7 +23,6 @@
         return;
     }
 
-
     function resetTheGame($db, $userID): void {
         $data = Array ('currentQuest' => 0);
         $db->where('userID', $userID);
@@ -65,5 +64,26 @@
         $data = Array ('userScore' => $db->inc(20),);
         $db->where ('userID', $userID);
         $db->update ('users', $data);
+     }
+
+     function getPosibleAnswers($update): array {
+         $answersID = [];
+         $isAnswersReady = FALSE;
+         $answersCounter = 0;
+         while ($isAnswersReady == FALSE):
+             $randID = rand(0, 3);
+             if (in_array($randID, $answersID)){
+             } else {
+                 array_push($answersID, $randID);
+                 $answersCounter = $answersCounter + 1;
+             }
+             if ($answersCounter == 4)
+                 $isAnswersReady = TRUE;
+         endwhile;
+
+
+
+         return [[$update["data"]["answers"][$answersID[0]], $update["data"]["answers"][$answersID[1]]], [$update["data"]["answers"][$answersID[2]], $update["data"]["answers"][$answersID[3]]]];
+
      }
 ?>

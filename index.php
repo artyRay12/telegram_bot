@@ -58,7 +58,6 @@ if($questDinId <= 7) {
         addPoint($db, $userID);
     }
 
-
     pushRightAnswerInDB($db, $userID, $userID);
 
     //Смешиваю варианты ответа
@@ -76,14 +75,8 @@ if($questDinId <= 7) {
 
 
     $questText = $update["data"]["question"];
-    $answer1 = $update["data"]["answers"][$answersID[0]];
-    $answer2 = $update["data"]["answers"][$answersID[1]];
-    $answer3 = $update["data"]["answers"][$answersID[2]];
-    $answer4 = $update["data"]["answers"][$answersID[3]];
-    $keyboard = [[$answer1, $answer2], [$answer3, $answer4]];
+    $keyboard = getPosibleAnswers($update);
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-
-
 
 
 
