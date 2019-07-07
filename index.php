@@ -5,7 +5,6 @@ use Telegram\Bot\Api;
 //require('bd_functions.php');
 require('config.php');
 require('db_handler.php');
-require('engineLifeIsAPI.php');
 require('main_functions.php');
 
 $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
@@ -17,8 +16,6 @@ $userID = $result['message']['from']['id'];
 
 
 $db = dbInit();
-isNewPlayer($db, $userID, $userName);
-
 
 //=-==---=
 if ($text == START_COMMAND) {
