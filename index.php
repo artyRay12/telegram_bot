@@ -38,11 +38,9 @@ if(isLastQuestion($db, $userID) == FALSE) {
         addPoint($db, $userID);
     }
 
-    pushRightAnswerInDB($db, $userID, $update);
-
     $questText = $update["data"]["question"];
 
-    $keyboard = getPosibleAnswers($update);
+    $keyboard = getPosibleAnswers($update, $userID, $db);
     $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 
 

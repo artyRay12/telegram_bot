@@ -67,10 +67,11 @@
         return;
      }
 
-     function getPosibleAnswers($update): array {
+     function getPosibleAnswers($update, $userID, $db): array {
          $answersID = [];
          $isAnswersReady = FALSE;
          $answersCounter = 0;
+         pushRightAnswerInDB($db, $userID, $update);
          while ($isAnswersReady == FALSE):
              $randID = rand(0, 3);
              if (in_array($randID, $answersID)){
