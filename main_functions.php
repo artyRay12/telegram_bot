@@ -8,7 +8,7 @@ require_once("engineLifeIsAPI.php");
 
 function isNewPlayer($db, $userID): bool {
     $userIDfromDB = getUserID($db, $userID);
-    if ($userName) {
+    if ($userIDfromDB) {
         return FALSE;
     } else {
         return TRUE;
