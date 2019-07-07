@@ -84,6 +84,27 @@
         return;
     }
 
+    function getScoreByPlace($db, $currentPlace): string {
+        $db->where('place', $currentPlace);
+        $score =$db->getOne("topplayers", null, "score");
+        return isset($score[0]) ? $score[0] : "";
+    }
+
+    function getUserInfoByPlace($db, $place ): array {
+        $dbRequest = ['userID', 'userName', 'Score'];
+        $db->where('place', $place);
+        $dbUser =  $db->getOne("topplayers", null, $dbRequest);
+        var_dump($dbUser);
+        return $dbUser;
+    }
+
+    function replaceRecords($db, $newInfo, $placeForReplace): void {
+        $data = Array('userID' => $newInfo["userID"],
+            'userName' => $newInfo["userName"],
+            'Score' => $newInfo["Score"]);
+        $db->where('place', $placeForReplace);
+        $db->update('topplayers', $data);
+    }
 
 
 ?>

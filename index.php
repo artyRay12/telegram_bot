@@ -14,7 +14,6 @@
     $userName = $result["message"]["from"]["username"];
     $userID = $result['message']['from']['id'];
     $db = dbInit();
-
     //=-==---=
     if ($text == START_COMMAND) {
         if (isNewplayer($db, $userID)) {
@@ -50,6 +49,8 @@
         if (isNewRecord($db, $userID)) {
             addPersonalRecord($db, $userID);
         }
+
+        addNewGlobalRating($db, $userName, $userID);
 
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . getUserScore($db, $userID)
                                                         . " баллов",
