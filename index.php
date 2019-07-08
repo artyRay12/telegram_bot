@@ -6,7 +6,7 @@
     require('db_handler.php');
     require('main_functions.php');
 
-    $telegram = new Api('713953239:AAFiRmir3z-JsMnDMmGdQ4twvV2nzLpADGs');
+    $telegram = new Api('825920642:AAGTgs44IT85j2VJPyl4950YhBqWS9YCg5s');
     $result = $telegram -> getWebhookUpdates();
     $text = $result["message"]["text"];
     $chat_id = $result["message"]["chat"]["id"];
