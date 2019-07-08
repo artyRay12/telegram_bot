@@ -98,13 +98,5 @@
         return $dbUser;
     }
 
-    function replaceRecords($db, $newInfo, $placeForReplace): void {
-        $data = Array('userID' => $newInfo["userID"],
-            'userName' => $newInfo["userName"],
-            'Score' => $newInfo["Score"]);
-        $db->where('place', $placeForReplace);
-        $db->update('topplayers', $data);
-    }
-
 
 ?>
