@@ -47,9 +47,13 @@ function addNewGlobalRating($db, $userID, $userName): void {
     $placeFound = FALSE;
     $placeForChange = 1;
     $score = getUserScore($db, $userID);
+    $scoreByPlace = "";
+    echo $scoreByPlace;
     while ($placeFound == FALSE):
-
         $scoreByPlace = getScoreByPlace($db, $placeForChange);
+        if ($placeForChange == 4) {
+            $placeFound = TRUE;
+        }
         if ($scoreByPlace < $score) {
             $placeFound = TRUE;
         } elseif ($scoreByPlace == $score) {
@@ -67,7 +71,7 @@ function addNewGlobalRating($db, $userID, $userName): void {
     } elseif ($placeForChange == 2) {
         replaceRecords($db, 2, 3);
         putNewRecord($db, $userID, $userName, $score, $placeForChange);
-    } else {
+    } elseif ($placeForChange == 3) {
         putNewRecord($db, $userID, $userName, $score, $placeForChange);
     }
 }

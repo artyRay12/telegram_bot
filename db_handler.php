@@ -87,14 +87,13 @@
     function getScoreByPlace($db, $currentPlace): string {
         $db->where('place', $currentPlace);
         $score = $db->getOne("topplayers", null, "score");
-        return isset($score[0]) ? $score[0] : "";
+        return isset($score["Score"]) ? $score["Score"] : "";
     }
 
     function getUserInfoByPlace($db, $place ): array {
         $dbRequest = ['userID', 'userName', 'Score'];
         $db->where('place', $place);
         $dbUser =  $db->getOne("topplayers", null, $dbRequest);
-        var_dump($dbUser);
         return $dbUser;
     }
 
