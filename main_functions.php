@@ -51,38 +51,31 @@ function addNewGlobalRating($db, $userID, $userName) {
 
         $scoreByPlace = getScoreByPlace($db, $placeForChange);
         if ($scoreByPlace < $score) {
-            echo $i  . " место";
             $placeFound = TRUE;
         } elseif ($scoreByPlace == $score) {
-            echo "равно" . ($placeForChange) . "месту";
             $placeFound = TRUE;
         }
-        $placeForChange = $placeForChange + 1;
+        if ($placeFound == FALSE) {
+            $placeForChange = $placeForChange + 1;
+        }
     endwhile;
 
-    function SecondReplaceThird($db): string {
+    function replaceRecords($db, $from, $where) {
         $userData = [];
-        $userData = getUserInfoByPlace($db, 2);
-        replaceRecords($db, $userData, 3);
-        return '123';
-    }
-
-    function firstReplaceSecond($db): void {
-        $userData = [];
-        $userData = getUserInfoByPlace($db, 1);
-        replaceRecords($db, $userData, 2);
+        $userData = getUserInfoByPlace($db, $from);
+        replaceRecords($db, $userData, $where);
     }
 
     if ($placeForChange == 1) {
-        SecondReplaceThird($db);
-        firstReplaceSecond($db);
+        replaceRecords($db, 1, 2);
+        replaceRecords($db, 2, 3);
         $data = Array('userID' =>$userID,
             'userName' => $userName,
             'Score' => $score);
         $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
     } elseif ($placeForChange == 2) {
-        SecondReplaceThird($db);
+        replaceRecords($db, 2, 3);
         $data = Array('userID' =>$userID,
             'userName' => $userName,
             'Score' => $score);
