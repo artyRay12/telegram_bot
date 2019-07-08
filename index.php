@@ -19,6 +19,9 @@
 
     if ($text == SHOW_TOP_PLAYERS) {
         showTopPlayers($db, $telegram, $chat_id, $reply_markup);
+        $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => false]);
     }
 
     if ($text == START_COMMAND) {
