@@ -16,6 +16,10 @@
     $db = dbInit();
 
     //=-==---=
+
+    if ($text == SHOW_TOP_PLAYERS) {
+        showTopPlayers($db, $telegram, $chat_id, $reply_markup);
+    }
     if ($text == START_COMMAND) {
         if (isNewplayer($db, $userID)) {
             createNewAccount($db, $userID, $userName);
@@ -39,7 +43,7 @@
                                                        'reply_markup' => $reply_markup]);
 
     } else {
-        $keyboard = [[START_COMMAND]];
+        $keyboard = [[START_COMMAND], [SHOW_TOP_PLAYERS]];
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                                                         'resize_keyboard' => true,
                                                         'one_time_keyboard' => true]);
