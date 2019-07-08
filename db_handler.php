@@ -98,5 +98,23 @@
         return $dbUser;
     }
 
+    function replaceRecords($db, $from, $where): void {
+        $userData = [];
+        $userData = getUserInfoByPlace($db, $from);
+        $data = Array('userID' => $userData["userID"],
+            'userName' => $userData["userName"],
+            'Score' => $userData["Score"]);
+        $db->where('place', $where);
+        $db->update('topplayers', $data);
+    }
+
+    function putNewRecord($db, $userID, $userName, $score, $placeForChange): void {
+        $data = Array('userID' =>$userID,
+            'userName' => $userName,
+            'Score' => $score);
+        $db->where('place', $placeForChange);
+        $db->update('topplayers', $data);
+    }
+
 
 ?>

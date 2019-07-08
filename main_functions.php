@@ -43,7 +43,7 @@ function isNewRecord($db, $userID): bool {
     }
 }
 
-function addNewGlobalRating($db, $userID, $userName) {
+function addNewGlobalRating($db, $userID, $userName): void {
     $placeFound = FALSE;
     $placeForChange = 1;
     $score = getUserScore($db, $userID);
@@ -60,33 +60,15 @@ function addNewGlobalRating($db, $userID, $userName) {
         }
     endwhile;
 
-    function replaceRecords($db, $from, $where) {
-        $userData = [];
-        $userData = getUserInfoByPlace($db, $from);
-        replaceRecords($db, $userData, $where);
-    }
-
     if ($placeForChange == 1) {
         replaceRecords($db, 1, 2);
         replaceRecords($db, 2, 3);
-        $data = Array('userID' =>$userID,
-            'userName' => $userName,
-            'Score' => $score);
-        $db->where('place', $placeForChange);
-        $db->update('topplayers', $data);
+        putNewRecord($db, $userID, $userName, $score, $placeForChange);
     } elseif ($placeForChange == 2) {
         replaceRecords($db, 2, 3);
-        $data = Array('userID' =>$userID,
-            'userName' => $userName,
-            'Score' => $score);
-        $db->where('place', $placeForChange);
-        $db->update('topplayers', $data);
+        putNewRecord($db, $userID, $userName, $score, $placeForChange);
     } else {
-        $data = Array('userID' =>$userID,
-            'userName' => $userName,
-            'Score' => $score);
-        $db->where('place', $placeForChange);
-        $db->update('topplayers', $data);
+        putNewRecord($db, $userID, $userName, $score, $placeForChange);
     }
 }
 

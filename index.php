@@ -14,6 +14,7 @@
     $userName = $result["message"]["from"]["username"];
     $userID = $result['message']['from']['id'];
     $db = dbInit();
+addNewGlobalRating($db, $userID, $userName);
     //=-==---=
     if ($text == START_COMMAND) {
         if (isNewplayer($db, $userID)) {
