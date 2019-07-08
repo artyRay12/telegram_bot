@@ -120,7 +120,7 @@
        for($i = 1; $i <= 3; $i++) {
           $info = getUserInfoByPlace($db, $i);
            $telegram->sendMessage(['chat_id' => $chat_id,
-                                   'text' => $i . $info["userName"] . ": " . $info["Score"]
+                                   'text' => $i . ". " . $info["userName"] . ": " . $info["Score"]
                . " баллов",
                'reply_markup' => $reply_markup]);
        }

@@ -47,7 +47,7 @@
         $keyboard = [[START_COMMAND], [SHOW_TOP_PLAYERS]];
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                                                         'resize_keyboard' => true,
-                                                        'one_time_keyboard' => true]);
+                                                        'one_time_keyboard' => false]);
         if ($text == SHOW_TOP_PLAYERS){
         } else {
             if (isRightAnswer($db, $userID, $update, $text)) {
