@@ -34,16 +34,16 @@
 
     if(isTestCompleted($db, $userID) == FALSE) {
 
-        if (isRightAnswer($db, $userID, $update, $text)) {
+        if (isRightAnswer($db, $userID, $text)) {
             addPoint($db, $userID);
         }
-        $keyboard = getPosibleAnswers($update, $userID, $db);
+        $keyboard = getPosibleAnswers($questionRequest, $userID, $db);
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                                                         'resize_keyboard' => true,
                                                         'one_time_keyboard' => true]);
 
         increaseQuestCounter($db, $userID);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => getQuestText($update),
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => getQuestText($questionRequest),
                                                        'reply_markup' => $reply_markup]);
 
     } else {
@@ -53,7 +53,7 @@
                                                         'one_time_keyboard' => false]);
         if ($text == SHOW_TOP_PLAYERS){
         } else {
-            if (isRightAnswer($db, $userID, $update, $text)) {
+            if (isRightAnswer($db, $userID, $text)) {
                 addPoint($db, $userID);
             }
 

@@ -2,13 +2,13 @@
 
   $questLevels = rand(2, 4);
   $questionsRequest = "https://engine.lifeis.porn/api/millionaire.php?q=$questLevels";
-  $update = json_decode(file_get_contents($questionsRequest), JSON_OBJECT_AS_ARRAY);
+  $questionRequest = json_decode(file_get_contents($questionsRequest), JSON_OBJECT_AS_ARRAY);
 
-    function getPosibleAnswers($update, $userID, $db): array {
+    function getPosibleAnswers($questionRequest, $userID, $db): array {
         $answersID = [];
         $isAnswersReady = FALSE;
         $answersCounter = 0;
-        pushRightAnswerInDB($db, $userID, $update);
+        pushRightAnswerInDB($db, $userID, $questionRequest);
         while ($isAnswersReady == FALSE):
             $randID = rand(0, 3);
             if (in_array($randID, $answersID)) {
@@ -19,11 +19,14 @@
             if ($answersCounter == 4)
                 $isAnswersReady = TRUE;
         endwhile;
-        return [[$update["data"]["answers"][$answersID[0]], $update["data"]["answers"][$answersID[1]]], [$update["data"]["answers"][$answersID[2]], $update["data"]["answers"][$answersID[3]]]];
+        return [[$questionRequest["data"]["answers"][$answersID[0]],
+               $questionRequest["data"]["answers"][$answersID[1]]],
+               [$questionRequest["data"]["answers"][$answersID[2]],
+               $questionRequest["data"]["answers"][$answersID[3]]]];
     }
 
-    function getQuestText($update): string {
-        return $update["data"]["question"];
+    function getQuestText($questionRequest): string {
+        return $questionRequest["data"]["question"];
     }
 
 

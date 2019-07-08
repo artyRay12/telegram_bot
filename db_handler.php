@@ -32,8 +32,8 @@
     }
 
 
-    function pushRightAnswerInDB($db, $userID, $update): void {
-        $data = Array('rightAnswer' => $update["data"]["answers"][0]);
+    function pushRightAnswerInDB($db, $userID, $questionRequest): void {
+        $data = Array('rightAnswer' => $questionRequest["data"]["answers"][0]);
         $db->where('userID', $userID);
         $db->update('users', $data);
         return;
@@ -84,7 +84,7 @@
         return;
     }
 
-   /* function getScoreByPlace($db, $place): string {
+    function getScoreByPlace($db, $place): string {
         $db->where('place', $place);
         $score = $db->getOne("topplayers", null, "score");
         return isset($score["Score"]) ? $score["Score"] : "";
@@ -95,25 +95,12 @@
         $db->where('place', $place);
         $dbUser =  $db->getOne("topplayers", null, $dbRequest);
         return $dbUser;
-    }*/
-
-    function getInfoByPlace($info, $db, $place) {
-        if ($info == ALL_INFORMATION){
-            $dbRequest = ['userID', 'userName', 'Score'];
-            $db->where('place', $place);
-            $dbUser =  $db->getOne("topplayers", null, $dbRequest);
-            return $dbUser;
-        }elseif ($info == SCORE) {
-            $db->where('place', $place);
-            $score = $db->getOne("topplayers", null, "score");
-            return isset($score["Score"]) ? $score["Score"] : "";
-        }
     }
 
 
     function replaceRecords($db, $from, $where): void {
         $userData = [];
-        $userData = getInfoByPlace(ALL_INFORMATION, $db, $from);
+        $userData = getUserInfoByPlace($db, $from);
         $data = Array('userID' => $userData["userID"],
             'userName' => $userData["userName"],
             'Score' => $userData["Score"]);
@@ -132,7 +119,7 @@
     function showTopPlayers($db, $telegram, $chat_id, $reply_markup) {
        $info = [];
        for($i = 1; $i <= 3; $i++) {
-          $info = getInfoByPlace(ALL_INFORMATION, $db, $i);
+          $info = getUserInfoByPlace($db, $i);
            $telegram->sendMessage(['chat_id' => $chat_id,
                                    'text' => $i . ". " . $info["userName"] . ": " . $info["Score"]
                . " баллов",
