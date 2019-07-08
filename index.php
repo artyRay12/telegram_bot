@@ -2,7 +2,6 @@
     include('vendor/autoload.php');
     use Telegram\Bot\Api;
 
-    //require('bd_functions.php');
     require('config.php');
     require('db_handler.php');
     require('main_functions.php');
@@ -15,13 +14,11 @@
     $userID = $result['message']['from']['id'];
     $db = dbInit();
 
-    //=-==---=
-
     if ($text == SHOW_TOP_PLAYERS) {
         showTopPlayers($db, $telegram, $chat_id, $reply_markup);
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
-            'resize_keyboard' => true,
-            'one_time_keyboard' => false]);
+                                                        'resize_keyboard' => true,
+                                                        'one_time_keyboard' => false]);
     }
 
     if ($text == START_COMMAND) {
@@ -41,11 +38,9 @@
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                                                         'resize_keyboard' => true,
                                                         'one_time_keyboard' => false]);
-
         increaseQuestCounter($db, $userID);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => getQuestText($questionRequest),
                                                        'reply_markup' => $reply_markup]);
-
     } else {
         $keyboard = [[START_COMMAND], [SHOW_TOP_PLAYERS]];
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
@@ -56,16 +51,14 @@
             if (isRightAnswer($db, $userID, $text)) {
                 addPoint($db, $userID);
             }
-
             if (isNewRecord($db, $userID)) {
                 addPersonalRecord($db, $userID);
             }
             addNewGlobalRating($db, $userID, $userName);
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: "
-                                                                    . getUserScore($db, $userID)
-                                                                    . " баллов",
+                                                                    . getUserScore($db, $userID) . " баллов",
                                                                      'reply_markup' => $reply_markup]);
         }
- }
+    }
 
 ?>

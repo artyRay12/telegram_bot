@@ -9,16 +9,15 @@
     }
 
     function getUserID($db, $userID): string {
-      $db->where('userID', $userID);
-      $userInfo = $db->getOne("users", null, "userID");
-      $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
-      return $userInfo["userID"];
+        $db->where('userID', $userID);
+        $userInfo = $db->getOne("users", null, "userID");
+        $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
+        return $userInfo["userID"];
     }
 
     function createNewAccount($db, $userID, $userName): void {
-      $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, rightAnswer) values($userID, '$userName', 0, 'empty', 0, 'epmty')";
-      $db->query($query);
-      return;
+        $query = "insert into users(userID, userName, userScore, currentQuest, maxScore, rightAnswer) values($userID, '$userName', 0, 'empty', 0, 'epmty')";
+        $db->query($query);
     }
 
     function resetTheGame($db, $userID): void {
@@ -31,12 +30,10 @@
         $db->update('users', $data);
     }
 
-
     function pushRightAnswerInDB($db, $userID, $questionRequest): void {
         $data = Array('rightAnswer' => $questionRequest["data"]["answers"][0]);
         $db->where('userID', $userID);
         $db->update('users', $data);
-        return;
     }
 
     function getRightAnwerFromDB($db, $userID): string {
@@ -49,7 +46,6 @@
         $data = Array('userScore' => $db->inc(20),);
         $db->where('userID', $userID);
         $db->update('users', $data);
-        return;
     }
 
     function getCurrentQuestId($db, $userID): string {
@@ -62,7 +58,6 @@
         $data = Array('currentQuest' => $db->inc(1),);
         $db->where('userID', $userID);
         $db->update('users', $data);
-        return;
     }
 
     function getUserScore($db, $userID): string {
@@ -81,7 +76,6 @@
         $data = Array('maxScore' => getUserScore($db, $userID));
         $db->where('userID', $userID);
         $db->update('users', $data);
-        return;
     }
 
     function getScoreByPlace($db, $place): string {
@@ -97,21 +91,20 @@
         return $dbUser;
     }
 
-
     function replaceRecords($db, $from, $where): void {
         $userData = [];
         $userData = getUserInfoByPlace($db, $from);
         $data = Array('userID' => $userData["userID"],
-            'userName' => $userData["userName"],
-            'Score' => $userData["Score"]);
+                      'userName' => $userData["userName"],
+                      'Score' => $userData["Score"]);
         $db->where('place', $where);
         $db->update('topplayers', $data);
     }
 
     function putNewRecord($db, $userID, $userName, $score, $placeForChange): void {
         $data = Array('userID' =>$userID,
-            'userName' => $userName,
-            'Score' => $score);
+                      'userName' => $userName,
+                      'Score' => $score);
         $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
     }
@@ -122,8 +115,8 @@
           $info = getUserInfoByPlace($db, $i);
            $telegram->sendMessage(['chat_id' => $chat_id,
                                    'text' => $i . ". " . $info["userName"] . ": " . $info["Score"]
-               . " баллов",
-               'reply_markup' => $reply_markup]);
+                                   . " баллов",
+                                   'reply_markup' => $reply_markup]);
        }
     }
 

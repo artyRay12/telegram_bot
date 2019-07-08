@@ -75,8 +75,4 @@ function addNewGlobalRating($db, $userID, $userName): void {
         putNewRecord($db, $userID, $userName, $score, $placeForChange);
     }
 }
-
-
-
-
 ?>
