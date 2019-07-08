@@ -50,7 +50,7 @@
             addPersonalRecord($db, $userID);
         }
 
-        addNewGlobalRating($db, $userName, $userID);
+        addNewGlobalRating($db, $userID, $userName);
 
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . getUserScore($db, $userID)
                                                         . " баллов",

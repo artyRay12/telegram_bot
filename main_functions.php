@@ -45,7 +45,6 @@ function isNewRecord($db, $userID): bool {
 
 function addNewGlobalRating($db, $userID, $userName) {
     $placeFound = FALSE;
-    $placeValue = "";
     $placeForChange = 1;
     $score = getUserScore($db, $userID);
     while ($placeFound == FALSE):
@@ -53,12 +52,10 @@ function addNewGlobalRating($db, $userID, $userName) {
         $scoreByPlace = getScoreByPlace($db, $placeForChange);
         if ($scoreByPlace < $score) {
             echo $i  . " место";
-            $placeValue = $placeForChange;
             $placeFound = TRUE;
         } elseif ($scoreByPlace == $score) {
             echo "равно" . ($placeForChange) . "месту";
             $placeFound = TRUE;
-            $placeValue = $placeForChange;
         }
         $placeForChange = $placeForChange + 1;
     endwhile;
@@ -71,36 +68,31 @@ function addNewGlobalRating($db, $userID, $userName) {
     }
 
     function firstReplaceSecond($db): void {
-        $dbRequest = ['userID', 'userName', 'Score'];
-        $db->where('place', 1);
-        $dbUser =  $db->getOne("topplayers", null, $dbRequest);
-        echo $dbUser["Score"];
-
         $userData = [];
         $userData = getUserInfoByPlace($db, 1);
         replaceRecords($db, $userData, 2);
     }
 
-    if ($placeValue == 1) {
+    if ($placeForChange == 1) {
         SecondReplaceThird($db);
         firstReplaceSecond($db);
         $data = Array('userID' =>$userID,
             'userName' => $userName,
             'Score' => $score);
-        $db->where('place', $placeValue);
+        $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
-    } elseif ($placeValue == 2) {
+    } elseif ($placeForChange == 2) {
         SecondReplaceThird($db);
         $data = Array('userID' =>$userID,
             'userName' => $userName,
             'Score' => $score);
-        $db->where('place', $placeValue);
+        $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
     } else {
         $data = Array('userID' =>$userID,
             'userName' => $userName,
             'Score' => $score);
-        $db->where('place', $placeValue);
+        $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
     }
 }
