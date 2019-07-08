@@ -20,6 +20,7 @@
     if ($text == SHOW_TOP_PLAYERS) {
         showTopPlayers($db, $telegram, $chat_id, $reply_markup);
     }
+    
     if ($text == START_COMMAND) {
         if (isNewplayer($db, $userID)) {
             createNewAccount($db, $userID, $userName);
@@ -60,6 +61,7 @@
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . getUserScore($db, $userID)
                                                         . " баллов",
                                                         'reply_markup' => $reply_markup]);
+        resetTheGame($db, $userID);
  }
 
 ?>
