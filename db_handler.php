@@ -86,7 +86,7 @@
 
     function getScoreByPlace($db, $currentPlace): string {
         $db->where('place', $currentPlace);
-        $score =$db->getOne("topplayers", null, "score");
+        $score = $db->getOne("topplayers", null, "score");
         return isset($score[0]) ? $score[0] : "";
     }
 
