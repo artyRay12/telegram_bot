@@ -40,7 +40,7 @@
         $keyboard = getPosibleAnswers($questionRequest, $userID, $db);
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
                                                         'resize_keyboard' => true,
-                                                        'one_time_keyboard' => true]);
+                                                        'one_time_keyboard' => false]);
 
         increaseQuestCounter($db, $userID);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => getQuestText($questionRequest),
@@ -61,9 +61,10 @@
                 addPersonalRecord($db, $userID);
             }
             addNewGlobalRating($db, $userID, $userName);
-            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: " . getUserScore($db, $userID)
-                . " баллов",
-                'reply_markup' => $reply_markup]);
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: "
+                                                                    . getUserScore($db, $userID)
+                                                                    . " баллов",
+                                                                     'reply_markup' => $reply_markup]);
         }
  }
 
