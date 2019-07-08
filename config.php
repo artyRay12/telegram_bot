@@ -6,4 +6,6 @@
     const HEROKU_DB_PASS = '8b5a0204';
     const START_COMMAND = '/start';
     const SHOW_TOP_PLAYERS = 'Рейтинг';
+    const ALL_INFORMATION = 'allInfo';
+    const SCORE = "score";
 ?>

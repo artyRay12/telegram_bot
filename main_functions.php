@@ -16,7 +16,7 @@ function isNewPlayer($db, $userID): bool {
 }
 
 function isRightAnswer($db, $userID, $update, $text): bool {
-    $rightAnswer = getRightAnwerFromDB($db, $userID, $update);
+    $rightAnswer = getRightAnwerFromDB($db, $userID);
     if ($text == $rightAnswer) {
         return TRUE;
     } else {
@@ -50,7 +50,7 @@ function addNewGlobalRating($db, $userID, $userName): void {
     $scoreByPlace = "";
     echo $scoreByPlace;
     while ($placeFound == FALSE):
-        $scoreByPlace = getScoreByPlace($db, $placeForChange);
+        $scoreByPlace = getInfoByPlace(SCORE, $db, $placeForChange);
         if ($placeForChange == 4) {
             $placeFound = TRUE;
         }

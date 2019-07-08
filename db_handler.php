@@ -39,7 +39,7 @@
         return;
     }
 
-    function getRightAnwerFromDB($db, $userID, $update): string {
+    function getRightAnwerFromDB($db, $userID): string {
         $db->where('userID', $userID);
         $rightAnswer = $db->get("users", null, "rightAnswer");//получаем номер квеста
         return isset($rightAnswer[0]["rightAnswer"]) ? $rightAnswer[0]["rightAnswer"] : "";
@@ -84,8 +84,8 @@
         return;
     }
 
-    function getScoreByPlace($db, $currentPlace): string {
-        $db->where('place', $currentPlace);
+   /* function getScoreByPlace($db, $place): string {
+        $db->where('place', $place);
         $score = $db->getOne("topplayers", null, "score");
         return isset($score["Score"]) ? $score["Score"] : "";
     }
@@ -95,11 +95,25 @@
         $db->where('place', $place);
         $dbUser =  $db->getOne("topplayers", null, $dbRequest);
         return $dbUser;
+    }*/
+
+    function getInfoByPlace($info, $db, $place) {
+        if ($info == ALL_INFORMATION){
+            $dbRequest = ['userID', 'userName', 'Score'];
+            $db->where('place', $place);
+            $dbUser =  $db->getOne("topplayers", null, $dbRequest);
+            return $dbUser;
+        }elseif ($info == SCORE) {
+            $db->where('place', $place);
+            $score = $db->getOne("topplayers", null, "score");
+            return isset($score["Score"]) ? $score["Score"] : "";
+        }
     }
+
 
     function replaceRecords($db, $from, $where): void {
         $userData = [];
-        $userData = getUserInfoByPlace($db, $from);
+        $userData = getInfoByPlace(ALL_INFORMATION, $db, $from);
         $data = Array('userID' => $userData["userID"],
             'userName' => $userData["userName"],
             'Score' => $userData["Score"]);
@@ -118,7 +132,7 @@
     function showTopPlayers($db, $telegram, $chat_id, $reply_markup) {
        $info = [];
        for($i = 1; $i <= 3; $i++) {
-          $info = getUserInfoByPlace($db, $i);
+          $info = getInfoByPlace(ALL_INFORMATION, $db, $i);
            $telegram->sendMessage(['chat_id' => $chat_id,
                                    'text' => $i . ". " . $info["userName"] . ": " . $info["Score"]
                . " баллов",
