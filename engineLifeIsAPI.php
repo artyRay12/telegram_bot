@@ -28,9 +28,6 @@
   function getQuestText($questionRequest): string {
        return $questionRequest["data"]["question"];
     }
-
-
-
 ?>
 
 

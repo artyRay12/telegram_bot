@@ -14,6 +14,7 @@
     $userID = $result['message']['from']['id'];
     $db = dbInit();
 
+
     if ($text == SHOW_TOP_PLAYERS) {
         showTopPlayers($db, $telegram, $chat_id, $reply_markup);
         $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard,
