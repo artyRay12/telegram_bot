@@ -47,16 +47,15 @@ function addNewGlobalRating($db, $userID, $userName): void {
     $placeFound = FALSE;
     $placeForChange = 1;
     $score = getInfoByID(USER_SCORE, $db, $userID);
-    $scoreByPlace = "";
-    echo $scoreByPlace;
+    $scoreFromTop = "";
     while ($placeFound == FALSE):
-        $scoreByPlace = getScoreByPlace($db, $placeForChange);
+        $scoreFromTop = getScoreByPlace($db, $placeForChange);
         if ($placeForChange == 4) {
             $placeFound = TRUE;
         }
-        if ($scoreByPlace < $score) {
+        if ($scoreFromTop < $score) {
             $placeFound = TRUE;
-        } elseif ($scoreByPlace == $score) {
+        } elseif ($scoreFromTop == $score) {
             $placeFound = TRUE;
         }
         if ($placeFound == FALSE) {
