@@ -7,7 +7,7 @@ require_once("engineLifeIsAPI.php");
 
 
 function isNewPlayer($db, $userID): bool {
-    $userIDfromDB = getUserID($db, $userID);
+    $userIDfromDB = getInfoByID(USER_ID, $db, $userID);
     if ($userIDfromDB) {
         return FALSE;
     } else {
@@ -16,7 +16,7 @@ function isNewPlayer($db, $userID): bool {
 }
 
 function isRightAnswer($db, $userID, $text): bool {
-    $rightAnswer = getRightAnwerFromDB($db, $userID);
+    $rightAnswer = getInfoByID(RIGHT_ANSWER, $db, $userID);
     if ($text == $rightAnswer) {
         return TRUE;
     } else {
@@ -25,7 +25,7 @@ function isRightAnswer($db, $userID, $text): bool {
 }
 
 function isTestCompleted($db, $userID): bool {
-    $currentQuestID = getCurrentQuestId($db, $userID);
+    $currentQuestID = getInfoByID(CURRENT_QUEST_ID, $db, $userID);
     if ( $currentQuestID < 10) {
         return false;
     } else {
@@ -34,8 +34,8 @@ function isTestCompleted($db, $userID): bool {
 }
 
 function isNewRecord($db, $userID): bool {
-    $score = getUserScore($db, $userID);
-    $maxScore = getUserMaxScore($db, $userID);
+    $score = getInfoByID(USER_SCORE, $db, $userID);
+    $maxScore = getInfoByID(USER_MAX_SCORE, $db, $userID);
     if ($score > $maxScore) {
         return true;
     } else {
@@ -46,7 +46,7 @@ function isNewRecord($db, $userID): bool {
 function addNewGlobalRating($db, $userID, $userName): void {
     $placeFound = FALSE;
     $placeForChange = 1;
-    $score = getUserScore($db, $userID);
+    $score = getInfoByID(USER_SCORE, $db, $userID);
     $scoreByPlace = "";
     echo $scoreByPlace;
     while ($placeFound == FALSE):
