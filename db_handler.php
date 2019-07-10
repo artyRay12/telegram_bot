@@ -65,7 +65,7 @@
        if ($info == USER_ID) {
             $db->where('userID', $userID);
             $userInfo = $db->getOne("users", null, "userID");
-            $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
+            return isset($userInfo["userID"]) ? $userInfo["userID"] : "";
        } else {
             $db->where('userID', $userID);
             $dbInfo = $db->get("users", null, $info);
