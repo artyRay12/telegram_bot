@@ -36,7 +36,7 @@
     }
 
    function getInfoByID($collumnName, $db, $userID): string  {
-       if ($info == USER_ID) {
+       if ($collumnName == USER_ID) {
             $db->where('userID', $userID);
             $userInfo = $db->getOne("users", null, "userID");
             return isset($userInfo["userID"]) ? $userInfo["userID"] : "";
@@ -82,9 +82,9 @@
         $db->update('topplayers', $data);
     }
 
-    function putNewRecord($db, $userID, $userName, $score, $placeForChange): void {
+    function putNewRecord($db, $userID, $firstName, $lastName, $score, $placeForChange): void {
         $data = Array('userID' =>$userID,
-                      'userName' => $userName,
+                      'userName' => $firstName . " " . $lastName,
                       'Score' => $score);
         $db->where('place', $placeForChange);
         $db->update('topplayers', $data);
