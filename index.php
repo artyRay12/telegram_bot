@@ -56,7 +56,7 @@
             }
             addNewGlobalRating($db, $userID, $userName);
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Вы набрали всего лишь: "
-                                                                    . getUserScore($db, $userID) . " баллов",
+                                                                    . getInfoByID(USER_SCORE, $db, $userID) . " баллов",
                                                                      'reply_markup' => $reply_markup]);
         }
     }
