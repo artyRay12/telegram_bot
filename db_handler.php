@@ -66,7 +66,7 @@
             $db->where('userID', $userID);
             $userInfo = $db->getOne("users", null, "userID");
             $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
-       } esle {
+       } else {
             $db->where('userID', $userID);
             $dbInfo = $db->get("users", null, $info);
             return isset($scoreDb[0][$info]) ? $scoreDb[0][$info] : "";
