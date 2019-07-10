@@ -100,7 +100,7 @@
     }
 
     function addPersonalRecord($db, $userID): void {
-        $data = Array('maxScore' => getUserScore($db, $userID));
+        $data = Array('maxScore' => getInfoByID(USER_SCORE, $db, $userID));
         $db->where('userID', $userID);
         $db->update('users', $data);
     }
