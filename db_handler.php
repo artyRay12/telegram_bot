@@ -60,39 +60,7 @@
             return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
         }
     }
-    
-   /*function getUserID($db, $userID): string {
-        $db->where('userID', $userID);
-        $userInfo = $db->getOne("users", null, "userID");
-        $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
-        return $userInfo["userID"];
-    } 
-
-    function getRightAnwerFromDB($db, $userID): string {
-        $db->where('userID', $userID);
-        $rightAnswer = $db->get("users", null, "rightAnswer");//получаем номер квеста
-        return isset($rightAnswer[0]["rightAnswer"]) ? $rightAnswer[0]["rightAnswer"] : "";
-    }
-
- 
-    function getCurrentQuestId($db, $userID): string {
-        $db->where('userID', $userID);
-        $questId = $db->get("users", null, "currentQuest");//получаем номер квеста
-        return isset($questId[0]["currentQuest"]) ? $questId[0]["currentQuest"] : "";
-    }
-
-    function getUserScore($db, $userID): string {
-        $db->where('userID', $userID);
-        $scoreDb = $db->get("users", null, "userScore");
-        return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-    }
-
-    function getUserMaxScore($db, $userID): string {
-        $db->where('userID', $userID);
-        $scoreDb = $db->get("users", null, "maxScore");
-        return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : ""
-    }*/
-
+   
     function increaseQuestCounter($db, $userID): void {
         $data = Array('currentQuest' => $db->inc(1),);
         $db->where('userID', $userID);
@@ -146,5 +114,37 @@
                                    'reply_markup' => $reply_markup]);
        }
     }
+
+    /*function getUserID($db, $userID): string {
+        $db->where('userID', $userID);
+        $userInfo = $db->getOne("users", null, "userID");
+        $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
+        return $userInfo["userID"];
+    } 
+
+    function getRightAnwerFromDB($db, $userID): string {
+        $db->where('userID', $userID);
+        $rightAnswer = $db->get("users", null, "rightAnswer");//получаем номер квеста
+        return isset($rightAnswer[0]["rightAnswer"]) ? $rightAnswer[0]["rightAnswer"] : "";
+    }
+
+ 
+    function getCurrentQuestId($db, $userID): string {
+        $db->where('userID', $userID);
+        $questId = $db->get("users", null, "currentQuest");//получаем номер квеста
+        return isset($questId[0]["currentQuest"]) ? $questId[0]["currentQuest"] : "";
+    }
+
+    function getUserScore($db, $userID): string {
+        $db->where('userID', $userID);
+        $scoreDb = $db->get("users", null, "userScore");
+        return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
+    }
+
+    function getUserMaxScore($db, $userID): string {
+        $db->where('userID', $userID);
+        $scoreDb = $db->get("users", null, "maxScore");
+        return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : ""
+    }*/
 
 ?>
