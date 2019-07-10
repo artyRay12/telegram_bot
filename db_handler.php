@@ -35,15 +35,15 @@
         $db->update('users', $data);
     }
 
-   function getInfoByID($info, $db, $userID): string  {
+   function getInfoByID($collumnName, $db, $userID): string  {
        if ($info == USER_ID) {
             $db->where('userID', $userID);
             $userInfo = $db->getOne("users", null, "userID");
             return isset($userInfo["userID"]) ? $userInfo["userID"] : "";
        } else {
             $db->where('userID', $userID);
-            $dbInfo = $db->get("users", null, $info);
-            return isset($dbInfo[0][$info]) ? $dbInfo[0]["$info"] : "";
+            $dbInfo = $db->get("users", null, $collumnName);
+            return isset($dbInfo[0]["$collumnName"]) ? $dbInfo[0]["$collumnName"] : "";
        }
    }
        
