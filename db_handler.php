@@ -34,32 +34,6 @@
         $db->where('userID', $userID);
         $db->update('users', $data);
     }
- 
-
-    /*function getInfoByID($info, $db, $userID): string{
-        if ($info == USER_ID) {
-            $db->where('userID', $userID);
-            $userInfo = $db->getOne("users", null, "userID");
-            $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
-            return $userInfo["userID"];
-        } elseif ($info == RIGHT_ANSWER) {
-            $db->where('userID', $userID);
-            $rightAnswer = $db->get("users", null, "rightAnswer");
-            return isset($rightAnswer[0]["rightAnswer"]) ? $rightAnswer[0]["rightAnswer"] : "";
-        } elseif ($info == CURRENT_QUEST_ID) {
-            $db->where('userID', $userID);
-            $questId = $db->get("users", null, "currentQuest");//получаем номер квеста
-            return isset($questId[0]["currentQuest"]) ? $questId[0]["currentQuest"] : "";
-        } elseif ($info == USER_SCORE) {
-            $db->where('userID', $userID);
-            $scoreDb = $db->get("users", null, "userScore");
-            return isset($scoreDb[0]["userScore"]) ? $scoreDb[0]["userScore"] : "";
-        } elseif ($info == USER_MAX_SCORE) {
-            $db->where('userID', $userID);
-            $scoreDb = $db->get("users", null, "maxScore");
-            return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
-        }
-    }*/
 
    function getInfoByID($info, $db, $userID): string  {
        if ($info == USER_ID) {
