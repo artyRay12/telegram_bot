@@ -8,5 +8,5 @@
   $usersID = $db->rawQuery('SELECT DISTINCT(userID) FROM ' . 'users');
   $length = count($usersID);
   for($i = 0; $i < $length; $i++) {
-      $telegram->sendMessage(['chat_id' => $usersID[$i]["userID"], 'text' => "Привет"]);
+      $telegram->sendMessage(['chat_id' => $usersID[$i]["userID"], 'text' => "Привет, я хочу сыграть с тобой в одну игру"]);
   }
