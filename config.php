@@ -8,7 +8,7 @@
     const SHOW_TOP_PLAYERS = 'Рейтинг';
     const CURRENT_QUEST_ID = 'currentQuest';
     const RIGHT_ANSWER = 'rightAnswer';
-    const USER_ID = 'UserID';
+    const USER_ID = 'userID';
     const USER_SCORE = 'userScore';
     const USER_MAX_SCORE = 'maxScore';
 ?>
