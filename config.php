@@ -10,4 +10,5 @@
     const RIGHT_ANSWER = 'ПравильныйОтвет';
     const USER_ID = 'UserID';
     const USER_SCORE = 'ОчкиПользователя';
+    const USER_MAX_SCORE = 'МаксимальныеБаллы';
 ?>
