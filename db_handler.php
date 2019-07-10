@@ -36,7 +36,7 @@
     }
  
 
-    function getInfoByID($info, $db, $userID): string{
+    /*function getInfoByID($info, $db, $userID): string{
         if ($info == USER_ID) {
             $db->where('userID', $userID);
             $userInfo = $db->getOne("users", null, "userID");
@@ -59,8 +59,20 @@
             $scoreDb = $db->get("users", null, "maxScore");
             return isset($scoreDb[0]["maxScore"]) ? $scoreDb[0]["maxScore"] : "";
         }
-    }
-   
+    }*/
+
+   function getInfoByID($info, $db, $userID): string  {
+       if ($info == USER_ID) {
+            $db->where('userID', $userID);
+            $userInfo = $db->getOne("users", null, "userID");
+            $userInfo["userID"] = isset($userInfo["userID"]) ? $userInfo["userID"] : "";
+       } esle {
+            $db->where('userID', $userID);
+            $dbInfo = $db->get("users", null, $info);
+            return isset($scoreDb[0][$info]) ? $scoreDb[0][$info] : "";
+       }
+   }
+       
     function increaseQuestCounter($db, $userID): void {
         $data = Array('currentQuest' => $db->inc(1),);
         $db->where('userID', $userID);
