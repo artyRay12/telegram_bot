@@ -11,8 +11,8 @@
     $text = $result["message"]["text"];
     $chat_id = $result["message"]["chat"]["id"];
     $userName = $result["message"]["from"]["username"];
-    $firstName = $result["message"]["from"]["firstname"];
-    $lastName = $result["message"]["from"]["lastname"];
+    $firstName = $result["message"]["from"]["first_name"];
+    $lastName = $result["message"]["from"]["last_name"];
     $userID = $result['message']['from']['id'];
     $db = dbInit();
 
