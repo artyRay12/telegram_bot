@@ -1,5 +1,5 @@
 <?php
-  require("index.php");
+  //require("index.php");
   include('vendor/autoload.php');
   $chatID = 843008832;
   use Telegram\Bot\Api;
