@@ -6,9 +6,9 @@
     const HEROKU_DB_PASS = '8b5a0204';
     const START_COMMAND = '/start';
     const SHOW_TOP_PLAYERS = 'Рейтинг';
-    const CURRENT_QUEST_ID = 'ТекущийНомерВопроса';
-    const RIGHT_ANSWER = 'ПравильныйОтвет';
+    const CURRENT_QUEST_ID = 'currentQuest';
+    const RIGHT_ANSWER = 'rightAnswer';
     const USER_ID = 'UserID';
-    const USER_SCORE = 'ОчкиПользователя';
-    const USER_MAX_SCORE = 'МаксимальныеБаллы';
+    const USER_SCORE = 'userScore';
+    const USER_MAX_SCORE = 'maxScore';
 ?>
