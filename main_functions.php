@@ -43,7 +43,7 @@ function isNewRecord($db, $userID): bool {
     }
 }
 
-function addNewGlobalRating($db, $userID, $userName): void {
+function addNewGlobalRating($db, $userID, $firstName, $lastName, $userName): void {
     $placeFound = FALSE;
     $placeForChange = 1;
     $score = getInfoByID(USER_SCORE, $db, $userID);
@@ -66,12 +66,12 @@ function addNewGlobalRating($db, $userID, $userName): void {
     if ($placeForChange == 1) {
         replaceRecords($db, 2, 3);
         replaceRecords($db, 1, 2);
-        putNewRecord($db, $userID, $userName, $score, $placeForChange);
+        putNewRecord($db, $userID, $firstName, $lastName, $score, $placeForChange);
     } elseif ($placeForChange == 2) {
         replaceRecords($db, 2, 3);
-        putNewRecord($db, $userID, $userName, $score, $placeForChange);
+        putNewRecord($db, $userID, $firstName, $lastName, $score, $placeForChange);
     } elseif ($placeForChange == 3) {
-        putNewRecord($db, $userID, $userName, $score, $placeForChange);
+        putNewRecord($db, $userID, $firstName, $lastName, $score, $placeForChange);
     }
 }
 ?>
