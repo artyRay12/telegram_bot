@@ -48,7 +48,7 @@ function addNewGlobalRating($db, $userID, $firstName, $lastName, $userName): voi
     $placeForChange = 1;
     $score = getInfoByID(USER_SCORE, $db, $userID);
     $scoreFromTop = "";
-    while ($placeFound == FALSE):
+    while ($placeFound == FALSE): //Ищем какое место занимает новый рекорд
         $scoreFromTop = getScoreByPlace($db, $placeForChange);
         if ($placeForChange == 4) {
             $placeFound = TRUE;
