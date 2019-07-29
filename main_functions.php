@@ -64,7 +64,7 @@ function addNewGlobalRating($db, $userID, $firstName, $lastName, $userName): voi
     endwhile;
 
     if ($placeForChange == 1) {
-        replaceRecords($db, 2, 3);
+        replaceRecords($db, 2, 3); //функция перекидывает данные с 2-ого места на 3е
         replaceRecords($db, 1, 2);
         putNewRecord($db, $userID, $firstName, $lastName, $score, $placeForChange);
     } elseif ($placeForChange == 2) {
